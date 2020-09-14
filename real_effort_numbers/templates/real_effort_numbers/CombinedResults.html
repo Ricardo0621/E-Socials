@@ -1,0 +1,13 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Combined Results Page
+{% endblock %}
+
+{% block content %}
+    Your combined payoff is: {{ combined_payoff }}
+    {% next_button %}
+{% endblock %}
+
+

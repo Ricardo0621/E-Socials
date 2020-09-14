@@ -1,0 +1,15 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Please add the numbers
+{% endblock %}
+<!--formfields hace referencia a los datos que estan alojados en el vector form_fields-->
+<!--en Django se puede acceder a las variables del metodo vars_for_template, a lo que se define en player
+y a las variables definidas en form_fields-->
+{% block content %}
+    {{ number_1 }} + {{ number_2 }} = ?
+    {% formfields %}
+    {% next_button %}
+
+{% endblock %}
