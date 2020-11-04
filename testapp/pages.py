@@ -12,3 +12,5 @@ class TestAppQuestions(Page):
 
 
 page_sequence = [TestAppQuestions] #Aca van los nombres de las clases definidas en pages.py
+
+#Class Concent

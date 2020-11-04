@@ -26,9 +26,11 @@ class Results(Page):
     pass
 
 class CombinedResults(Page):
+    #Lo que se muestra en la primera página I guess
     def is_displayed(self):
         return self.round_number == Constants.num_rounds
 
+    #Cuando uno le quiere mostrar algo al usuario
     def vars_for_template(self):
         all_players = self.player.in_all_rounds()
         combined_payoff = 0
