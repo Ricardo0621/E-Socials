@@ -10,13 +10,13 @@ SESSION_CONFIGS = [
     ),
     dict(
         name='real_effort_numbers',
-        display_name="Experimento 2 (Real Effort Numbers App)",
+        display_name="Experimento 2 (Real Effort Numbers App) Yes",
         num_demo_participants=1,
         app_sequence=['real_effort_numbers'],
     ),
     dict(
         name='myprisoners_dilemma',
-        display_name="Experimento 3 (Prisoner's Dilemma App)",
+        display_name="Experimento 3 (Prisoner's Dilemma App) Yes",
         num_demo_participants=2,
         app_sequence=['myprisoners_dilemma'],
     )
