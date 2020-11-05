@@ -19,7 +19,13 @@ SESSION_CONFIGS = [
         display_name="Experimento 3 (Prisoner's Dilemma App) Yes",
         num_demo_participants=2,
         app_sequence=['myprisoners_dilemma'],
-    )
+    ),
+    dict(
+        name='survey',
+        display_name="An App in which subjects provide demographic information",
+        num_demo_participants=3,
+        app_sequence=['survey'],
+    ),
     # dict(
     #     name='public_goods',
     #     display_name="Public Goods",
