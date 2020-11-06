@@ -1,2 +1,2 @@
-# E-Socials
+# EsocialS
 Scientific Colombia Project
