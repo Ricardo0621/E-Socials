@@ -2,30 +2,42 @@ from os import environ
 
 
 SESSION_CONFIGS = [
+    # dict(
+    #     name='testapp',
+    #     display_name="Efecto de distintos tipos de contratación",
+    #     num_demo_participants=3,
+    #     app_sequence=['testapp'],
+    # ),
+    # dict(
+    #     name='real_effort_numbers',
+    #     display_name="Experimento 2 (Real Effort Numbers App) Yes",
+    #     num_demo_participants=1,
+    #     app_sequence=['real_effort_numbers'],
+    # ),
+    # dict(
+    #     name='myprisoners_dilemma',
+    #     display_name="Experimento 3 (Prisoner's Dilemma App) Yes",
+    #     num_demo_participants=2,
+    #     app_sequence=['myprisoners_dilemma'],
+    # ),
+    # dict(
+    #     name='survey',
+    #     display_name="An App in which subjects provide demographic information",
+    #     num_demo_participants=3,
+    #     app_sequence=['survey'],
+    # ),
     dict(
-        name='testapp',
-        display_name="Efecto de distintos tipos de contratación",
-        num_demo_participants=3,
-        app_sequence=['testapp'],
-    ),
-    dict(
-        name='real_effort_numbers',
-        display_name="Experimento 2 (Real Effort Numbers App) Yes",
+        name='mpl',
+        display_name="Experimento 1",
         num_demo_participants=1,
-        app_sequence=['real_effort_numbers'],
+        app_sequence=['mpl'],
     ),
-    dict(
-        name='myprisoners_dilemma',
-        display_name="Experimento 3 (Prisoner's Dilemma App) Yes",
-        num_demo_participants=2,
-        app_sequence=['myprisoners_dilemma'],
-    ),
-    dict(
-        name='survey',
-        display_name="An App in which subjects provide demographic information",
-        num_demo_participants=3,
-        app_sequence=['survey'],
-    ),
+    # dict(
+    #     name='cem',
+    #     display_name="Certainty Equivalent Method",
+    #     num_demo_participants=1,
+    #     app_sequence=['cem'],
+    # ),
     # dict(
     #     name='public_goods',
     #     display_name="Public Goods",
