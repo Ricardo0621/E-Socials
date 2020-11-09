@@ -2,6 +2,7 @@ from otree.api import Currency as c, currency_range
 from . import models
 from ._builtin import Page, WaitPage
 from .models import Constants
+import random
 
 
 # variables for all templates
@@ -168,14 +169,44 @@ class Results(Page):
                 'payoff':         self.player.payoff
             }
 
+class Consent(Page):
+    form_model = 'player' #Le dice que es un jugador
+    form_fields = ['accepts_data', 'name', 'id_cc']
 
+class DoubleMoney(Page):
+    form_model = 'player' #Le dice que es un jugador
+    form_fields = ['monto']
+
+class ResultsDoubleMoney(Page):
+    def vars_for_template(self):
+        # cara_sello = random.randint(0, 1)
+        cara_sello = 0
+        #all_players = self.player.in_all_rounds()
+        combined_payoff = 0
+        inversion = c(self.player.monto)
+        nombre_aux = ""
+        if(cara_sello == 0):
+            nombre_aux = "Cara"
+            self.player.monto = self.player.monto*2
+        else:
+            nombre_aux = "Sello"
+            self.player.monto = 0
+        #for player in all_players:
+        combined_payoff = self.player.payoff + c(self.player.monto)
+        return {
+            'combined_payoff' : combined_payoff,
+            'inversion' : inversion,
+            'nombre_aux' : nombre_aux
+        }
 # ******************************************************************************************************************** #
-# *** PAGE SEQUENCE *** #
+# *** PAGE SEQUENCE *** #Usted obtuvo invertió {{inversion }}y obtuvo {{cara_sello}} 
+# por lo que su pago en esta activdad es de {{player.monto}} y su pago total es {{combined_payoff}}
 # ******************************************************************************************************************** #
-page_sequence = [Decision]
+page_sequence = [Consent, Instructions, Decision, Results, DoubleMoney, ResultsDoubleMoney]
+print("Sequencia" + str(page_sequence))
 
-if Constants.instructions:
-    page_sequence.insert(0, Instructions)
+# if Constants.instructions:
+#     page_sequence.insert(0, Instructions)
 
-if Constants.results:
-    page_sequence.append(Results)
+# if Constants.results:
+#     page_sequence.append(Results)

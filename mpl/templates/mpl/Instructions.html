@@ -15,7 +15,7 @@
 {# *** TITLE *** #}
 {# ****************************************************************************************************************** #}
 {% block title %}
-    {% trans "Instrucciones" %}
+    {% trans "Actividad 1 - Instrucciones" %}
 {% endblock %}
 
 
@@ -25,17 +25,17 @@
 {% block content %}
 
     <div class="wrapper instructions">
-        <p>
+        <p align = "justify">
             {% blocktrans trimmed with n=num_choices %}
                 En esta actividad deberás tomar {{ n }} decisiones, <b>pero solo una</b> será escogida al azar para
                 realizar tu pago. Al finalizar toda la actividad podrás revisar un enlace en el que se te
-                informará cuál ha sido la decisión escogida para tus pagos.
+                informará cuál ha sido la decisión escogida para tus pagos.<br><br>
 
                 Ten en cuenta que el dinero que podrás ganar en esta actividad dependerá de las
-                posibilidades que tengas de sacar al final una pelota azul.
+                posibilidades que tengas de sacar al final una pelota azul.<br><br>
 
                 Tendrás la posibilidad de escoger entre dos bolsas que contienen 10 pelotas, algunas
-                azules y otras rojas.
+                azules y otras rojas.<br><br>
 
                 Ganaras $15,000 si al final de la actividad es escogida al azar una pelota de color azul y
                 no ganas nada si al final la balota escogida es roja.

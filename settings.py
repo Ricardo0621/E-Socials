@@ -2,30 +2,30 @@ from os import environ
 
 
 SESSION_CONFIGS = [
-    # dict(
-    #     name='testapp',
-    #     display_name="Efecto de distintos tipos de contratación",
-    #     num_demo_participants=3,
-    #     app_sequence=['testapp'],
-    # ),
-    # dict(
-    #     name='real_effort_numbers',
-    #     display_name="Experimento 2 (Real Effort Numbers App) Yes",
-    #     num_demo_participants=1,
-    #     app_sequence=['real_effort_numbers'],
-    # ),
+    dict(
+        name='testapp',
+        display_name="Efecto de distintos tipos de contratación",
+        num_demo_participants=3,
+        app_sequence=['testapp'],
+    ),
+    dict(
+        name='real_effort_numbers',
+        display_name="Experimento 2 (Real Effort Numbers App) Yes",
+        num_demo_participants=1,
+        app_sequence=['real_effort_numbers'],
+    ),
     # dict(
     #     name='myprisoners_dilemma',
     #     display_name="Experimento 3 (Prisoner's Dilemma App) Yes",
     #     num_demo_participants=2,
     #     app_sequence=['myprisoners_dilemma'],
     # ),
-    # dict(
-    #     name='survey',
-    #     display_name="An App in which subjects provide demographic information",
-    #     num_demo_participants=3,
-    #     app_sequence=['survey'],
-    # ),
+    dict(
+        name='survey',
+        display_name="An App in which subjects provide demographic information",
+        num_demo_participants=3,
+        app_sequence=['survey'],
+    ),
     dict(
         name='mpl',
         display_name="Experimento 1",
@@ -64,7 +64,7 @@ SESSION_CONFIGS = [
 # e.g. self.session.config['participation_fee']
 
 SESSION_CONFIG_DEFAULTS = dict(
-    real_world_currency_per_point=1.00, participation_fee=0.00, doc=""
+    real_world_currency_per_point=1, participation_fee=0.00, doc=""
 )
 
 # ISO-639 code

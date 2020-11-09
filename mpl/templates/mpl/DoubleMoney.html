@@ -1,0 +1,41 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+{% load i18n %}
+
+
+{# ****************************************************************************************************************** #}
+{# *** STYLES *** #}
+{# ****************************************************************************************************************** #}
+{% block styles %}
+    <link href="{% static 'mpl/css/custom.css' %}" rel="stylesheet"/>
+{% endblock %}
+
+
+{# ****************************************************************************************************************** #}
+{# *** TITLE *** #}
+{# ****************************************************************************************************************** #}
+{% block title %}
+    {% trans "Actividad 2 - Instrucciones" %}
+{% endblock %}
+
+
+{# ****************************************************************************************************************** #}
+{# *** CONTENT *** #}
+{# ****************************************************************************************************************** #}
+{% block content %}
+
+    <div class="wrapper instructions">
+        <p align = "justify">
+                En esta actividad recibirás $20.000. Te pediremos que elijas cuánto de este dinero estás
+                dispuesto a invertir en un activo de riesgo. <b>Podrás elegir cualquier monto entre 0 y
+                $20.000.</b> El monto restando se abonará a tu saldo final.<br><br>
+
+                Lanzaremos una moneda para determinar si el activo será exitoso o no. Si la moneda cae
+                cara recibirás el doble de la cantidad invertida y si cae sello perderás el monto invertido.<br>
+        </p>
+        {% formfield player.monto %}
+    </div>
+
+    {% next_button %}
+
+{% endblock %}

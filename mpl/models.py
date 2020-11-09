@@ -101,6 +101,18 @@ class Player(BasePlayer):
     option_to_pay = models.StringField()
     inconsistent = models.IntegerField()
     switching_row = models.IntegerField()
+    name = models.StringField(label= "Nombre Completo")
+    id_cc = models.IntegerField(label="Cédula de Ciudadanía (Sin puntos)")
+    accepts_data = models.BooleanField(
+        label = "¿Autoriza el uso de los datos recolectados para futuros estudios?",
+        choices = [
+            [True, "Sí"],
+            [False, "No"],
+        ],
+        default=True)
+    accepts_terms = models.BooleanField()
+    monto = models.IntegerField(label = 
+    "Por favor, indica el monto que invertirás en el activo de riesgo (sin puntos o comas)", min=0, max=20000)
 
     # set player's payoff
     # ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
