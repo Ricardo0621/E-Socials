@@ -180,31 +180,32 @@ class DoubleMoney(Page):
 
 class ResultsDoubleMoney(Page):
     def vars_for_template(self):
-        #cara_sello = 0
-        cara_sello = random.randint(0, 1)
-        #all_players = self.player.in_all_rounds()
-        combined_payoff = 0
-        inversion = math.trunc(c(self.player.monto))
-        nombre_aux = ""
-        if(cara_sello == 0):
-            nombre_aux = "Cara"
-            self.player.monto = math.trunc(self.player.monto*2)
-        else:
-            nombre_aux = "Sello"
-            self.player.monto = 0
-        #for player in all_players:
-        combined_payoff = math.trunc(self.player.payoff) + math.trunc(c(self.player.monto))
+        cara_sello = 0
+        #cara_sello = random.randint(0, 1)
+        all_players = self.player.in_all_rounds()
+        for player in all_players:
+            combined_payoff = 0
+            inversion = math.trunc(c(player.monto))
+            nombre_aux = ""
+            cara_sello_payoff = 0
+            if(cara_sello == 0):
+                nombre_aux = "Cara"
+                cara_sello_payoff = math.trunc(player.monto*2)
+            else:
+                nombre_aux = "Sello"
+                cara_sello_payoff = 0
+            combined_payoff = math.trunc(player.payoff) + cara_sello_payoff
         return {
             'combined_payoff' : combined_payoff,
             'inversion' : inversion,
-            'nombre_aux' : nombre_aux
+            'nombre_aux' : nombre_aux,
+            'cara_sello_payoff' : cara_sello_payoff
         }
 # ******************************************************************************************************************** #
 # *** PAGE SEQUENCE *** #Usted obtuvo invertió {{inversion }}y obtuvo {{cara_sello}} 
 # por lo que su pago en esta activdad es de {{player.monto}} y su pago total es {{combined_payoff}}
 # ******************************************************************************************************************** #
 page_sequence = [Consent, Instructions, Decision, Results, DoubleMoney, ResultsDoubleMoney]
-print("Sequencia" + str(page_sequence))
 
 # if Constants.instructions:
 #     page_sequence.insert(0, Instructions)

@@ -206,18 +206,18 @@
         <div class="card info">
             <p>
             {% if option_to_pay == 'A' %}
-                    <p>Como se indica arriba, ustéd decidió optar por la <b>opción 1</b> en esta decisión.
-                    Para la opción escogida, una de dos posibles opciones se tomaron aleatoriamente teniendo en cuenta
+                    <p>Como se indica arriba, ustéd escogió la <b>Bolsa 1</b>.
+                    Para la bolsa escogida, una de dos posibles opciones se tomaron aleatoriamente teniendo en cuenta
                     las correspondientes probabilidades </p>
             {% elif option_to_pay == 'B' %}
-                <p> Como se indica arriba, ustéd decidió optar por la <b>opción 2</b> en esta decisión.
-                        Para la opción escogida, una de dos posibles opciones se tomaron aleatoriamente teniendo en cuenta
+                <p> Como se indica arriba, ustéd escogió la <b>Bolsa 2</b>.
+                        Para la bolsa escogida, una de dos posibles opciones se tomaron aleatoriamente teniendo en cuenta
                         las correspondientes probabilidades.</p>
             {% endif %}
             </p>
             <p>
                 {% blocktrans trimmed with payoff=payoff %}
-                    Su pago en esta tarea equivale a <b>{{ payoff}}</b>.
+                    Su pago en esta actividad equivale a <b>${{ payoff}}</b>.
                 {% endblocktrans %}
             </p>
         </div>
