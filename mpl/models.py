@@ -7,10 +7,10 @@ import random
 from random import randrange
 
 
-author = 'Felix Holzmeister'
+author = 'Ricardo Diaz'
 
 doc = """
-Multiple price list task as proposed by Holt/Laury (2002), American Economic Review 92(5).
+Experimento 1.
 """
 
 

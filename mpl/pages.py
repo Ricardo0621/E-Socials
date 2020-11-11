@@ -3,6 +3,7 @@ from . import models
 from ._builtin import Page, WaitPage
 from .models import Constants
 import random
+import math
 
 
 # variables for all templates
@@ -166,12 +167,12 @@ class Results(Page):
             return {
                 'choice_to_pay':  [choice_to_pay],
                 'option_to_pay':  self.player.option_to_pay,
-                'payoff':         self.player.payoff
+                'payoff':         math.trunc(self.player.payoff)
             }
 
 class Consent(Page):
     form_model = 'player' #Le dice que es un jugador
-    form_fields = ['accepts_data', 'name', 'id_cc']
+    form_fields = ['accepts_data', 'name', 'id_cc', 'accepts_terms']
 
 class DoubleMoney(Page):
     form_model = 'player' #Le dice que es un jugador
@@ -179,19 +180,20 @@ class DoubleMoney(Page):
 
 class ResultsDoubleMoney(Page):
     def vars_for_template(self):
-        cara_sello = random.randint(0, 1)
+        cara_sello = 0
+        # cara_sello = random.randint(0, 1)
         #all_players = self.player.in_all_rounds()
         combined_payoff = 0
-        inversion = c(self.player.monto)
+        inversion = math.trunc(c(self.player.monto))
         nombre_aux = ""
         if(cara_sello == 0):
             nombre_aux = "Cara"
-            self.player.monto = self.player.monto*2
+            self.player.monto = math.trunc(self.player.monto*2)
         else:
             nombre_aux = "Sello"
             self.player.monto = 0
         #for player in all_players:
-        combined_payoff = self.player.payoff + c(self.player.monto)
+        combined_payoff = math.trunc(self.player.payoff) + math.trunc(c(self.player.monto))
         return {
             'combined_payoff' : combined_payoff,
             'inversion' : inversion,
