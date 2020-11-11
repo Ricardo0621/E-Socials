@@ -180,8 +180,8 @@ class DoubleMoney(Page):
 
 class ResultsDoubleMoney(Page):
     def vars_for_template(self):
-        cara_sello = 0
-        # cara_sello = random.randint(0, 1)
+        #cara_sello = 0
+        cara_sello = random.randint(0, 1)
         #all_players = self.player.in_all_rounds()
         combined_payoff = 0
         inversion = math.trunc(c(self.player.monto))
