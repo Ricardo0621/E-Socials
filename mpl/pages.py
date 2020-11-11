@@ -179,9 +179,11 @@ class DoubleMoney(Page):
     form_fields = ['monto']
 
 class ResultsDoubleMoney(Page):
+    #form_model = 'player' #Le dice que es un jugador
+    #form_fields = ['monto', 'combined_payoff', 'inversion', 'cara_sello_payoff' ]
     def vars_for_template(self):
-        cara_sello = 0
-        #cara_sello = random.randint(0, 1)
+        #cara_sello = 0
+        cara_sello = random.randint(0, 1)
         all_players = self.player.in_all_rounds()
         for player in all_players:
             combined_payoff = 0
@@ -203,7 +205,7 @@ class ResultsDoubleMoney(Page):
         }
 # ******************************************************************************************************************** #
 # *** PAGE SEQUENCE *** #Usted obtuvo invertió {{inversion }}y obtuvo {{cara_sello}} 
-# por lo que su pago en esta activdad es de {{player.monto}} y su pago total es {{combined_payoff}}
+# por lo que su pago en esta activdad es de {{cara_sello_payoff}} y su pago total es {{combined_payoff}}
 # ******************************************************************************************************************** #
 page_sequence = [Consent, Instructions, Decision, Results, DoubleMoney, ResultsDoubleMoney]
 
