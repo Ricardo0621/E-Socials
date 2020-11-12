@@ -2,7 +2,6 @@ from otree.api import Currency as c, currency_range
 from . import models
 from ._builtin import Page, WaitPage
 from .models import Constants
-import random
 import math
 
 
@@ -182,25 +181,22 @@ class ResultsDoubleMoney(Page):
     #form_model = 'player' #Le dice que es un jugador
     #form_fields = ['monto', 'combined_payoff', 'inversion', 'cara_sello_payoff' ]
     def vars_for_template(self):
-        #cara_sello = 0
-        cara_sello = random.randint(0, 1)
-        all_players = self.player.in_all_rounds()
-        for player in all_players:
-            combined_payoff = 0
-            inversion = math.trunc(c(player.monto))
-            nombre_aux = ""
+        #all_players = self.player.in_all_rounds()
+        cara_sello_name = ""
+        combined_payoff = 0
+        cara_sello_payof = 0
+        inversion = math.trunc(c(self.player.monto))
+        if(Constants.cara_sello_value == 0):
+            cara_sello_name = "Cara"
+            cara_sello_payoff = math.trunc(self.player.monto*2)
+        else:
+            cara_sello_name = "Sello"
             cara_sello_payoff = 0
-            if(cara_sello == 0):
-                nombre_aux = "Cara"
-                cara_sello_payoff = math.trunc(player.monto*2)
-            else:
-                nombre_aux = "Sello"
-                cara_sello_payoff = 0
-            combined_payoff = math.trunc(player.payoff) + cara_sello_payoff
+        combined_payoff = math.trunc(self.player.payoff) + cara_sello_payoff
         return {
             'combined_payoff' : combined_payoff,
             'inversion' : inversion,
-            'nombre_aux' : nombre_aux,
+            'cara_sello_name' : cara_sello_name,
             'cara_sello_payoff' : cara_sello_payoff
         }
 # ******************************************************************************************************************** #

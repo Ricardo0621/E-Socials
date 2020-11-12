@@ -1,6 +1,7 @@
 # <imports>
 from otree.api import Currency as c
 from otree.constants import BaseConstants
+import random
 # </imports>
 
 
@@ -85,6 +86,8 @@ class Constants(BaseConstants):
     # if <results = True>, a separate page containing all relevant information is displayed after finishing the task
     # if <results = False>, the template "Decision.html" will not be rendered
     results = True
+
+    cara_sello_value = random.randint(0, 1)
 
     # ---------------------------------------------------------------------------------------------------------------- #
     # --- oTree Settings (Don't Modify) --- #
