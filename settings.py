@@ -8,12 +8,12 @@ SESSION_CONFIGS = [
     #     num_demo_participants=3,
     #     app_sequence=['testapp'],
     # ),
-    dict(
-        name='real_effort_numbers',
-        display_name="Experimento 2 (Real Effort Numbers App) Yes",
-        num_demo_participants=1,
-        app_sequence=['real_effort_numbers'],
-    ),
+    # dict(
+    #     name='real_effort_numbers',
+    #     display_name="Experimento 2 (Real Effort Numbers App) Yes",
+    #     num_demo_participants=1,
+    #     app_sequence=['real_effort_numbers'],
+    # ),
     # dict(
     #     name='myprisoners_dilemma',
     #     display_name="Experimento 3 (Prisoner's Dilemma App) Yes",
