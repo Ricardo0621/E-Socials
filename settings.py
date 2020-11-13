@@ -2,6 +2,12 @@ from os import environ
 
 
 SESSION_CONFIGS = [
+    dict(
+        name='mpl',
+        display_name="Efecto de distintos tipos de contratación",
+        num_demo_participants=1,
+        app_sequence=['mpl'],
+    ),
     # dict(
     #     name='testapp',
     #     display_name="Efecto de distintos tipos de contratación",
@@ -26,12 +32,6 @@ SESSION_CONFIGS = [
     #     num_demo_participants=3,
     #     app_sequence=['survey'],
     # ),
-    dict(
-        name='mpl',
-        display_name="Efecto de distintos tipos de contratación",
-        num_demo_participants=1,
-        app_sequence=['mpl'],
-    ),
     # dict(
     #     name='cem',
     #     display_name="Certainty Equivalent Method",
