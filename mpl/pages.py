@@ -2,7 +2,7 @@ from otree.api import Currency as c, currency_range
 from . import models
 from ._builtin import Page, WaitPage
 from .models import Constants
-import random
+import math
 
 
 # variables for all templates
@@ -166,43 +166,44 @@ class Results(Page):
             return {
                 'choice_to_pay':  [choice_to_pay],
                 'option_to_pay':  self.player.option_to_pay,
-                'payoff':         self.player.payoff
+                'payoff':         math.trunc(self.player.payoff)
             }
 
 class Consent(Page):
     form_model = 'player' #Le dice que es un jugador
-    form_fields = ['accepts_data', 'name', 'id_cc']
+    form_fields = ['accepts_data', 'name', 'id_cc', 'accepts_terms']
 
 class DoubleMoney(Page):
     form_model = 'player' #Le dice que es un jugador
     form_fields = ['monto']
 
 class ResultsDoubleMoney(Page):
+    #form_model = 'player' #Le dice que es un jugador
+    #form_fields = ['monto', 'combined_payoff', 'inversion', 'cara_sello_payoff' ]
     def vars_for_template(self):
-        cara_sello = random.randint(0, 1)
         #all_players = self.player.in_all_rounds()
+        cara_sello_name = ""
         combined_payoff = 0
-        inversion = c(self.player.monto)
-        nombre_aux = ""
-        if(cara_sello == 0):
-            nombre_aux = "Cara"
-            self.player.monto = self.player.monto*2
+        cara_sello_payof = 0
+        inversion = math.trunc(c(self.player.monto))
+        if(Constants.cara_sello_value == 0):
+            cara_sello_name = "Cara"
+            cara_sello_payoff = math.trunc(self.player.monto*2)
         else:
-            nombre_aux = "Sello"
-            self.player.monto = 0
-        #for player in all_players:
-        combined_payoff = self.player.payoff + c(self.player.monto)
+            cara_sello_name = "Sello"
+            cara_sello_payoff = 0
+        combined_payoff = math.trunc(self.player.payoff) + cara_sello_payoff
         return {
             'combined_payoff' : combined_payoff,
             'inversion' : inversion,
-            'nombre_aux' : nombre_aux
+            'cara_sello_name' : cara_sello_name,
+            'cara_sello_payoff' : cara_sello_payoff
         }
 # ******************************************************************************************************************** #
 # *** PAGE SEQUENCE *** #Usted obtuvo invertió {{inversion }}y obtuvo {{cara_sello}} 
-# por lo que su pago en esta activdad es de {{player.monto}} y su pago total es {{combined_payoff}}
+# por lo que su pago en esta activdad es de {{cara_sello_payoff}} y su pago total es {{combined_payoff}}
 # ******************************************************************************************************************** #
 page_sequence = [Consent, Instructions, Decision, Results, DoubleMoney, ResultsDoubleMoney]
-print("Sequencia" + str(page_sequence))
 
 # if Constants.instructions:
 #     page_sequence.insert(0, Instructions)

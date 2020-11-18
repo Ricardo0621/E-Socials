@@ -151,13 +151,6 @@ Reference: http://blog.rrwd.nl/2015/04/04/the-screen-reader-text-class-why-and-h
     cursor: pointer;
 }
 
-.mejs__overlay-button {
-    background: url('mejs-controls.svg') no-repeat;
-    background-position: 0 -39px;
-    height: 80px;
-    width: 80px;
-}
-
 .mejs__overlay:hover > .mejs__overlay-button {
     background-position: -80px -39px;
 }
@@ -165,16 +158,6 @@ Reference: http://blog.rrwd.nl/2015/04/04/the-screen-reader-text-class-why-and-h
 .mejs__overlay-loading {
     height: 80px;
     width: 80px;
-}
-
-.mejs__overlay-loading-bg-img {
-    -webkit-animation: mejs__loading-spinner 1s linear infinite;
-            animation: mejs__loading-spinner 1s linear infinite;
-    background: transparent url('mejs-controls.svg') -160px -40px no-repeat;
-    display: block;
-    height: 80px;
-    width: 80px;
-    z-index: 1;
 }
 
 @-webkit-keyframes mejs__loading-spinner {
@@ -224,22 +207,6 @@ Reference: http://blog.rrwd.nl/2015/04/04/the-screen-reader-text-class-why-and-h
     line-height: 10px;
     margin: 0;
     width: 32px;
-}
-
-.mejs__button > button {
-    background: transparent url('mejs-controls.svg');
-    border: 0;
-    cursor: pointer;
-    display: block;
-    font-size: 0;
-    height: 20px;
-    line-height: 0;
-    margin: 10px 6px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    text-decoration: none;
-    width: 20px;
 }
 
 /* :focus for accessibility */

@@ -15,7 +15,7 @@
 {# *** TITLE *** #}
 {# ****************************************************************************************************************** #}
 {% block title %}
-    {% trans "Actividad 2 - Resultados" %}
+    {% trans "Actividad 4 - Resultados" %}
 {% endblock %}
 
 
@@ -33,8 +33,8 @@
                 Lanzaremos una moneda para determinar si el activo será exitoso o no. Si la moneda cae
                 cara recibirás el doble de la cantidad invertida y si cae sello perderás el monto invertido.<br><br>
 
-                Usted obtuvo invirtió {{inversion }} y obtuvo {{nombre_aux}}.
-                Su pago en esta actividad es de {{player.monto}} y su pago total combinado es {{combined_payoff}}
+                Usted invirtió <b>${{inversion }}</b> y obtuvo <b>{{cara_sello_name}}</b>.
+                Su pago en esta actividad es de <b>${{cara_sello_payoff}}</b> y su pago total combinado es <b>${{combined_payoff}}</b>
         </p>
         
     </div>

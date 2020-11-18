@@ -1,5 +1,6 @@
 from os import environ
 
+
 SESSION_CONFIGS = [
     # dict(
     #     name='testapp',
@@ -27,7 +28,7 @@ SESSION_CONFIGS = [
     # ),
     dict(
         name='mpl',
-        display_name="Experimento 1",
+        display_name="Efecto de distintos tipos de contratación",
         num_demo_participants=1,
         app_sequence=['mpl'],
     ),

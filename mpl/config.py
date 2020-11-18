@@ -1,6 +1,7 @@
 # <imports>
 from otree.api import Currency as c
 from otree.constants import BaseConstants
+import random
 # </imports>
 
 
@@ -16,9 +17,9 @@ class Constants(BaseConstants):
     # lottery payoffs
     # "high" and "low" outcomes (in currency units set in settings.py) of "lottery A" and "lottery B"
     # note that payoffs are identical for all choices and only probabilities of "high" and "low" outcomes change
-    lottery_a_hi = 15.00
+    lottery_a_hi = 15000
     lottery_a_lo = 0
-    lottery_b_hi = 15.00
+    lottery_b_hi = 15000
     lottery_b_lo = 0
 
     # number of binary choices between "lottery A" and "lottery B"
@@ -85,6 +86,8 @@ class Constants(BaseConstants):
     # if <results = True>, a separate page containing all relevant information is displayed after finishing the task
     # if <results = False>, the template "Decision.html" will not be rendered
     results = True
+
+    cara_sello_value = random.randint(0, 1)
 
     # ---------------------------------------------------------------------------------------------------------------- #
     # --- oTree Settings (Don't Modify) --- #
