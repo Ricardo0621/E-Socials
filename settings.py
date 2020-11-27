@@ -9,7 +9,7 @@ SESSION_CONFIGS = [
         app_sequence=['mpl'],
     ),
     # dict(
-    #     name='testapp',
+    #     name='testapp',epa
     #     display_name="Efecto de distintos tipos de contratación",
     #     num_demo_participants=3,
     #     app_sequence=['testapp'],
