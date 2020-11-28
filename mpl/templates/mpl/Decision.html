@@ -47,7 +47,6 @@
     {% trans "Por favor, escoja entre la Bolsa 1 o la Bolsa 2" %}
 {% endblock %}
 
-
 {# ****************************************************************************************************************** #}
 {# *** CONTENT *** #}
 {# ****************************************************************************************************************** #}
@@ -126,7 +125,23 @@
         <!-- Lottery Decisions: Choice List -->
         <!-- ------------------------------------------------------------------------------------------------------- -->
         {% else %}
+    <div class="wrapper instructions">
+        <p align = "justify">
+                En esta actividad realizaremos <b>un sorteo</b> y tú definirás algunas de las condiciones del mismo. 
+                Existen 11 sorteos posibles pero al final, sólo se seleccionará uno al azar. <br><br>
 
+                El sorteo consiste en unas bolsas virtuales que tienen <b>10 pelotitas</b> de dos colores, <b>azul o rojo</b>. No hay bolas de ningún otro color. 
+                <b>Ganarás $15,000</b> si de la bolsa virtual saliera una <b>bola azul</b>. 
+                Si sale una bola roja,  no ganarás nada, pero tampoco perderás el dinero que tienes hasta el momento.<br><br>
+                
+                <b>Tu decisión:</b> elegir la bolsa de la cual quieres que se realice el sorteo. 
+                Como hay 11 sorteos posibles, deberás tomar 11 decisiones. 
+                Piensa en cada una de ellas como si fuera la definitiva.<br><br>
+                
+                <b>Nota:</b> siempre sabrás cuántas bolitas azules y rojas hay en la bolsa 1. En la bolsa 2 sólo hay bolitas azules y rojas, pero nunca sabrás cuántas hay de cada color. 
+                <b>Recuerda, sólo ganas si sale una pelotita azul.</b>
+            </p>
+    </div>
             <div class="card">
                 <table class="table table-striped">
                     <thead>
@@ -159,7 +174,8 @@
 
                                 <!-- A lotteries -->
                                 <td class="lottery-a">
-                                    {% trans " tiene " %}{{ i|add:"-1" }} {% trans " bolas azules y " %} {{  p}}{% trans " bolas rojas " %} <br/>
+                                
+                                    <b>{% trans " Decisión " %}{{ i}}</b>{% trans ". Tiene " %}{{ i|add:"-1" }} {% trans " bolas azules y " %} {{  p}}{% trans " bolas rojas " %} <br/>
                                     {% comment %} {{ lottery_a_hi }} {% trans "with a probability of " %}{{ p }},<br/>
                                     {{ lottery_a_lo }} {% trans "otherwise" %} {% endcomment %}
                                 </td>

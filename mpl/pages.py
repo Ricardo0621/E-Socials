@@ -155,18 +155,21 @@ class Results(Page):
         index_to_pay = self.player.participant.vars['mpl_index_to_pay']
         round_to_pay = indices.index(index_to_pay) + 1
         choice_to_pay = self.participant.vars['mpl_choices'][round_to_pay - 1]
+        decision = choice_to_pay[0]
 
         if Constants.one_choice_per_page:
             return {
                 'choice_to_pay':  [choice_to_pay],
                 'option_to_pay':  self.player.in_round(round_to_pay).option_to_pay,
                 'payoff':         self.player.in_round(round_to_pay).payoff,
+                'decision':       decision
             }
         else:
             return {
                 'choice_to_pay':  [choice_to_pay],
                 'option_to_pay':  self.player.option_to_pay,
-                'payoff':         math.trunc(self.player.payoff)
+                'payoff':         math.trunc(self.player.payoff),
+                'decision':       decision
             }
 
 class Consent(Page):
@@ -188,23 +191,40 @@ class ResultsDoubleMoney(Page):
         inversion = math.trunc(c(self.player.monto))
         if(Constants.cara_sello_value == 0):
             cara_sello_name = "Cara"
-            cara_sello_payoff = math.trunc(self.player.monto*2)
+            self.player.monto = 10000-inversion + math.trunc(self.player.monto*2)
         else:
             cara_sello_name = "Sello"
-            cara_sello_payoff = 0
-        combined_payoff = math.trunc(self.player.payoff) + cara_sello_payoff
+            self.player.monto = 10000-inversion + 0
+        #combined_payoff = math.trunc(self.player.payoff) + cara_sello_payoff
         return {
-            'combined_payoff' : combined_payoff,
+            #'combined_payoff' : combined_payoff,
             'inversion' : inversion,
             'cara_sello_name' : cara_sello_name,
-            'cara_sello_payoff' : cara_sello_payoff
+            'cara_sello_payoff' : self.player.monto
         }
+class CombinedResults(Page):
+    def vars_for_template(self):
+        combined_payoff = math.trunc(self.player.payoff) + self.player.monto
+        return {
+            'combined_payoff' : combined_payoff,
+        }
+        
+class Survey(Page):
+    form_model = 'player' #Le dice que es un jugador
+    form_fields = ['nombre_entidad', 'tiempo_entidad', 'tipo_contrato', 'horas_semanales', 'rango_pago', 'satisfecho_trabajo_actual',
+    'satisfecho_beneficios', 'satisfecho_jornada', 'conforme_contrato', 'empleo_estable', 'contrato_credito_vivienda','contrato_credito_carro' ,
+    'contrato_opciones' ,'aporte_vejez' ,'cambiar_empresa' , 'cambiar_trabajo', 'mejorar_capacidades', 'mejorar_ingresos', 'trabajar_menos', 
+    'trabajo_temporal', 'trabajo_estable', 'crecimiento_profesional', 'dinero_compra_vivienda', 'contrato_compra_vivienda', 'problemas_companeros',
+    'problemas_jefe', 'labor_desempenada', 'esfuerzo_fisico', 'problemas_ambientales', 'otro_problema' ]     
+
+class Tips(Page):
+    form_model = 'player'
 # ******************************************************************************************************************** #
 # *** PAGE SEQUENCE *** #Usted obtuvo invertió {{inversion }}y obtuvo {{cara_sello}} 
 # por lo que su pago en esta activdad es de {{cara_sello_payoff}} y su pago total es {{combined_payoff}}
 # ******************************************************************************************************************** #
-page_sequence = [Consent, Instructions, Decision, Results, DoubleMoney, ResultsDoubleMoney]
-
+# page_sequence = [Consent,Survey,Tips, Instructions, Decision, Results, DoubleMoney, ResultsDoubleMoney]
+page_sequence = [Consent,Survey, Tips, DoubleMoney, ResultsDoubleMoney, Instructions, Decision, Results, CombinedResults]
 # if Constants.instructions:
 #     page_sequence.insert(0, Instructions)
 

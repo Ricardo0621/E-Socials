@@ -112,8 +112,221 @@ class Player(BasePlayer):
         default=True)
     accepts_terms = models.BooleanField()
     monto = models.IntegerField(label = 
-    "Por favor, indica el monto que invertirás en el activo de riesgo (sin puntos o comas)", min=0, max=20000)
-
+    "Por favor, indica el monto que invertirás en el activo de riesgo (sin puntos o comas)", min=0, max=10000)
+    nombre_entidad = models.StringField(label= "¿Cuál es el nombre de la entidad en la que usted trabaja?")
+    tiempo_entidad = models.IntegerField(label="¿Cuánto tiempo (en años) lleva trabajando en esta entidad?")
+    tipo_contrato =  models.StringField(
+        label="Por favor, seleccione cuál es el tipo de contrato que lo vincula a esta entidad",
+        choices = [
+            ["Contrato a término indefinido", "Contrato a término indefinido"],
+            ["Contrato a término fijo", "Contrato a término fijo"],
+            ["Contrato de obra o labor", "Contrato de obra o labor"],
+            ["Contrato por prestación de servicios", "Contrato por prestación de servicios"],
+            ["Contrato a término fijo", "Contrato a término fijo"],
+        ]
+    )
+    horas_semanales = models.IntegerField(label="Cuántas horas a la semana trabaja normalmente en este trabajo?")    
+    rango_pago = models.StringField(
+        label="¿Puede decirme en cuál de los siguientes rangos está el ingreso que usted gana al mes por su trabajo?",
+        choices = [
+            ["Menos de 205.000", "Menos de 205.000"],
+            ["Entre 205.000 y 325.000", "Entre 205.000 y 325.000"],
+            ["Entre 325.0001 y 440.000", "Entre 325.0001 y 440.000"],
+            ["Entre 440.001 y 565.000", "Entre 440.001 y 565.000"],
+            ["Entre 650.001 y 710.000", "Entre 650.001 y 710.000"],
+            ["Entre 710.001 y 750.000", "Entre 710.001 y 750.000"],
+            ["Entre 810.001 y 915.000", "Entre 810.001 y 915.000"],
+            ["Entre 915.001 y 1.000.00", "Entre 915.001 y 1.000.00"],
+            ["Entre 1.000.001 y 1.250.000", "Entre 1.000.001 y 1.250.000"],
+            ["Entre 1.250.001 y 1.365.000", "Entre 1.250.001 y 1.365.000"],
+            ["Entre 1.365.001 y 1.600.000", "Entre 1.365.001 y 1.600.000"],
+            ["Entre 1.600.001 y 2.000.000", "Entre 1.600.001 y 2.000.000"],
+            ["Entre 2.000.001 y 3.150.000", "Entre 2.000.001 y 3.150.000"],
+            ["Más de 3.150.000", "Más de 3.150.000"],
+        ]
+    )
+    satisfecho_trabajo_actual = models.BooleanField(
+        label = "¿Con su trabajo actual?",
+        choices = [
+            [True, "Sí"],
+            [False, "No"],
+        ]
+    )
+    satisfecho_beneficios = models.BooleanField(
+        label = "¿Con los beneficios y las prestaciones que recibe?",
+        choices = [
+            [True, "Sí"],
+            [False, "No"],
+        ]
+    )
+    satisfecho_jornada = models.BooleanField(
+        label = "¿Con su jornada laboral actual?",
+        choices = [
+            [True, "Sí"],
+            [False, "No"],
+        ]
+    )
+    conforme_contrato = models.BooleanField(
+        label = "¿Está conforme con su tipo de contrato?",
+        choices = [
+            [True, "Sí"],
+            [False, "No"],
+        ]
+    )
+    empleo_estable = models.BooleanField(
+        label = "¿Considera que su empleo actual es estable?",
+        choices = [
+            [True, "Sí"],
+            [False, "No"],
+        ]
+    )
+    contrato_credito_vivienda = models.BooleanField(
+        label = "¿Su tipo de contrato actual le permite acceder a créditos de vivienda?",
+        choices = [
+            [True, "Sí"],
+            [False, "No"],
+        ]
+    )
+    contrato_credito_carro = models.BooleanField(
+        label = "¿Su tipo de contrato actual le permite acceder a créditos para carro o educación?",
+        choices = [
+            [True, "Sí"],
+            [False, "No"],
+        ]
+    )
+    contrato_opciones =  models.StringField(
+        label="De acuerdo con su contrato actual, usted recibe o tiene derecho a algunas de las siguientes opciones:",
+        choices = [
+            ["Prima de navidad", "Prima de navidad"],
+            ["Cesantías ", "Cesantías "],
+            ["Vacaciones con sueldo", "Vacaciones con sueldo"],
+        ]
+    )
+    aporte_vejez = models.StringField(
+        label="¿Qué está haciendo usted actualmente para mantener económicamente en su vejez?",
+        choices = [
+            ["Aportar en un fondo de pensiones obligatorias", "Aportar en un fondo de pensiones obligatorias"],
+            ["Aportar en un fondo de pensiones voluntarias", "Aportar en un fonde de pensiones voluntarias"],
+            ["Ahorrando", "Ahorrando"],
+            ["Haciendo inversiones", "Haciendo inversiones"],
+            ["Pagando un seguro por su cuenta", "Pagando un seguro por su cuenta"],
+            ["Preparando a sus hijos para que pueda mantenerlo en su vejez", "Preparando a sus hijos para que pueda mantenerlo en su vejez"],
+            ["Otro", "Otro"],
+            ["Nada", "Nada"],
+        ]
+    )
+    cambiar_empresa = models.BooleanField(
+        label = "¿Desearía trabajar en otra organización/empresa?",
+        choices = [
+            [True, "Sí"],
+            [False, "No"],
+        ]
+    )
+    cambiar_trabajo = models.BooleanField(
+        label = "¿Desea cambiar el tipo de trabajo que realiza actualmente?",
+        choices = [
+            [True, "Sí"],
+            [False, "No"],
+        ]
+    )
+    mejorar_capacidades = models.BooleanField(
+        label = "¿Para mejorar la utilización de sus capacidades o formación?",
+        choices = [
+            [True, "Sí"],
+            [False, "No"],
+        ]
+    )
+    mejorar_ingresos = models.BooleanField(
+        label = "¿Desea mejorar sus ingresos?",
+        choices = [
+            [True, "Sí"],
+            [False, "No"],
+        ]
+    )
+    trabajar_menos = models.BooleanField(
+        label = "¿Desea trabajar menos horas?",
+        choices = [
+            [True, "Sí"],
+            [False, "No"],
+        ]
+    )
+    trabajo_temporal = models.BooleanField(
+        label = "¿Porque el trabajo actual es temporal?",
+        choices = [
+            [True, "Sí"],
+            [False, "No"],
+        ]
+    )
+    trabajo_estable = models.BooleanField(
+        label = "¿Porque su trabajo no es estable?",
+        choices = [
+            [True, "Sí"],
+            [False, "No"],
+        ]
+    )
+    crecimiento_profesional = models.BooleanField(
+        label = "¿Porque no ve posibilidades de crecimiento profesional?",
+        choices = [
+            [True, "Sí"],
+            [False, "No"],
+        ]
+    )
+    dinero_compra_vivienda = models.BooleanField(
+        label = "¿Porque con el dinero que gana no puede realizar planes de compra de vivienda, carro o educación?",
+        choices = [
+            [True, "Sí"],
+            [False, "No"],
+        ]
+    )
+    contrato_compra_vivienda = models.BooleanField(
+        label = "¿Porque su tipo de contrato no le permite realizar planes de compra de vivienda, carro o educación?",
+        choices = [
+            [True, "Sí"],
+            [False, "No"],
+        ]
+    )
+    problemas_companeros = models.BooleanField(
+        label = "¿Problemas con sus compañeros de trabajo?",
+        choices = [
+            [True, "Sí"],
+            [False, "No"],
+        ]
+    )
+    problemas_jefe = models.BooleanField(
+        label = "¿Problemas con su jefe?",
+        choices = [
+            [True, "Sí"],
+            [False, "No"],
+        ]
+    )
+    labor_desempenada = models.BooleanField(
+        label = "Le gusta la labor que desempeña?",
+        choices = [
+            [True, "Sí"],
+            [False, "No"],
+        ]
+    )
+    esfuerzo_fisico = models.BooleanField(
+        label = "¿Su trabajo actual exige mucho esfuerzo físico o mental?",
+        choices = [
+            [True, "Sí"],
+            [False, "No"],
+        ]
+    )
+    problemas_ambientales = models.BooleanField(
+        label = "¿Problemas ambientales (aire, olores, ruidos, temperatura, etc.)?",
+        choices = [
+            [True, "Sí"],
+            [False, "No"],
+        ]
+    )
+    otro_problema = models.BooleanField(
+        label = "¿Otro?",
+        choices = [
+            [True, "Sí"],
+            [False, "No"],
+        ]
+    )
     # set player's payoff
     # ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
     def set_payoffs(self):
