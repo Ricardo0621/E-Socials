@@ -1,0 +1,75 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+{% load i18n %}
+
+
+{# ****************************************************************************************************************** #}
+{# *** STYLES *** #}
+{# ****************************************************************************************************************** #}
+{% block styles %}
+    <link href="{% static 'mpl/css/custom.css' %}" rel="stylesheet"/>
+{% endblock %}
+
+
+{# ****************************************************************************************************************** #}
+{# *** TITLE *** #}
+{# ****************************************************************************************************************** #}
+{% block title %}
+    {% trans "Actividad 1 - Primming" %}
+{% endblock %}
+
+
+{# ****************************************************************************************************************** #}
+{# *** CONTENT *** #}
+{# ****************************************************************************************************************** #}
+{% block content %}
+
+    <div class="wrapper instructions">
+        <p align = "justify" >
+                
+            Por favor, responda las siguientes preguntas.
+
+            {% formfield player.nombre_entidad %}
+            {% formfield player.tiempo_entidad %}
+            En colombia existen diferentes tipos de contrato: <br><br>
+            ◦ <b>Contrato a término indefinido:</b> No tiene fecha de terminación establecida. El empleado cuenta con todas las prestaciones sociales establecidas por la ley (cesantías, primas, vacaciones remuneradas) y tiene beneficios adicionales (vinculación a cooperativas, ayudas especiales, créditos u otros).<br>
+            ◦ <b>Contrato a término fijo:</b> Este tipo de contrato tiene fecha de terminación establecida de hasta 3 años y puede ser renovado hasta por tres veces su permanencia. . El empleado cuenta con todas las prestaciones sociales establecidas por la ley (cesantías, primas, vacaciones remuneradas) y para su finalización es necesario un preaviso de 30 días.<br>
+            ◦ <b>Contrato de obra o labor:</b> Este tipo de contrato es igual a los anteriores en términos de beneficios y descuentos. Sin embargo, solo está vigente durante una labor específica y termina en el momento que la obra llegue a su fin.<br>
+            ◦ <b>Contrato por prestación de servicios:</b> La remuneración se acuerda entre las partes y no genera relación laboral ni obliga a la organización a pagar prestaciones sociales. La duración es igualmente en común acuerdo dependiendo del trabajo a realizar.<br>
+            {% formfield player.tipo_contrato %}
+            {% formfield player.horas_semanales %}
+            {% formfield player.rango_pago %}
+            ¿Está satisfecho con ... ? <br><br>
+            {% formfield player.satisfecho_trabajo_actual %}
+            {% formfield player.satisfecho_beneficios %}
+            {% formfield player.satisfecho_jornada %}
+            {% formfield player.conforme_contrato %}
+            {% formfield player.empleo_estable %}
+            {% formfield player.contrato_credito_vivienda %}
+            {% formfield player.contrato_credito_carro %}
+            {% formfield player.contrato_opciones %}
+            {% formfield player.aporte_vejez %}
+            {% formfield player.cambiar_empresa %}
+            {% formfield player.cambiar_trabajo %}
+            ¿Por qué motivos desea cambiar de trabajo o empleo?<br><br>
+            {% formfield player.mejorar_capacidades %}
+            {% formfield player.mejorar_ingresos %}
+            {% formfield player.trabajar_menos %}
+            {% formfield player.trabajo_temporal %}
+            {% formfield player.trabajo_estable %}
+            {% formfield player.crecimiento_profesional %}
+            {% formfield player.dinero_compra_vivienda %}
+            {% formfield player.contrato_compra_vivienda %}
+            {% formfield player.problemas_companeros %}
+            {% formfield player.problemas_jefe %}
+            {% formfield player.labor_desempenada %}
+            {% formfield player.esfuerzo_fisico %}
+            {% formfield player.problemas_ambientales %}
+            {% formfield player.problemas_ambientales %}
+            {% formfield player.otro_problema %}
+        </p>
+        </p>
+
+    </div>
+{% next_button %}
+{% endblock %}

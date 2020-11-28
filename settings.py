@@ -9,16 +9,16 @@ SESSION_CONFIGS = [
         app_sequence=['mpl'],
     ),
     # dict(
-    #     name='testapp',epa
-    #     display_name="Efecto de distintos tipos de contratación",
+    #     name='testapp',
+    #     display_name="La desensibilización de la violencia: el efecto de las noticias en la percepción del asesinato de líderes sociales en Colombia",
     #     num_demo_participants=3,
     #     app_sequence=['testapp'],
     # ),
     # dict(
-    #     name='real_effort_numbers',
-    #     display_name="Experimento 2 (Real Effort Numbers App) Yes",
+    #     name='survey',
+    #     display_name="Gift Exhange Game",
     #     num_demo_participants=1,
-    #     app_sequence=['real_effort_numbers'],
+    #     app_sequence=['survey'],
     # ),
     # dict(
     #     name='myprisoners_dilemma',

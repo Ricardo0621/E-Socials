@@ -209,7 +209,7 @@ class CombinedResults(Page):
             'combined_payoff' : combined_payoff,
         }
         
-class Survey(Page):
+class Priming(Page):
     form_model = 'player' #Le dice que es un jugador
     form_fields = ['nombre_entidad', 'tiempo_entidad', 'tipo_contrato', 'horas_semanales', 'rango_pago', 'satisfecho_trabajo_actual',
     'satisfecho_beneficios', 'satisfecho_jornada', 'conforme_contrato', 'empleo_estable', 'contrato_credito_vivienda','contrato_credito_carro' ,
@@ -219,12 +219,31 @@ class Survey(Page):
 
 class Tips(Page):
     form_model = 'player'
+
+class Survey(Page):
+    form_model = 'player'
+    form_fields = ['genero', 'edad', 'ciudad', 'estrato', 'estado_civil', 'numero_hijos', 'identifica_cultura',
+    'identifica_religion','nivel_estudios', 'tendencia_politica', 'disposicion_riesgos', 'conseguir_esfuerzo',
+    'planes_termino', 'juego_suerte', 'propongo_aprender', 'mayores_logros', 'establecer_metas', 'competencia_excelencia',
+    'salir_adelante', 'comparar_calificaciones', 'empeno_trabajo', 'alcanzar_objetivos', 'cumplir_tareas', 'obtener_resultados',
+    'exito_esfuerzo','superar_desafios', 'confianza_tareas', 'tareas_excelencia', 'tareas_dificiles', 'alcanzar_objetivos',
+    'tarde_cita', 'comprar_vendedores_ambulantes', 'trabajar_sin_contrato', 'emplear_sin_contrato', 'no_cotizar_pension', 'no_cotizar_salud',
+    'no_cuenta_bancaria', 'pedir_prestado', 'transporte_alternativo', 'vender_informal', 'no_votar', 'comprar_sin_factura',
+    'tarde_cita_otros', 'comprar_vendedores_ambulantes_otros', 'trabajar_sin_contrato_otros', 'emplear_sin_contrato_otros', 'no_cotizar_pension_otros', 'no_cotizar_salud_otros',
+    'no_cuenta_bancaria_otros', 'pedir_prestado_otros', 'transporte_alternativo_otros', 'vender_informal_otros', 'no_votar_otros', 'comprar_sin_factura_otros',
+    'tarde_cita_apropiado', 'comprar_vendedores_ambulantes_apropiado', 'trabajar_sin_contrato_apropiado', 'emplear_sin_contrato_apropiado', 'no_cotizar_pension_apropiado', 'no_cotizar_salud_apropiado',
+    'no_cuenta_bancaria_apropiado', 'pedir_prestado_apropiado', 'transporte_alternativo_apropiado', 'vender_informal_apropiado', 'no_votar_apropiado', 'comprar_sin_factura_apropiado',
+    'tarde_cita_otros_apropiado', 'comprar_vendedores_ambulantes_otros_apropiado', 'trabajar_sin_contrato_otros_apropiado', 'emplear_sin_contrato_otros_apropiado', 'no_cotizar_pension_otros_apropiado', 'no_cotizar_salud_otros_apropiado',
+    'no_cuenta_bancaria_otros_apropiado', 'pedir_prestado_otros_apropiado', 'transporte_alternativo_otros_apropiado', 'vender_informal_otros_apropiado', 'no_votar_otros_apropiado', 'comprar_sin_factura_otros_apropiado',
+    'tarde_cita_ilegal', 'comprar_vendedores_ambulantes_ilegal', 'trabajar_sin_contrato_ilegal', 'emplear_sin_contrato_ilegal', 'no_cotizar_pension_ilegal', 'no_cotizar_salud_ilegal',
+    'no_cuenta_bancaria_ilegal', 'pedir_prestado_ilegal', 'transporte_alternativo_ilegal', 'vender_informal_ilegal', 'no_votar_ilegal', 'comprar_sin_factura_ilegal',
+    ]    
 # ******************************************************************************************************************** #
 # *** PAGE SEQUENCE *** #Usted obtuvo invertió {{inversion }}y obtuvo {{cara_sello}} 
 # por lo que su pago en esta activdad es de {{cara_sello_payoff}} y su pago total es {{combined_payoff}}
 # ******************************************************************************************************************** #
-# page_sequence = [Consent,Survey,Tips, Instructions, Decision, Results, DoubleMoney, ResultsDoubleMoney]
-page_sequence = [Consent,Survey, Tips, DoubleMoney, ResultsDoubleMoney, Instructions, Decision, Results, CombinedResults]
+# page_sequence = [Consent,Priming,Tips, Instructions, Decision, Results, DoubleMoney, ResultsDoubleMoney]
+page_sequence = [Consent,Priming,Tips,DoubleMoney, ResultsDoubleMoney, Instructions, Decision, Results, CombinedResults, Survey]
 # if Constants.instructions:
 #     page_sequence.insert(0, Instructions)
 

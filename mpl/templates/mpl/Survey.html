@@ -15,7 +15,7 @@
 {# *** TITLE *** #}
 {# ****************************************************************************************************************** #}
 {% block title %}
-    {% trans "Actividad 1 - Primming" %}
+    {% trans "Encuesta de datos sociodemográficos" %}
 {% endblock %}
 
 
@@ -27,47 +27,122 @@
     <div class="wrapper instructions">
         <p align = "justify" >
                 
-            Por favor, responda las siguientes preguntas.
+            <b>A continuación, usted va a encontrar varias preguntas relacionadas a aspectos sociodemográficos.
+            Por favor lea y especifique sus respuestas de acuerdo a lo indicado.</b><br><br>
 
-            {% formfield player.nombre_entidad %}
-            {% formfield player.tiempo_entidad %}
-            En colombia existen diferentes tipos de contrato: <br><br>
-            ◦ <b>Contrato a término indefinido:</b> No tiene fecha de terminación establecida. El empleado cuenta con todas las prestaciones sociales establecidas por la ley (cesantías, primas, vacaciones remuneradas) y tiene beneficios adicionales (vinculación a cooperativas, ayudas especiales, créditos u otros).<br>
-            ◦ <b>Contrato a término fijo:</b> Este tipo de contrato tiene fecha de terminación establecida de hasta 3 años y puede ser renovado hasta por tres veces su permanencia. . El empleado cuenta con todas las prestaciones sociales establecidas por la ley (cesantías, primas, vacaciones remuneradas) y para su finalización es necesario un preaviso de 30 días.<br>
-            ◦ <b>Contrato de obra o labor:</b> Este tipo de contrato es igual a los anteriores en términos de beneficios y descuentos. Sin embargo, solo está vigente durante una labor específica y termina en el momento que la obra llegue a su fin.<br>
-            ◦ <b>Contrato por prestación de servicios:</b> La remuneración se acuerda entre las partes y no genera relación laboral ni obliga a la organización a pagar prestaciones sociales. La duración es igualmente en común acuerdo dependiendo del trabajo a realizar.<br>
-            {% formfield player.tipo_contrato %}
-            {% formfield player.horas_semanales %}
-            {% formfield player.rango_pago %}
-            ¿Está satisfecho con ... ? <br><br>
-            {% formfield player.satisfecho_trabajo_actual %}
-            {% formfield player.satisfecho_beneficios %}
-            {% formfield player.satisfecho_jornada %}
-            {% formfield player.conforme_contrato %}
-            {% formfield player.empleo_estable %}
-            {% formfield player.contrato_credito_vivienda %}
-            {% formfield player.contrato_credito_carro %}
-            {% formfield player.contrato_opciones %}
-            {% formfield player.aporte_vejez %}
-            {% formfield player.cambiar_empresa %}
-            {% formfield player.cambiar_trabajo %}
-            ¿Por qué motivos desea cambiar de trabajo o empleo?<br><br>
-            {% formfield player.mejorar_capacidades %}
-            {% formfield player.mejorar_ingresos %}
-            {% formfield player.trabajar_menos %}
-            {% formfield player.trabajo_temporal %}
-            {% formfield player.trabajo_estable %}
-            {% formfield player.crecimiento_profesional %}
-            {% formfield player.dinero_compra_vivienda %}
-            {% formfield player.contrato_compra_vivienda %}
-            {% formfield player.problemas_companeros %}
-            {% formfield player.problemas_jefe %}
-            {% formfield player.labor_desempenada %}
-            {% formfield player.esfuerzo_fisico %}
-            {% formfield player.problemas_ambientales %}
-            {% formfield player.problemas_ambientales %}
-            {% formfield player.otro_problema %}
-        </p>
+            <b>Confidencialidad:</b> La información que usted brinda en esta encuesta es confidencial y anónima. Dicha información
+            será utilizada con propósitos académicos y será protegida de acuerdo con la Ley Estatutaria 1581 de 2012 de
+            protección a los datos personales.<br>
+
+            {% formfield player.genero %}
+            {% formfield player.edad %}
+            {% formfield player.ciudad %}
+            {% formfield player.estrato %}
+            {% formfield player.estado_civil %}
+            {% formfield player.numero_hijos %}
+            {% formfield player.identifica_cultura %}
+            {% formfield player.identifica_religion %}
+            {% formfield player.nivel_estudios %}
+            De acuerdo con una escala del 1 a 10 que va de izquierda a derecha, en la que el 1 significa izquierda
+            y el 10 significa derecha.
+            {% formfield player.tendencia_politica %}
+            {% formfield player.disposicion_riesgos %}
+            <b>Por favor, indique en qué medida está de acuerdo o no con cada una de las siguientes 10
+            afirmaciones.</b>
+            {% formfield player.conseguir_esfuerzo %}
+            {% formfield player.planes_termino %}
+            {% formfield player.juego_suerte %}
+            {% formfield player.propongo_aprender %}
+            {% formfield player.mayores_logros %}
+            {% formfield player.establecer_metas %}
+            {% formfield player.competencia_excelencia %}
+            {% formfield player.salir_adelante %}
+            {% formfield player.comparar_calificaciones %}
+            {% formfield player.empeno_trabajo %}
+            <b>Por favor, indique en qué medida está de acuerdo o no con cada una de las siguientes 10
+            afirmaciones.</b>
+            {% formfield player.alcanzar_objetivos %}
+            {% formfield player.cumplir_tareas %}
+            {% formfield player.obtener_resultados %}
+            {% formfield player.exito_esfuerzo %}
+            {% formfield player.superar_desafios %}
+            {% formfield player.confianza_tareas %}
+            {% formfield player.tareas_excelencia %}
+            {% formfield player.tareas_dificiles %}
+            {% formfield player.alcanzar_objetivos %}
+            <b>¿Ha realizado las siguientes situaciones o acciones en los <u>últimos 4 años</u>?. Por favor, utilice una
+            escala de 0 a 4, siendo 0 “nunca la hice en el último año”, y 4 es “las hago/he hecho todo el tiempo
+            en el último año”</b>
+            {% formfield player.tarde_cita %}
+            {% formfield player.comprar_vendedores_ambulantes %}
+            {% formfield player.trabajar_sin_contrato %}
+            {% formfield player.emplear_sin_contrato %}
+            {% formfield player.no_cotizar_pension %}
+            {% formfield player.no_cotizar_salud %}
+            {% formfield player.no_cuenta_bancaria %}
+            {% formfield player.pedir_prestado %}
+            {% formfield player.transporte_alternativo %}
+            {% formfield player.vender_informal %}
+            {% formfield player.no_votar %}
+            {% formfield player.comprar_sin_factura %}
+            <b>Según su experiencia personal, en los <u>últimos 4 años</u>, ¿cuántas personas realizan estas acciones?
+            Utilice una escala de 0 a 5, en donde 0 es “ninguna lo ha hecho en el último año”, y 5 es “todas o la
+            mayoría lo han hecho en el último año”</b>
+            {% formfield player.tarde_cita_otros %}
+            {% formfield player.comprar_vendedores_ambulantes_otros %}
+            {% formfield player.trabajar_sin_contrato_otros %}
+            {% formfield player.emplear_sin_contrato_otros %}
+            {% formfield player.no_cotizar_pension_otros %}
+            {% formfield player.no_cotizar_salud_otros %}
+            {% formfield player.no_cuenta_bancaria_otros %}
+            {% formfield player.pedir_prestado_otros %}
+            {% formfield player.transporte_alternativo_otros %}
+            {% formfield player.vender_informal_otros %}
+            {% formfield player.no_votar_otros %}
+            {% formfield player.comprar_sin_factura_otros %}
+            <b>¿Qué tan apropiado o inapropiado cree usted que es hacer estas acciones?
+            Por favor, utilice la siguiente escala de -2 a 2, donde -2 es Completamente inapropiado, 
+            -1 Poco inapropiado, 0 Ni apropiado ni inapropiado, 1 Poco apropiado y 2 Completamente apropiado</b>
+            {% formfield player.tarde_cita_apropiado %}
+            {% formfield player.comprar_vendedores_ambulantes_apropiado %}
+            {% formfield player.trabajar_sin_contrato_apropiado %}
+            {% formfield player.emplear_sin_contrato_apropiado %}
+            {% formfield player.no_cotizar_pension_apropiado %}
+            {% formfield player.no_cotizar_salud_apropiado %}
+            {% formfield player.no_cuenta_bancaria_apropiado %}
+            {% formfield player.pedir_prestado_apropiado %}
+            {% formfield player.transporte_alternativo_apropiado %}
+            {% formfield player.vender_informal_apropiado %}
+            {% formfield player.no_votar_apropiado %}
+            {% formfield player.comprar_sin_factura_apropiado %}
+            <b>¿Cuántas personas de su entorno cree usted que piensan que es apropiado hacerlas?
+            Utilice una escala de 0 a 4, en donde 0 es “ninguna o casi nadie piensa que es apropiado”, y 4 es
+            “todas o la mayoría piensan que es apropiado”</b>
+            {% formfield player.tarde_cita_otros_apropiado %}
+            {% formfield player.comprar_vendedores_ambulantes_otros_apropiado %}
+            {% formfield player.trabajar_sin_contrato_otros_apropiado %}
+            {% formfield player.emplear_sin_contrato_otros_apropiado %}
+            {% formfield player.no_cotizar_pension_otros_apropiado %}
+            {% formfield player.no_cotizar_salud_otros_apropiado %}
+            {% formfield player.no_cuenta_bancaria_otros_apropiado %}
+            {% formfield player.pedir_prestado_otros_apropiado %}
+            {% formfield player.transporte_alternativo_otros_apropiado %}
+            {% formfield player.vender_informal_otros_apropiado %}
+            {% formfield player.no_votar_otros_apropiado %}
+            {% formfield player.comprar_sin_factura_otros_apropiado %}
+            <b>¿Cree usted que es ilegal hacerlas?</b> Por favor, Indique 1 si cree que es ilegal, o 0 no es ilegal.
+            {% formfield player.tarde_cita_ilegal %}
+            {% formfield player.comprar_vendedores_ambulantes_ilegal %}
+            {% formfield player.trabajar_sin_contrato_ilegal %}
+            {% formfield player.emplear_sin_contrato_ilegal %}
+            {% formfield player.no_cotizar_pension_ilegal %}
+            {% formfield player.no_cotizar_salud_ilegal %}
+            {% formfield player.no_cuenta_bancaria_ilegal %}
+            {% formfield player.pedir_prestado_ilegal %}
+            {% formfield player.transporte_alternativo_ilegal %}
+            {% formfield player.vender_informal_ilegal %}
+            {% formfield player.no_votar_ilegal %}
+            {% formfield player.comprar_sin_factura_ilegal %}
         </p>
 
     </div>
