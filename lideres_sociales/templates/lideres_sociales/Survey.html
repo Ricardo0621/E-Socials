@@ -1,0 +1,96 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+{% load i18n %}
+
+
+{# ****************************************************************************************************************** #}
+{# *** STYLES *** #}
+{# ****************************************************************************************************************** #}
+{% block styles %}
+    <link href="{% static 'lideres_sociales/css/custom.css' %}" rel="stylesheet"/>
+{% endblock %}
+
+
+{# ****************************************************************************************************************** #}
+{# *** TITLE *** #}
+{# ****************************************************************************************************************** #}
+{% block title %}
+    {% trans "Cuestionario" %}
+{% endblock %}
+
+
+{# ****************************************************************************************************************** #}
+{# *** CONTENT *** #}
+{# ****************************************************************************************************************** #}
+{% block content %}
+
+    <div class="wrapper instructions">
+        <p align = "justify" >
+            <b>De acuerdo con el vídeo que vio anteriormente, por favor seleccione qué tan de acuerdo
+            se siente con las siguientes afirmaciones.</b>
+            {% formfield player.calidad_noticia %}
+            {% formfield player.informacion_noticia %}
+            {% formfield player.noticia_incompleta %}
+            {% formfield player.noticia_credibilidad %}
+            {% formfield player.noticia_tiempo %}
+            {% formfield player.noticia_calidad %}
+            {% formfield player.noticia_imagenes %}
+            {% formfield player.noticia_publico_general %}
+            {% formfield player.noticia_informacion_importante %}
+            {% formfield player.noticia_informacion_importante_politicos %}
+            {% formfield player.noticia_lenguaje %}
+            {% formfield player.noticia_lideres_similar %}
+            <b>Por favor, respecto a la noticia vista anteriormente, conteste las siguientes preguntas
+            eligiendo la opción con la que se sienta más de acuerdo.</b>
+            {% formfield player.noticia_impactante %}
+            {% formfield player.noticia_angustiante %}
+            {% formfield player.noticia_violenta %}
+            {% formfield player.lider_necesario %}
+            {% formfield player.acuerdo_paz %}
+            {% formfield player.gobierno_responsable_lideres %}
+            {% formfield player.acuerdo_paz %}
+            {% formfield player.frase_identificado_1 %}
+            {% formfield player.frase_identificado_2 %}
+            {% formfield player.frase_identificado_3 %}
+            <b>Por favor, seleccione qué tan de acuerdo o en desacuerdo está con las siguientes afirmaciones.</b>
+            {% formfield player.victima_responsable %}
+            {% formfield player.siente_compasion %}
+            <b>Por favor, lea las siguientes situaciones y conteste si se siente o no identificado con ellas.</b>
+            {% formfield player.entristece_persona_solitaria %}
+            {% formfield player.importancia_sentimientos %}
+            {% formfield player.muestras_afecto %}
+            {% formfield player.molestan_personas_infelices %}
+            {% formfield player.ponerse_nervioso %}
+            {% formfield player.llorar_felicidad %}
+            {% formfield player.involucrarse_emocionalmente %}
+            {% formfield player.cancion_conmueve %}
+            {% formfield player.perder_control_malas_noticias %}
+            {% formfield player.gente_influencia_estado_animo %}        
+            {% formfield player.extrajeros_geniales %}
+            {% formfield player.trabajador_social %}
+            {% formfield player.enfado_amigo %}
+            {% formfield player.abrir_regalos %}
+            {% formfield player.gente_solitaria_no_amistosa %}
+            {% formfield player.llorar_molesta %}
+            {% formfield player.canciones_feliz %}
+            {% formfield player.sentimientos_personajes_novela %}
+            {% formfield player.enfado_maltrato %}
+            {% formfield player.mantener_calma %}
+            {% formfield player.amigo_problemas %}
+            {% formfield player.risa_otro %}
+            {% formfield player.llanto_divierte %}
+            {% formfield player.decisiones_sin_sentimientos %}
+            {% formfield player.gente_deprimida_alrededor %}
+            {% formfield player.irritar_gente %}
+            {% formfield player.disgusto_animal_sufriendo %}
+            {% formfield player.involucrarse_libros_tonto %}
+            {% formfield player.ancianos_indefensos %}
+            {% formfield player.irrita_lagrimas_otros %}
+            {% formfield player.involucrar_pelicula %}
+            {% formfield player.mantener_calma_emocion %}
+            {% formfield player.ninos_lloran_sin_razon %}
+        </p>
+
+    </div>
+{% next_button %}
+{% endblock %}

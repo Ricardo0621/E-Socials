@@ -220,7 +220,7 @@ class Priming(Page):
 class Tips(Page):
     form_model = 'player'
 
-class Survey(Page):
+class SocioDemSurvey(Page):
     form_model = 'player'
     form_fields = ['genero', 'edad', 'ciudad', 'estrato', 'estado_civil', 'numero_hijos', 'identifica_cultura',
     'identifica_religion','nivel_estudios', 'tendencia_politica', 'disposicion_riesgos', 'conseguir_esfuerzo',
@@ -243,7 +243,7 @@ class Survey(Page):
 # por lo que su pago en esta activdad es de {{cara_sello_payoff}} y su pago total es {{combined_payoff}}
 # ******************************************************************************************************************** #
 # page_sequence = [Consent,Priming,Tips, Instructions, Decision, Results, DoubleMoney, ResultsDoubleMoney]
-page_sequence = [Consent,Priming,Tips,DoubleMoney, ResultsDoubleMoney, Instructions, Decision, Results, CombinedResults, Survey]
+page_sequence = [Consent,Priming,Tips,DoubleMoney, ResultsDoubleMoney, Instructions, Decision, Results, CombinedResults, SocioDemSurvey]
 # if Constants.instructions:
 #     page_sequence.insert(0, Instructions)
 

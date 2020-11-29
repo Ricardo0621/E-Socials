@@ -7,7 +7,7 @@ import random
 from random import randrange
 
 
-author = 'Ricardo Diaz'
+author = 'Ricardo Diaz Rincon'
 
 doc = """
 Experimento 1.
@@ -630,17 +630,6 @@ class Player(BasePlayer):
     )
     tareas_dificiles = models.StringField(
         label="Incluso cuando las cosas son difíciles, puedo realizarlas bastante bien.",
-        choices = [
-            ["Fuertemente en desacuerdo", "Fuertemente en desacuerdo"],
-            ["En desacuerdo", "En desacuerdo"],
-            ["Ligeramente en desacuerdo", "Ligeramente en desacuerdo"],
-            ["Ni de acuerdo, ni en desacuerdo", "Ni de acuerdo, ni en desacuerdo"],
-            ["De acuerdo", "De acuerdo"],
-            ["Fuertemente de acuerdo", "Fuertemente de acuerdo"],
-        ]
-    )
-    alcanzar_objetivos = models.StringField(
-        label="Podré alcanzar la mayoría de los objetivos que me he propuesto.",
         choices = [
             ["Fuertemente en desacuerdo", "Fuertemente en desacuerdo"],
             ["En desacuerdo", "En desacuerdo"],
