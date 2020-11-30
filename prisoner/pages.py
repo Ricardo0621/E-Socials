@@ -27,7 +27,7 @@ class Results(Page):
             same_choice=me.decision == opponent.decision,
         )
 class Consent(Page):
-    form_model = 'player' #Le dice que es un jugador
+    form_model = 'player' #El jugador
     form_fields = ['accepts_data', 'name', 'id_cc', 'accepts_terms']
     def is_displayed(self):
         return self.round_number == 1
