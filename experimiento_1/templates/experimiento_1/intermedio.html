@@ -7,18 +7,12 @@
 
 {% block body %}
     <div class="row">
-        <div class="{% if session.config.tipo_de_juego == 1 %}col-12{% else %}col-6{% endif %}">
+        <div class="col-12">
             {% formfield player.money_decision %}
             <div style="display: none" id="percentage_saved_div">
                 {% formfield player.percentage_saved %}
             </div>
         </div>
-        {% if session.config.tipo_de_juego == 2 %}
-            <div class="col-6">
-                Los participantes de juegos anteriores en esta etapa han escogido.
-                <canvas id="myChart"></canvas>
-            </div>
-        {% endif %}
     </div>
     <div style="display: None" id="confirm_button">
         {% next_button %}
