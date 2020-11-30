@@ -280,43 +280,21 @@ button.ui-button::-moz-focus-inner {
 .ui-widget-content a {
 	color: #222222;
 }
-.ui-widget-header {
-	border: 1px solid #4297d7;
-	background: #5c9ccc url("images/ui-bg_gloss-wave_55_5c9ccc_500x100.png") 50% 50% repeat-x;
-	color: #ffffff;
-	font-weight: bold;
-}
+
 .ui-widget-header a {
 	color: #ffffff;
 }
 
 /* Interaction states
 ----------------------------------*/
-.ui-state-default,
-.ui-widget-content .ui-state-default,
-.ui-widget-header .ui-state-default {
-	border: 1px solid #c5dbec;
-	background: #dfeffc url("images/ui-bg_glass_85_dfeffc_1x400.png") 50% 50% repeat-x;
-	font-weight: bold;
-	color: #2e6e9e;
-}
+
 .ui-state-default a,
 .ui-state-default a:link,
 .ui-state-default a:visited {
 	color: #2e6e9e;
 	text-decoration: none;
 }
-.ui-state-hover,
-.ui-widget-content .ui-state-hover,
-.ui-widget-header .ui-state-hover,
-.ui-state-focus,
-.ui-widget-content .ui-state-focus,
-.ui-widget-header .ui-state-focus {
-	border: 1px solid #79b7e7;
-	background: #d0e5f5 url("images/ui-bg_glass_75_d0e5f5_1x400.png") 50% 50% repeat-x;
-	font-weight: bold;
-	color: #1d5987;
-}
+
 .ui-state-hover a,
 .ui-state-hover a:hover,
 .ui-state-hover a:link,
@@ -328,14 +306,7 @@ button.ui-button::-moz-focus-inner {
 	color: #1d5987;
 	text-decoration: none;
 }
-.ui-state-active,
-.ui-widget-content .ui-state-active,
-.ui-widget-header .ui-state-active {
-	border: 1px solid #79b7e7;
-	background: #f5f8f9 url("images/ui-bg_inset-hard_100_f5f8f9_1x100.png") 50% 50% repeat-x;
-	font-weight: bold;
-	color: #e17009;
-}
+
 .ui-state-active a,
 .ui-state-active a:link,
 .ui-state-active a:visited {
@@ -357,13 +328,7 @@ button.ui-button::-moz-focus-inner {
 .ui-widget-header .ui-state-highlight a {
 	color: #363636;
 }
-.ui-state-error,
-.ui-widget-content .ui-state-error,
-.ui-widget-header .ui-state-error {
-	border: 1px solid #cd0a0a;
-	background: #fef1ec url("images/ui-bg_glass_95_fef1ec_1x400.png") 50% 50% repeat-x;
-	color: #cd0a0a;
-}
+
 .ui-state-error a,
 .ui-widget-content .ui-state-error a,
 .ui-widget-header .ui-state-error a {
@@ -397,38 +362,6 @@ button.ui-button::-moz-focus-inner {
 	filter:Alpha(Opacity=35); /* support: IE8 - See #6059 */
 }
 
-/* Icons
-----------------------------------*/
-
-/* states and images */
-.ui-icon {
-	width: 16px;
-	height: 16px;
-}
-.ui-icon,
-.ui-widget-content .ui-icon {
-	background-image: url("images/ui-icons_469bdd_256x240.png");
-}
-.ui-widget-header .ui-icon {
-	background-image: url("images/ui-icons_d8e7f3_256x240.png");
-}
-.ui-state-default .ui-icon {
-	background-image: url("images/ui-icons_6da8d5_256x240.png");
-}
-.ui-state-hover .ui-icon,
-.ui-state-focus .ui-icon {
-	background-image: url("images/ui-icons_217bc0_256x240.png");
-}
-.ui-state-active .ui-icon {
-	background-image: url("images/ui-icons_f9bd01_256x240.png");
-}
-.ui-state-highlight .ui-icon {
-	background-image: url("images/ui-icons_2e83ff_256x240.png");
-}
-.ui-state-error .ui-icon,
-.ui-state-error-text .ui-icon {
-	background-image: url("images/ui-icons_cd0a0a_256x240.png");
-}
 
 /* positioning */
 .ui-icon-blank { background-position: 16px 16px; }
