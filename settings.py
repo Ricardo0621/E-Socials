@@ -14,24 +14,12 @@ SESSION_CONFIGS = [
         num_demo_participants=1,
         app_sequence=['lideres_sociales'],
     ),
-    # dict(
-    #     name='survey',
-    #     display_name="Gift Exhange Game",
-    #     num_demo_participants=1,
-    #     app_sequence=['survey'],
-    # ),
-    # dict(
-    #     name='myprisoners_dilemma',
-    #     display_name="Experimento 3 (Prisoner's Dilemma App) Yes",
-    #     num_demo_participants=2,
-    #     app_sequence=['myprisoners_dilemma'],
-    # # ),
-    # dict(
-    #     name='survey',
-    #     display_name="An App in which subjects provide demographic information",
-    #     num_demo_participants=3,
-    #     app_sequence=['survey'],
-    # ),
+    dict(
+        name='prisoner',
+        display_name="Gift-exchange game",
+        num_demo_participants=2,
+        app_sequence=['prisoner'],
+    ),
     # dict(
     #     name='cem',
     #     display_name="Certainty Equivalent Method",
