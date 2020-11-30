@@ -7,7 +7,7 @@ import random
 from random import randrange
 
 
-author = 'Ricardo Diaz'
+author = 'Ricardo Diaz Rincon'
 
 doc = """
 Experimento 1.
@@ -101,6 +101,9 @@ class Player(BasePlayer):
     option_to_pay = models.StringField()
     inconsistent = models.IntegerField()
     switching_row = models.IntegerField()
+    # ******************************************************************************************************************** #
+# *** Variables Consentimiento
+# ******************************************************************************************************************** #
     name = models.StringField(label= "Nombre Completo")
     id_cc = models.IntegerField(label="Cédula de Ciudadanía (Sin puntos)")
     accepts_data = models.BooleanField(
@@ -111,9 +114,1113 @@ class Player(BasePlayer):
         ],
         default=True)
     accepts_terms = models.BooleanField()
+    # ******************************************************************************************************************** #
+# *** Variables Riesgo
+# ******************************************************************************************************************** #
     monto = models.IntegerField(label = 
-    "Por favor, indica el monto que invertirás en el activo de riesgo (sin puntos o comas)", min=0, max=20000)
-
+    "Por favor, indica el monto que invertirás en el activo de riesgo (sin puntos o comas)", min=0, max=10000)
+    # ******************************************************************************************************************** #
+# *** Variables Priming
+# ******************************************************************************************************************** #
+    nombre_entidad = models.StringField(label= "¿Cuál es el nombre de la entidad en la que usted trabaja?")
+    tiempo_entidad = models.IntegerField(label="¿Cuánto tiempo (en años) lleva trabajando en esta entidad?")
+    tipo_contrato =  models.StringField(
+        label="Por favor, seleccione cuál es el tipo de contrato que lo vincula a esta entidad",
+        choices = [
+            ["Contrato a término indefinido", "Contrato a término indefinido"],
+            ["Contrato a término fijo", "Contrato a término fijo"],
+            ["Contrato de obra o labor", "Contrato de obra o labor"],
+            ["Contrato por prestación de servicios", "Contrato por prestación de servicios"],
+            ["Contrato a término fijo", "Contrato a término fijo"],
+        ]
+    )
+    horas_semanales = models.IntegerField(label="Cuántas horas a la semana trabaja normalmente en este trabajo?")    
+    rango_pago = models.StringField(
+        label="¿Puede decirme en cuál de los siguientes rangos está el ingreso que usted gana al mes por su trabajo?",
+        choices = [
+            ["Menos de 205.000", "Menos de 205.000"],
+            ["Entre 205.000 y 325.000", "Entre 205.000 y 325.000"],
+            ["Entre 325.0001 y 440.000", "Entre 325.0001 y 440.000"],
+            ["Entre 440.001 y 565.000", "Entre 440.001 y 565.000"],
+            ["Entre 650.001 y 710.000", "Entre 650.001 y 710.000"],
+            ["Entre 710.001 y 750.000", "Entre 710.001 y 750.000"],
+            ["Entre 810.001 y 915.000", "Entre 810.001 y 915.000"],
+            ["Entre 915.001 y 1.000.00", "Entre 915.001 y 1.000.00"],
+            ["Entre 1.000.001 y 1.250.000", "Entre 1.000.001 y 1.250.000"],
+            ["Entre 1.250.001 y 1.365.000", "Entre 1.250.001 y 1.365.000"],
+            ["Entre 1.365.001 y 1.600.000", "Entre 1.365.001 y 1.600.000"],
+            ["Entre 1.600.001 y 2.000.000", "Entre 1.600.001 y 2.000.000"],
+            ["Entre 2.000.001 y 3.150.000", "Entre 2.000.001 y 3.150.000"],
+            ["Más de 3.150.000", "Más de 3.150.000"],
+        ]
+    )
+    satisfecho_trabajo_actual = models.BooleanField(
+        label = "¿Con su trabajo actual?",
+        choices = [
+            [True, "Sí"],
+            [False, "No"],
+        ]
+    )
+    satisfecho_beneficios = models.BooleanField(
+        label = "¿Con los beneficios y las prestaciones que recibe?",
+        choices = [
+            [True, "Sí"],
+            [False, "No"],
+        ]
+    )
+    satisfecho_jornada = models.BooleanField(
+        label = "¿Con su jornada laboral actual?",
+        choices = [
+            [True, "Sí"],
+            [False, "No"],
+        ]
+    )
+    conforme_contrato = models.BooleanField(
+        label = "¿Está conforme con su tipo de contrato?",
+        choices = [
+            [True, "Sí"],
+            [False, "No"],
+        ]
+    )
+    empleo_estable = models.BooleanField(
+        label = "¿Considera que su empleo actual es estable?",
+        choices = [
+            [True, "Sí"],
+            [False, "No"],
+        ]
+    )
+    contrato_credito_vivienda = models.BooleanField(
+        label = "¿Su tipo de contrato actual le permite acceder a créditos de vivienda?",
+        choices = [
+            [True, "Sí"],
+            [False, "No"],
+        ]
+    )
+    contrato_credito_carro = models.BooleanField(
+        label = "¿Su tipo de contrato actual le permite acceder a créditos para carro o educación?",
+        choices = [
+            [True, "Sí"],
+            [False, "No"],
+        ]
+    )
+    contrato_opciones =  models.StringField(
+        label="De acuerdo con su contrato actual, usted recibe o tiene derecho a algunas de las siguientes opciones:",
+        choices = [
+            ["Prima de navidad", "Prima de navidad"],
+            ["Cesantías ", "Cesantías "],
+            ["Vacaciones con sueldo", "Vacaciones con sueldo"],
+        ]
+    )
+    aporte_vejez = models.StringField(
+        label="¿Qué está haciendo usted actualmente para mantener económicamente en su vejez?",
+        choices = [
+            ["Aportar en un fondo de pensiones obligatorias", "Aportar en un fondo de pensiones obligatorias"],
+            ["Aportar en un fondo de pensiones voluntarias", "Aportar en un fonde de pensiones voluntarias"],
+            ["Ahorrando", "Ahorrando"],
+            ["Haciendo inversiones", "Haciendo inversiones"],
+            ["Pagando un seguro por su cuenta", "Pagando un seguro por su cuenta"],
+            ["Preparando a sus hijos para que pueda mantenerlo en su vejez", "Preparando a sus hijos para que pueda mantenerlo en su vejez"],
+            ["Otro", "Otro"],
+            ["Nada", "Nada"],
+        ]
+    )
+    cambiar_empresa = models.BooleanField(
+        label = "¿Desearía trabajar en otra organización/empresa?",
+        choices = [
+            [True, "Sí"],
+            [False, "No"],
+        ]
+    )
+    cambiar_trabajo = models.BooleanField(
+        label = "¿Desea cambiar el tipo de trabajo que realiza actualmente?",
+        choices = [
+            [True, "Sí"],
+            [False, "No"],
+        ]
+    )
+    mejorar_capacidades = models.BooleanField(
+        label = "¿Para mejorar la utilización de sus capacidades o formación?",
+        choices = [
+            [True, "Sí"],
+            [False, "No"],
+        ]
+    )
+    mejorar_ingresos = models.BooleanField(
+        label = "¿Desea mejorar sus ingresos?",
+        choices = [
+            [True, "Sí"],
+            [False, "No"],
+        ]
+    )
+    trabajar_menos = models.BooleanField(
+        label = "¿Desea trabajar menos horas?",
+        choices = [
+            [True, "Sí"],
+            [False, "No"],
+        ]
+    )
+    trabajo_temporal = models.BooleanField(
+        label = "¿Porque el trabajo actual es temporal?",
+        choices = [
+            [True, "Sí"],
+            [False, "No"],
+        ]
+    )
+    trabajo_estable = models.BooleanField(
+        label = "¿Porque su trabajo no es estable?",
+        choices = [
+            [True, "Sí"],
+            [False, "No"],
+        ]
+    )
+    crecimiento_profesional = models.BooleanField(
+        label = "¿Porque no ve posibilidades de crecimiento profesional?",
+        choices = [
+            [True, "Sí"],
+            [False, "No"],
+        ]
+    )
+    dinero_compra_vivienda = models.BooleanField(
+        label = "¿Porque con el dinero que gana no puede realizar planes de compra de vivienda, carro o educación?",
+        choices = [
+            [True, "Sí"],
+            [False, "No"],
+        ]
+    )
+    contrato_compra_vivienda = models.BooleanField(
+        label = "¿Porque su tipo de contrato no le permite realizar planes de compra de vivienda, carro o educación?",
+        choices = [
+            [True, "Sí"],
+            [False, "No"],
+        ]
+    )
+    problemas_companeros = models.BooleanField(
+        label = "¿Problemas con sus compañeros de trabajo?",
+        choices = [
+            [True, "Sí"],
+            [False, "No"],
+        ]
+    )
+    problemas_jefe = models.BooleanField(
+        label = "¿Problemas con su jefe?",
+        choices = [
+            [True, "Sí"],
+            [False, "No"],
+        ]
+    )
+    labor_desempenada = models.BooleanField(
+        label = "Le gusta la labor que desempeña?",
+        choices = [
+            [True, "Sí"],
+            [False, "No"],
+        ]
+    )
+    esfuerzo_fisico = models.BooleanField(
+        label = "¿Su trabajo actual exige mucho esfuerzo físico o mental?",
+        choices = [
+            [True, "Sí"],
+            [False, "No"],
+        ]
+    )
+    problemas_ambientales = models.BooleanField(
+        label = "¿Problemas ambientales (aire, olores, ruidos, temperatura, etc.)?",
+        choices = [
+            [True, "Sí"],
+            [False, "No"],
+        ]
+    )
+    otro_problema = models.BooleanField(
+        label = "¿Otro?",
+        choices = [
+            [True, "Sí"],
+            [False, "No"],
+        ]
+    )
+    # ******************************************************************************************************************** #
+# *** Variables Encuesta sociodemográfica
+# ******************************************************************************************************************** #
+    genero = models.StringField(
+        label="¿Cuál es su género?",
+        choices=[["Masculino", "Masculino"], #[StoredValue, "Label"]
+                ["Femenino", "Femenino"]],
+        # widget=widgets.RadioSelect,
+    )
+    edad = models.IntegerField(label="¿Cuántos años cumplidos tiene usted?")
+    ciudad = models.StringField(label="¿En qué ciudad vive actualmente?")
+    estrato = models.IntegerField(label="¿Cuál es el estrato de la vivienda en la cual habita actualmente?", min=0, max=6)
+    estado_civil =  models.StringField(
+        label="¿Cuál es su estado civil? Escoja una opción",
+        choices = [
+            ["Soltero", "Soltero"],
+            ["Casado ", "Casado "],
+            ["Unión libre", "Unión libre"],
+            ["Divorciado", "Divorciado"],
+            ["Viudo", "Viudo"],
+            ["Prefiero no decir", "Prefiero no decir"],
+        ]
+    )
+    numero_hijos = models.IntegerField(label="¿Cuántos hijos tiene usted?")
+    identifica_cultura = models.StringField(
+        label="De acuerdo con su cultura o rasgos físicos, usted es o se reconoce como:",
+        choices = [
+            ["Afro-colombiano", "Afro-colombiano"],
+            ["Indígena ", "Indígena "],
+            ["Mestizo", "Mestizo"],
+            ["Mulato", "Mulato"],
+            ["Blanco", "Blanco"],
+            ["Raizal del archipielago", "Raizal del archipielago"],
+            ["Palenquero", "Palenquero"],
+            ["Otro", "Otro"],
+            ["Prefiero no decir", "Prefiero no decir"],
+        ]
+    )
+    identifica_religion = models.StringField(
+        label="¿En cuál de los siguientes grupos se identifica usted? Escoja una opción",
+        choices = [
+            ["Católico", "Católico"],
+            ["Cristiano ", "Cristiano "],
+            ["Testigo de Jehová", "Testigo de Jehová"],
+            ["Ateo", "Ateo"],
+            ["Judío", "Judío"],
+            ["Musulmán", "Musulmán"],
+            ["Hinduista", "Hinduista"],
+            ["Otro", "Otro"],
+            ["Prefiero no decir", "Prefiero no decir"],
+        ]
+    )
+    nivel_estudios = models.StringField(
+        label="¿Cuál es el máximo nivel de estudios alcanzado a la fecha? Escoja una opción",
+        choices = [
+            ["Primaria incompleta", "Primaria incompleta"],
+            ["Primaria completa ", "Primaria completa "],
+            ["Básica secundaria (9o grado completo)", "Básica secundaria (9o grado completo)"],
+            ["Media secundaria (11o grado completo)", "Media secundaria (11o grado completo)"],
+            ["Técnico incompleto", "Técnico incompleto"],
+            ["Técnico completo", "Técnico completo"],
+            ["Tecnológico incompleto", "Tecnológico incompleto"],
+            ["Tecnológico completo", "Tecnológico completo"],
+            ["Pregrado incompleto", "Pregrado incompleto"],
+            ["Pregrado completo", "Pregrado completo"],
+            ["Postgrado incompleto", "Postgrado incompleto"],
+            ["Posgrado completo", "Posgrado completo"],
+        ]
+    )
+    tendencia_politica = models.IntegerField(
+        label="Hoy en día cuando se habla de tendencias políticas, mucha gente habla de aquellos que simpatizan más con la izquierda o con la derecha. Según el sentido que tengan para usted los términos 'izquierda' y 'derecha' cuando piensa sobre su punto de vista político, ¿dónde se encontraría usted en esta escala?",
+        choices = [
+            [1, "1"],
+            [2, "2"],
+            [3, "3"],
+            [4, "4"],
+            [5, "5"],
+            [6, "6"],
+            [7, "7"],
+            [8, "8"],
+            [9, "9"],
+            [10, "10"],
+        ]
+    )
+    disposicion_riesgos = models.IntegerField(
+        label="Por favor, califique en un escala de 1 a 10 su disposición a asumir riesgos en general, siendo 1 para nada dispuesto y 10 completamente dispuesto",
+        choices = [
+            [1, "1"],
+            [2, "2"],
+            [3, "3"],
+            [4, "4"],
+            [5, "5"],
+            [6, "6"],
+            [7, "7"],
+            [8, "8"],
+            [9, "9"],
+            [10, "10"],
+        ]
+    )
+     # ******************************************************************************************************************** #
+# *** Pregunta 24: Primer conjunto de afirmaciones (10 preguntas)
+# ******************************************************************************************************************** #
+    conseguir_esfuerzo =  models.StringField(
+        label="Por lo general, cuando consigo lo que quiero es porque me he esforzado por lograrlo.",
+        choices = [
+            ["Fuertemente en desacuerdo", "Fuertemente en desacuerdo"],
+            ["En desacuerdo", "En desacuerdo"],
+            ["Ligeramente en desacuerdo", "Ligeramente en desacuerdo"],
+            ["Ni de acuerdo, ni en desacuerdo", "Ni de acuerdo, ni en desacuerdo"],
+            ["De acuerdo", "De acuerdo"],
+            ["Fuertemente de acuerdo", "Fuertemente de acuerdo"],
+        ]
+    )
+    planes_termino =  models.StringField(
+        label="Cuando hago planes estoy casi seguro (a) que conseguiré que lleguen a buen término.",
+        choices = [
+            ["Fuertemente en desacuerdo", "Fuertemente en desacuerdo"],
+            ["En desacuerdo", "En desacuerdo"],
+            ["Ligeramente en desacuerdo", "Ligeramente en desacuerdo"],
+            ["Ni de acuerdo, ni en desacuerdo", "Ni de acuerdo, ni en desacuerdo"],
+            ["De acuerdo", "De acuerdo"],
+            ["Fuertemente de acuerdo", "Fuertemente de acuerdo"],
+        ]
+    )
+    juego_suerte =  models.StringField(
+        label="Prefiero los juegos que entrañan algo de suerte que los que sólo requieren habilidad.",
+        choices = [
+            ["Fuertemente en desacuerdo", "Fuertemente en desacuerdo"],
+            ["En desacuerdo", "En desacuerdo"],
+            ["Ligeramente en desacuerdo", "Ligeramente en desacuerdo"],
+            ["Ni de acuerdo, ni en desacuerdo", "Ni de acuerdo, ni en desacuerdo"],
+            ["De acuerdo", "De acuerdo"],
+            ["Fuertemente de acuerdo", "Fuertemente de acuerdo"],
+        ]
+    )
+    propongo_aprender =  models.StringField(
+        label="Si me lo propongo, puedo aprender casi cualquier cosa.",
+        choices = [
+            ["Fuertemente en desacuerdo", "Fuertemente en desacuerdo"],
+            ["En desacuerdo", "En desacuerdo"],
+            ["Ligeramente en desacuerdo", "Ligeramente en desacuerdo"],
+            ["Ni de acuerdo, ni en desacuerdo", "Ni de acuerdo, ni en desacuerdo"],
+            ["De acuerdo", "De acuerdo"],
+            ["Fuertemente de acuerdo", "Fuertemente de acuerdo"],
+        ]
+    )
+    mayores_logros =  models.StringField(
+        label="Mis mayores logros se deben más que nada a mi trabajo arduo y a mi capacidad",
+        choices = [
+            ["Fuertemente en desacuerdo", "Fuertemente en desacuerdo"],
+            ["En desacuerdo", "En desacuerdo"],
+            ["Ligeramente en desacuerdo", "Ligeramente en desacuerdo"],
+            ["Ni de acuerdo, ni en desacuerdo", "Ni de acuerdo, ni en desacuerdo"],
+            ["De acuerdo", "De acuerdo"],
+            ["Fuertemente de acuerdo", "Fuertemente de acuerdo"],
+        ]
+    )
+    establecer_metas =  models.StringField(
+        label="Por lo general no establezco metas porque se me dificulta mucho hacer lo necesario para alcanzarlas.",
+        choices = [
+            ["Fuertemente en desacuerdo", "Fuertemente en desacuerdo"],
+            ["En desacuerdo", "En desacuerdo"],
+            ["Ligeramente en desacuerdo", "Ligeramente en desacuerdo"],
+            ["Ni de acuerdo, ni en desacuerdo", "Ni de acuerdo, ni en desacuerdo"],
+            ["De acuerdo", "De acuerdo"],
+            ["Fuertemente de acuerdo", "Fuertemente de acuerdo"],
+        ]
+    )
+    competencia_excelencia =  models.StringField(
+        label="La competencia desalienta la excelencia",
+        choices = [
+            ["Fuertemente en desacuerdo", "Fuertemente en desacuerdo"],
+            ["En desacuerdo", "En desacuerdo"],
+            ["Ligeramente en desacuerdo", "Ligeramente en desacuerdo"],
+            ["Ni de acuerdo, ni en desacuerdo", "Ni de acuerdo, ni en desacuerdo"],
+            ["De acuerdo", "De acuerdo"],
+            ["Fuertemente de acuerdo", "Fuertemente de acuerdo"],
+        ]
+    )
+    salir_adelante =  models.StringField(
+        label="Las personas a menudo salen adelante por pura suerte.",
+        choices = [
+            ["Fuertemente en desacuerdo", "Fuertemente en desacuerdo"],
+            ["En desacuerdo", "En desacuerdo"],
+            ["Ligeramente en desacuerdo", "Ligeramente en desacuerdo"],
+            ["Ni de acuerdo, ni en desacuerdo", "Ni de acuerdo, ni en desacuerdo"],
+            ["De acuerdo", "De acuerdo"],
+            ["Fuertemente de acuerdo", "Fuertemente de acuerdo"],
+        ]
+    )
+    comparar_calificaciones =  models.StringField(
+        label="En cualquier tipo de examen o competencia me gusta comparar mis calificaciones con las de los demás.",
+        choices = [
+            ["Fuertemente en desacuerdo", "Fuertemente en desacuerdo"],
+            ["En desacuerdo", "En desacuerdo"],
+            ["Ligeramente en desacuerdo", "Ligeramente en desacuerdo"],
+            ["Ni de acuerdo, ni en desacuerdo", "Ni de acuerdo, ni en desacuerdo"],
+            ["De acuerdo", "De acuerdo"],
+            ["Fuertemente de acuerdo", "Fuertemente de acuerdo"],
+        ]
+    )
+    empeno_trabajo = models.StringField(
+        label="Pienso que no tiene sentido empeñarme en trabajar en algo que es demasiado difícil para mí.",
+        choices = [
+            ["Fuertemente en desacuerdo", "Fuertemente en desacuerdo"],
+            ["En desacuerdo", "En desacuerdo"],
+            ["Ligeramente en desacuerdo", "Ligeramente en desacuerdo"],
+            ["Ni de acuerdo, ni en desacuerdo", "Ni de acuerdo, ni en desacuerdo"],
+            ["De acuerdo", "De acuerdo"],
+            ["Fuertemente de acuerdo", "Fuertemente de acuerdo"],
+        ]
+    )
+    # ******************************************************************************************************************** #
+# *** Pregunta 25: Segundo conjunto de afirmaciones (10 preguntas)
+# ******************************************************************************************************************** #
+    alcanzar_objetivos = models.StringField(
+        label="Podré alcanzar la mayoría de los objetivos que me he propuesto.",
+        choices = [
+            ["Fuertemente en desacuerdo", "Fuertemente en desacuerdo"],
+            ["En desacuerdo", "En desacuerdo"],
+            ["Ligeramente en desacuerdo", "Ligeramente en desacuerdo"],
+            ["Ni de acuerdo, ni en desacuerdo", "Ni de acuerdo, ni en desacuerdo"],
+            ["De acuerdo", "De acuerdo"],
+            ["Fuertemente de acuerdo", "Fuertemente de acuerdo"],
+        ]
+    )
+    cumplir_tareas = models.StringField(
+        label="Cuando me enfrento a tareas difíciles, estoy seguro de que las cumpliré.",
+        choices = [
+            ["Fuertemente en desacuerdo", "Fuertemente en desacuerdo"],
+            ["En desacuerdo", "En desacuerdo"],
+            ["Ligeramente en desacuerdo", "Ligeramente en desacuerdo"],
+            ["Ni de acuerdo, ni en desacuerdo", "Ni de acuerdo, ni en desacuerdo"],
+            ["De acuerdo", "De acuerdo"],
+            ["Fuertemente de acuerdo", "Fuertemente de acuerdo"],
+        ]
+    )
+    obtener_resultados = models.StringField(
+        label="En general, creo que puedo obtener resultados que son importantes para mí.",
+        choices = [
+            ["Fuertemente en desacuerdo", "Fuertemente en desacuerdo"],
+            ["En desacuerdo", "En desacuerdo"],
+            ["Ligeramente en desacuerdo", "Ligeramente en desacuerdo"],
+            ["Ni de acuerdo, ni en desacuerdo", "Ni de acuerdo, ni en desacuerdo"],
+            ["De acuerdo", "De acuerdo"],
+            ["Fuertemente de acuerdo", "Fuertemente de acuerdo"],
+        ]
+    )
+    exito_esfuerzo = models.StringField(
+        label="Creo que puedo tener éxito en cualquier esfuerzo que me proponga.",
+        choices = [
+            ["Fuertemente en desacuerdo", "Fuertemente en desacuerdo"],
+            ["En desacuerdo", "En desacuerdo"],
+            ["Ligeramente en desacuerdo", "Ligeramente en desacuerdo"],
+            ["Ni de acuerdo, ni en desacuerdo", "Ni de acuerdo, ni en desacuerdo"],
+            ["De acuerdo", "De acuerdo"],
+            ["Fuertemente de acuerdo", "Fuertemente de acuerdo"],
+        ]
+    )
+    superar_desafios = models.StringField(
+        label="Seré capaz de superar con éxito muchos desafíos.",
+        choices = [
+            ["Fuertemente en desacuerdo", "Fuertemente en desacuerdo"],
+            ["En desacuerdo", "En desacuerdo"],
+            ["Ligeramente en desacuerdo", "Ligeramente en desacuerdo"],
+            ["Ni de acuerdo, ni en desacuerdo", "Ni de acuerdo, ni en desacuerdo"],
+            ["De acuerdo", "De acuerdo"],
+            ["Fuertemente de acuerdo", "Fuertemente de acuerdo"],
+        ]
+    )
+    confianza_tareas = models.StringField(
+        label="Confío en que puedo realizar eficazmente muchas tareas diferentes.",
+        choices = [
+            ["Fuertemente en desacuerdo", "Fuertemente en desacuerdo"],
+            ["En desacuerdo", "En desacuerdo"],
+            ["Ligeramente en desacuerdo", "Ligeramente en desacuerdo"],
+            ["Ni de acuerdo, ni en desacuerdo", "Ni de acuerdo, ni en desacuerdo"],
+            ["De acuerdo", "De acuerdo"],
+            ["Fuertemente de acuerdo", "Fuertemente de acuerdo"],
+        ]
+    )
+    tareas_excelencia = models.StringField(
+        label="Comparado con otras personas, puedo hacer la mayoría de las tareas muy bien.",
+        choices = [
+            ["Fuertemente en desacuerdo", "Fuertemente en desacuerdo"],
+            ["En desacuerdo", "En desacuerdo"],
+            ["Ligeramente en desacuerdo", "Ligeramente en desacuerdo"],
+            ["Ni de acuerdo, ni en desacuerdo", "Ni de acuerdo, ni en desacuerdo"],
+            ["De acuerdo", "De acuerdo"],
+            ["Fuertemente de acuerdo", "Fuertemente de acuerdo"],
+        ]
+    )
+    tareas_dificiles = models.StringField(
+        label="Incluso cuando las cosas son difíciles, puedo realizarlas bastante bien.",
+        choices = [
+            ["Fuertemente en desacuerdo", "Fuertemente en desacuerdo"],
+            ["En desacuerdo", "En desacuerdo"],
+            ["Ligeramente en desacuerdo", "Ligeramente en desacuerdo"],
+            ["Ni de acuerdo, ni en desacuerdo", "Ni de acuerdo, ni en desacuerdo"],
+            ["De acuerdo", "De acuerdo"],
+            ["Fuertemente de acuerdo", "Fuertemente de acuerdo"],
+        ]
+    )
+     # ******************************************************************************************************************** #
+# *** Pregunta 26: Segundo conjunto de afirmaciones (10 preguntas)
+# ******************************************************************************************************************** #
+    tarde_cita = models.IntegerField(
+        label="Llegar tarde a una cita",
+        choices = [
+            [0, "0"],
+            [1, "1"],
+            [2, "2"],
+            [3, "3"],
+            [4, "4"],
+        ]
+    )
+    comprar_vendedores_ambulantes = models.IntegerField(
+        label="Comprar a vendedores ambulantes",
+        choices = [
+            [0, "0"],
+            [1, "1"],
+            [2, "2"],
+            [3, "3"],
+            [4, "4"],
+        ]
+    )
+    trabajar_sin_contrato = models.IntegerField(
+        label="Trabajar y recibir un pago sin que haya firmado un contrato formal (pintar una casa, realizar un reporte, etc.)",
+        choices = [
+            [0, "0"],
+            [1, "1"],
+            [2, "2"],
+            [3, "3"],
+            [4, "4"],
+        ]
+    )
+    emplear_sin_contrato = models.IntegerField(
+        label="Darle trabajo a alguien y pagarle sin pedirle que firme un contrato formal (pintar una casa, realizar un reporte, etc.)",
+        choices = [
+            [0, "0"],
+            [1, "1"],
+            [2, "2"],
+            [3, "3"],
+            [4, "4"],
+        ]
+    )
+    no_cotizar_pension = models.IntegerField(
+        label="No cotizar al sistema de pensiones",
+        choices = [
+            [0, "0"],
+            [1, "1"],
+            [2, "2"],
+            [3, "3"],
+            [4, "4"],
+        ]
+    )
+    no_cotizar_salud = models.IntegerField(
+        label="No aportar al sistema de salud",
+        choices = [
+            [0, "0"],
+            [1, "1"],
+            [2, "2"],
+            [3, "3"],
+            [4, "4"],
+        ]
+    )
+    no_cuenta_bancaria = models.IntegerField(
+        label="No tener cuenta bancaria",
+        choices = [
+            [0, "0"],
+            [1, "1"],
+            [2, "2"],
+            [3, "3"],
+            [4, "4"],
+        ]
+    )
+    pedir_prestado = models.IntegerField(
+        label="Pedir dinero prestado a prestamistas informales (ejemplo: gota a gota)",
+        choices = [
+            [0, "0"],
+            [1, "1"],
+            [2, "2"],
+            [3, "3"],
+            [4, "4"],
+        ]
+    )
+    transporte_alternativo = models.IntegerField(
+        label="Usar transportes alternativos como piratas o mototaxis",
+        choices = [
+            [0, "0"],
+            [1, "1"],
+            [2, "2"],
+            [3, "3"],
+            [4, "4"],
+        ]
+    )
+    vender_informal = models.IntegerField(
+        label="Vender cosas o hacer negocios de manera informal",
+        choices = [
+            [0, "0"],
+            [1, "1"],
+            [2, "2"],
+            [3, "3"],
+            [4, "4"],
+        ]
+    )
+    no_votar = models.IntegerField(
+        label="No votar",
+        choices = [
+            [0, "0"],
+            [1, "1"],
+            [2, "2"],
+            [3, "3"],
+            [4, "4"],
+        ]
+    )
+    comprar_sin_factura = models.IntegerField(
+        label="Comprar productos sin factura",
+        choices = [
+            [0, "0"],
+            [1, "1"],
+            [2, "2"],
+            [3, "3"],
+            [4, "4"],
+        ]
+    )
+    # ******************************************************************************************************************** #
+# *** Pregunta 27: Segundo conjunto de afirmaciones (10 preguntas)
+# ******************************************************************************************************************** #
+    tarde_cita_otros = models.IntegerField(
+        label="Llegar tarde a una cita",
+        choices = [
+            [0, "0"],
+            [1, "1"],
+            [2, "2"],
+            [3, "3"],
+            [4, "4"],
+        ]
+    )
+    comprar_vendedores_ambulantes_otros = models.IntegerField(
+        label="Comprar a vendedores ambulantes",
+        choices = [
+            [0, "0"],
+            [1, "1"],
+            [2, "2"],
+            [3, "3"],
+            [4, "4"],
+        ]
+    )
+    trabajar_sin_contrato_otros = models.IntegerField(
+        label="Trabajar y recibir un pago sin que haya firmado un contrato formal (pintar una casa, realizar un reporte, etc.)",
+        choices = [
+            [0, "0"],
+            [1, "1"],
+            [2, "2"],
+            [3, "3"],
+            [4, "4"],
+        ]
+    )
+    emplear_sin_contrato_otros = models.IntegerField(
+        label="Darle trabajo a alguien y pagarle sin pedirle que firme un contrato formal (pintar una casa, realizar un reporte, etc.)",
+        choices = [
+            [0, "0"],
+            [1, "1"],
+            [2, "2"],
+            [3, "3"],
+            [4, "4"],
+        ]
+    )
+    no_cotizar_pension_otros = models.IntegerField(
+        label="No cotizar al sistema de pensiones",
+        choices = [
+            [0, "0"],
+            [1, "1"],
+            [2, "2"],
+            [3, "3"],
+            [4, "4"],
+        ]
+    )
+    no_cotizar_salud_otros = models.IntegerField(
+        label="No aportar al sistema de salud",
+        choices = [
+            [0, "0"],
+            [1, "1"],
+            [2, "2"],
+            [3, "3"],
+            [4, "4"],
+        ]
+    )
+    no_cuenta_bancaria_otros = models.IntegerField(
+        label="No tener cuenta bancaria",
+        choices = [
+            [0, "0"],
+            [1, "1"],
+            [2, "2"],
+            [3, "3"],
+            [4, "4"],
+        ]
+    )
+    pedir_prestado_otros = models.IntegerField(
+        label="Pedir dinero prestado a prestamistas informales (ejemplo: gota a gota)",
+        choices = [
+            [0, "0"],
+            [1, "1"],
+            [2, "2"],
+            [3, "3"],
+            [4, "4"],
+        ]
+    )
+    transporte_alternativo_otros = models.IntegerField(
+        label="Usar transportes alternativos como piratas o mototaxis",
+        choices = [
+            [0, "0"],
+            [1, "1"],
+            [2, "2"],
+            [3, "3"],
+            [4, "4"],
+        ]
+    )
+    vender_informal_otros = models.IntegerField(
+        label="Vender cosas o hacer negocios de manera informal",
+        choices = [
+            [0, "0"],
+            [1, "1"],
+            [2, "2"],
+            [3, "3"],
+            [4, "4"],
+        ]
+    )
+    no_votar_otros = models.IntegerField(
+        label="No votar",
+        choices = [
+            [0, "0"],
+            [1, "1"],
+            [2, "2"],
+            [3, "3"],
+            [4, "4"],
+        ]
+    )
+    comprar_sin_factura_otros = models.IntegerField(
+        label="Comprar productos sin factura",
+        choices = [
+            [0, "0"],
+            [1, "1"],
+            [2, "2"],
+            [3, "3"],
+            [4, "4"],
+        ]
+        
+    )
+     # ******************************************************************************************************************** #
+# *** Pregunta 28: Apropiado (10 preguntas)
+# ******************************************************************************************************************** #
+    tarde_cita_apropiado = models.IntegerField(
+        label="Llegar tarde a una cita",
+        choices = [
+            [-2, "-2"],
+            [-1, "-1"],
+            [0, "0"],
+            [1, "1"],
+            [2, "2"],
+        ]
+    )
+    comprar_vendedores_ambulantes_apropiado = models.IntegerField(
+        label="Comprar a vendedores ambulantes",
+        choices = [
+            [-2, "-2"],
+            [-1, "-1"],
+            [0, "0"],
+            [1, "1"],
+            [2, "2"]
+        ]
+    )
+    trabajar_sin_contrato_apropiado = models.IntegerField(
+        label="Trabajar y recibir un pago sin que haya firmado un contrato formal (pintar una casa, realizar un reporte, etc.)",
+        choices = [
+            [-2, "-2"],
+            [-1, "-1"],
+            [0, "0"],
+            [1, "1"],
+            [2, "2"]
+        ]
+    )
+    emplear_sin_contrato_apropiado = models.IntegerField(
+        label="Darle trabajo a alguien y pagarle sin pedirle que firme un contrato formal (pintar una casa, realizar un reporte, etc.)",
+        choices = [
+            [-2, "-2"],
+            [-1, "-1"],
+            [0, "0"],
+            [1, "1"],
+            [2, "2"]
+        ]
+    )
+    no_cotizar_pension_apropiado = models.IntegerField(
+        label="No cotizar al sistema de pensiones",
+        choices = [
+            [-2, "-2"],
+            [-1, "-1"],
+            [0, "0"],
+            [1, "1"],
+            [2, "2"],
+        ]
+    )
+    no_cotizar_salud_apropiado = models.IntegerField(
+        label="No aportar al sistema de salud",
+        choices = [
+            [-2, "-2"],
+            [-1, "-1"],
+            [0, "0"],
+            [1, "1"],
+            [2, "2"]
+        ]
+    )
+    no_cuenta_bancaria_apropiado = models.IntegerField(
+        label="No tener cuenta bancaria",
+        choices = [
+            [-2, "-2"],
+            [-1, "-1"],
+            [0, "0"],
+            [1, "1"],
+            [2, "2"]
+        ]
+    )
+    pedir_prestado_apropiado = models.IntegerField(
+        label="Pedir dinero prestado a prestamistas informales (ejemplo: gota a gota)",
+        choices = [
+            [-2, "-2"],
+            [-1, "-1"],
+            [0, "0"],
+            [1, "1"],
+            [2, "2"]
+        ]
+    )
+    transporte_alternativo_apropiado = models.IntegerField(
+        label="Usar transportes alternativos como piratas o mototaxis",
+        choices = [
+            [-2, "-2"],
+            [-1, "-1"],
+            [0, "0"],
+            [1, "1"],
+            [2, "2"]
+        ]
+    )
+    vender_informal_apropiado = models.IntegerField(
+        label="Vender cosas o hacer negocios de manera informal",
+        choices = [
+            [-2, "-2"],
+            [-1, "-1"],
+            [0, "0"],
+            [1, "1"],
+            [2, "2"]
+        ]
+    )
+    no_votar_apropiado = models.IntegerField(
+        label="No votar",
+        choices = [
+            [-2, "-2"],
+            [-1, "-1"],
+            [0, "0"],
+            [1, "1"],
+            [2, "2"]
+        ]
+    )
+    comprar_sin_factura_apropiado = models.IntegerField(
+        label="Comprar productos sin factura",
+        choices = [
+            [-2, "-2"],
+            [-1, "-1"],
+            [0, "0"],
+            [1, "1"],
+            [2, "2"]
+        ]  
+    )
+    # ******************************************************************************************************************** #
+# *** Pregunta 29: Otros-Apropiado (10 preguntas)
+# ******************************************************************************************************************** #
+    tarde_cita_otros_apropiado = models.IntegerField(
+        label="Llegar tarde a una cita",
+        choices = [
+            [0, "0"],
+            [1, "1"],
+            [2, "2"],
+            [3, "3"],
+            [4, "4"],
+        ]
+    )
+    comprar_vendedores_ambulantes_otros_apropiado = models.IntegerField(
+        label="Comprar a vendedores ambulantes",
+        choices = [
+            [0, "0"],
+            [1, "1"],
+            [2, "2"],
+            [3, "3"],
+            [4, "4"],
+        ]
+    )
+    trabajar_sin_contrato_otros_apropiado = models.IntegerField(
+        label="Trabajar y recibir un pago sin que haya firmado un contrato formal (pintar una casa, realizar un reporte, etc.)",
+        choices = [
+            [0, "0"],
+            [1, "1"],
+            [2, "2"],
+            [3, "3"],
+            [4, "4"],
+        ]
+    )
+    emplear_sin_contrato_otros_apropiado = models.IntegerField(
+        label="Darle trabajo a alguien y pagarle sin pedirle que firme un contrato formal (pintar una casa, realizar un reporte, etc.)",
+        choices = [
+            [0, "0"],
+            [1, "1"],
+            [2, "2"],
+            [3, "3"],
+            [4, "4"],
+        ]
+    )
+    no_cotizar_pension_otros_apropiado = models.IntegerField(
+        label="No cotizar al sistema de pensiones",
+        choices = [
+            [0, "0"],
+            [1, "1"],
+            [2, "2"],
+            [3, "3"],
+            [4, "4"],
+        ]
+    )
+    no_cotizar_salud_otros_apropiado = models.IntegerField(
+        label="No aportar al sistema de salud",
+        choices = [
+            [0, "0"],
+            [1, "1"],
+            [2, "2"],
+            [3, "3"],
+            [4, "4"],
+        ]
+    )
+    no_cuenta_bancaria_otros_apropiado = models.IntegerField(
+        label="No tener cuenta bancaria",
+        choices = [
+            [0, "0"],
+            [1, "1"],
+            [2, "2"],
+            [3, "3"],
+            [4, "4"],
+        ]
+    )
+    pedir_prestado_otros_apropiado = models.IntegerField(
+        label="Pedir dinero prestado a prestamistas informales (ejemplo: gota a gota)",
+        choices = [
+            [0, "0"],
+            [1, "1"],
+            [2, "2"],
+            [3, "3"],
+            [4, "4"],
+        ]
+    )
+    transporte_alternativo_otros_apropiado = models.IntegerField(
+        label="Usar transportes alternativos como piratas o mototaxis",
+        choices = [
+            [0, "0"],
+            [1, "1"],
+            [2, "2"],
+            [3, "3"],
+            [4, "4"],
+        ]
+    )
+    vender_informal_otros_apropiado = models.IntegerField(
+        label="Vender cosas o hacer negocios de manera informal",
+        choices = [
+            [0, "0"],
+            [1, "1"],
+            [2, "2"],
+            [3, "3"],
+            [4, "4"],
+        ]
+    )
+    no_votar_otros_apropiado = models.IntegerField(
+        label="No votar",
+        choices = [
+            [0, "0"],
+            [1, "1"],
+            [2, "2"],
+            [3, "3"],
+            [4, "4"],
+        ]
+    )
+    comprar_sin_factura_otros_apropiado = models.IntegerField(
+        label="Comprar productos sin factura",
+        choices = [
+            [0, "0"],
+            [1, "1"],
+            [2, "2"],
+            [3, "3"],
+            [4, "4"],
+        ]
+        
+    )
+    # ******************************************************************************************************************** #
+# *** Pregunta 30: Ilegal
+# ******************************************************************************************************************** #
+    tarde_cita_ilegal = models.IntegerField(
+        label="Llegar tarde a una cita",
+        choices = [
+            [0, "0"],
+            [1, "1"],
+        ]
+    )
+    comprar_vendedores_ambulantes_ilegal = models.IntegerField(
+        label="Comprar a vendedores ambulantes",
+        choices = [
+            [0, "0"],
+            [1, "1"],
+        ]
+    )
+    trabajar_sin_contrato_ilegal = models.IntegerField(
+        label="Trabajar y recibir un pago sin que haya firmado un contrato formal (pintar una casa, realizar un reporte, etc.)",
+        choices = [
+            [0, "0"],
+            [1, "1"],
+        ]
+    )
+    emplear_sin_contrato_ilegal = models.IntegerField(
+        label="Darle trabajo a alguien y pagarle sin pedirle que firme un contrato formal (pintar una casa, realizar un reporte, etc.)",
+        choices = [
+            [0, "0"],
+            [1, "1"],
+        ]
+    )
+    no_cotizar_pension_ilegal = models.IntegerField(
+        label="No cotizar al sistema de pensiones",
+        choices = [
+            [0, "0"],
+            [1, "1"],
+        ]
+    )
+    no_cotizar_salud_ilegal = models.IntegerField(
+        label="No aportar al sistema de salud",
+        choices = [
+            [0, "0"],
+            [1, "1"],
+        ]
+    )
+    no_cuenta_bancaria_ilegal = models.IntegerField(
+        label="No tener cuenta bancaria",
+        choices = [
+            [0, "0"],
+            [1, "1"],
+        ]
+    )
+    pedir_prestado_ilegal = models.IntegerField(
+        label="Pedir dinero prestado a prestamistas informales (ejemplo: gota a gota)",
+        choices = [
+            [0, "0"],
+            [1, "1"],
+        ]
+    )
+    transporte_alternativo_ilegal = models.IntegerField(
+        label="Usar transportes alternativos como piratas o mototaxis",
+        choices = [
+            [0, "0"],
+            [1, "1"],
+        ]
+    )
+    vender_informal_ilegal = models.IntegerField(
+        label="Vender cosas o hacer negocios de manera informal",
+        choices = [
+            [0, "0"],
+            [1, "1"],
+        ]
+    )
+    no_votar_ilegal = models.IntegerField(
+        label="No votar",
+        choices = [
+            [0, "0"],
+            [1, "1"],
+        ]
+    )
+    comprar_sin_factura_ilegal = models.IntegerField(
+        label="Comprar productos sin factura",
+        choices = [
+            [0, "0"],
+            [1, "1"],
+        ]
+        
+    )
     # set player's payoff
     # ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
     def set_payoffs(self):

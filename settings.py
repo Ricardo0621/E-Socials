@@ -2,37 +2,25 @@ from os import environ
 
 
 SESSION_CONFIGS = [
-    # dict(
-    #     name='testapp',
-    #     display_name="Efecto de distintos tipos de contratación",
-    #     num_demo_participants=3,
-    #     app_sequence=['testapp'],
-    # ),
-    # dict(
-    #     name='real_effort_numbers',
-    #     display_name="Experimento 2 (Real Effort Numbers App) Yes",
-    #     num_demo_participants=1,
-    #     app_sequence=['real_effort_numbers'],
-    # ),
-    # dict(
-    #     name='myprisoners_dilemma',
-    #     display_name="Experimento 3 (Prisoner's Dilemma App) Yes",
-    #     num_demo_participants=2,
-    #     app_sequence=['myprisoners_dilemma'],
-    # # ),
-    # dict(
-    #     name='survey',
-    #     display_name="An App in which subjects provide demographic information",
-    #     num_demo_participants=3,
-    #     app_sequence=['survey'],
-    # ),
     dict(
         name='mpl',
-        display_name="Efecto de distintos tipos de contratación",
+        display_name="Contratos y consumo: una aproximación cuasi-experimental",
         num_demo_participants=1,
         app_sequence=['mpl'],
     ),
     dict(
+        name='lideres_sociales',
+        display_name="La desensibilización de la violencia: el efecto de las noticias en la percepción del asesinato de líderes sociales en Colombia",
+        num_demo_participants=1,
+        app_sequence=['lideres_sociales'],
+    ),
+    dict(
+        name='prisoner',
+        display_name="Gift-exchange game",
+        num_demo_participants=2,
+        app_sequence=['prisoner'],
+    ),
+dict(
         name='experimiento_1',
         display_name="Experimento 2",
         num_demo_participants=3,

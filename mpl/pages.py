@@ -155,18 +155,21 @@ class Results(Page):
         index_to_pay = self.player.participant.vars['mpl_index_to_pay']
         round_to_pay = indices.index(index_to_pay) + 1
         choice_to_pay = self.participant.vars['mpl_choices'][round_to_pay - 1]
+        decision = choice_to_pay[0]
 
         if Constants.one_choice_per_page:
             return {
                 'choice_to_pay':  [choice_to_pay],
                 'option_to_pay':  self.player.in_round(round_to_pay).option_to_pay,
                 'payoff':         self.player.in_round(round_to_pay).payoff,
+                'decision':       decision
             }
         else:
             return {
                 'choice_to_pay':  [choice_to_pay],
                 'option_to_pay':  self.player.option_to_pay,
-                'payoff':         math.trunc(self.player.payoff)
+                'payoff':         math.trunc(self.player.payoff),
+                'decision':       decision
             }
 
 class Consent(Page):
@@ -188,23 +191,59 @@ class ResultsDoubleMoney(Page):
         inversion = math.trunc(c(self.player.monto))
         if(Constants.cara_sello_value == 0):
             cara_sello_name = "Cara"
-            cara_sello_payoff = math.trunc(self.player.monto*2)
+            self.player.monto = 10000-inversion + math.trunc(self.player.monto*2)
         else:
             cara_sello_name = "Sello"
-            cara_sello_payoff = 0
-        combined_payoff = math.trunc(self.player.payoff) + cara_sello_payoff
+            self.player.monto = 10000-inversion + 0
+        #combined_payoff = math.trunc(self.player.payoff) + cara_sello_payoff
         return {
-            'combined_payoff' : combined_payoff,
+            #'combined_payoff' : combined_payoff,
             'inversion' : inversion,
             'cara_sello_name' : cara_sello_name,
-            'cara_sello_payoff' : cara_sello_payoff
+            'cara_sello_payoff' : self.player.monto
         }
+class CombinedResults(Page):
+    def vars_for_template(self):
+        combined_payoff = math.trunc(self.player.payoff) + self.player.monto
+        return {
+            'combined_payoff' : combined_payoff,
+        }
+        
+class Priming(Page):
+    form_model = 'player' #Le dice que es un jugador
+    form_fields = ['nombre_entidad', 'tiempo_entidad', 'tipo_contrato', 'horas_semanales', 'rango_pago', 'satisfecho_trabajo_actual',
+    'satisfecho_beneficios', 'satisfecho_jornada', 'conforme_contrato', 'empleo_estable', 'contrato_credito_vivienda','contrato_credito_carro' ,
+    'contrato_opciones' ,'aporte_vejez' ,'cambiar_empresa' , 'cambiar_trabajo', 'mejorar_capacidades', 'mejorar_ingresos', 'trabajar_menos', 
+    'trabajo_temporal', 'trabajo_estable', 'crecimiento_profesional', 'dinero_compra_vivienda', 'contrato_compra_vivienda', 'problemas_companeros',
+    'problemas_jefe', 'labor_desempenada', 'esfuerzo_fisico', 'problemas_ambientales', 'otro_problema' ]     
+
+class Tips(Page):
+    form_model = 'player'
+
+class SocioDemSurvey(Page):
+    form_model = 'player'
+    form_fields = ['genero', 'edad', 'ciudad', 'estrato', 'estado_civil', 'numero_hijos', 'identifica_cultura',
+    'identifica_religion','nivel_estudios', 'tendencia_politica', 'disposicion_riesgos', 'conseguir_esfuerzo',
+    'planes_termino', 'juego_suerte', 'propongo_aprender', 'mayores_logros', 'establecer_metas', 'competencia_excelencia',
+    'salir_adelante', 'comparar_calificaciones', 'empeno_trabajo', 'alcanzar_objetivos', 'cumplir_tareas', 'obtener_resultados',
+    'exito_esfuerzo','superar_desafios', 'confianza_tareas', 'tareas_excelencia', 'tareas_dificiles', 'alcanzar_objetivos',
+    'tarde_cita', 'comprar_vendedores_ambulantes', 'trabajar_sin_contrato', 'emplear_sin_contrato', 'no_cotizar_pension', 'no_cotizar_salud',
+    'no_cuenta_bancaria', 'pedir_prestado', 'transporte_alternativo', 'vender_informal', 'no_votar', 'comprar_sin_factura',
+    'tarde_cita_otros', 'comprar_vendedores_ambulantes_otros', 'trabajar_sin_contrato_otros', 'emplear_sin_contrato_otros', 'no_cotizar_pension_otros', 'no_cotizar_salud_otros',
+    'no_cuenta_bancaria_otros', 'pedir_prestado_otros', 'transporte_alternativo_otros', 'vender_informal_otros', 'no_votar_otros', 'comprar_sin_factura_otros',
+    'tarde_cita_apropiado', 'comprar_vendedores_ambulantes_apropiado', 'trabajar_sin_contrato_apropiado', 'emplear_sin_contrato_apropiado', 'no_cotizar_pension_apropiado', 'no_cotizar_salud_apropiado',
+    'no_cuenta_bancaria_apropiado', 'pedir_prestado_apropiado', 'transporte_alternativo_apropiado', 'vender_informal_apropiado', 'no_votar_apropiado', 'comprar_sin_factura_apropiado',
+    'tarde_cita_otros_apropiado', 'comprar_vendedores_ambulantes_otros_apropiado', 'trabajar_sin_contrato_otros_apropiado', 'emplear_sin_contrato_otros_apropiado', 'no_cotizar_pension_otros_apropiado', 'no_cotizar_salud_otros_apropiado',
+    'no_cuenta_bancaria_otros_apropiado', 'pedir_prestado_otros_apropiado', 'transporte_alternativo_otros_apropiado', 'vender_informal_otros_apropiado', 'no_votar_otros_apropiado', 'comprar_sin_factura_otros_apropiado',
+    'tarde_cita_ilegal', 'comprar_vendedores_ambulantes_ilegal', 'trabajar_sin_contrato_ilegal', 'emplear_sin_contrato_ilegal', 'no_cotizar_pension_ilegal', 'no_cotizar_salud_ilegal',
+    'no_cuenta_bancaria_ilegal', 'pedir_prestado_ilegal', 'transporte_alternativo_ilegal', 'vender_informal_ilegal', 'no_votar_ilegal', 'comprar_sin_factura_ilegal',
+    ]    
 # ******************************************************************************************************************** #
 # *** PAGE SEQUENCE *** #Usted obtuvo invertió {{inversion }}y obtuvo {{cara_sello}} 
 # por lo que su pago en esta activdad es de {{cara_sello_payoff}} y su pago total es {{combined_payoff}}
 # ******************************************************************************************************************** #
-page_sequence = [Consent, Instructions, Decision, Results, DoubleMoney, ResultsDoubleMoney]
-
+# page_sequence = [Consent,Priming,Tips, Instructions, Decision, Results, DoubleMoney, ResultsDoubleMoney]
+page_sequence = [Consent,Priming,Tips,DoubleMoney, ResultsDoubleMoney, Instructions, Decision, Results, CombinedResults, SocioDemSurvey]
 # if Constants.instructions:
 #     page_sequence.insert(0, Instructions)
 

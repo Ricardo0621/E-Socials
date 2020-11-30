@@ -37,7 +37,7 @@
 {# *** TITLE *** #}
 {# ****************************************************************************************************************** #}
 {% block title %}
-    {% trans "Actividad 3 - Resultados" %}
+    {% trans "Actividad 4 - Resultados" %}
 {% endblock %}
 
 
@@ -50,7 +50,7 @@
 
         <div class="card info">
             {% blocktrans trimmed %}
-                La siguiente decisión fué generada aleatoriamente para realizar su pago:
+                La siguiente decisión fué generada al azar para realizar su pago: 
             {% endblocktrans %}
         </div>
         <br/>
@@ -155,7 +155,7 @@
 
                                 <!-- A lotteries -->
                                 <td class="lottery-a">
-                                {% trans " tiene " %}{{ i|add:"-1" }} {% trans " bolas azules y " %} {{  p}}{% trans " bolas rojas " %}
+                                {% trans " tiene " %}{{ i|add:"-1" }} {% trans " bolas azules y " %} {{ p}}{% trans " bolas rojas " %}
                                     {% comment %} {{ lottery_a_hi }} {% trans "with a probability of " %}{{ p }},<br/>
                                     {{ lottery_a_lo }} {% trans "otherwise" %} {% endcomment %}
                                 </td>
@@ -206,12 +206,18 @@
         <div class="card info">
             <p>
             {% if option_to_pay == 'A' %}
-                    <p>Como se indica arriba, ustéd escogió la <b>Bolsa 1</b>.
-                    Para la bolsa escogida, una de dos posibles opciones se tomaron aleatoriamente teniendo en cuenta
+                {% blocktrans  %}
+                    Se escogió la <b>Decisión {{decision}}</b> al azar para determinar el pago.
+                {% endblocktrans %}
+                    <p>Como se indica arriba, se escogió la <b>Bolsa 1</b>.
+                    Para la bolsa escogida, una de dos posibles opciones se tomaron al azar teniendo en cuenta
                     las correspondientes probabilidades </p>
             {% elif option_to_pay == 'B' %}
+                {% blocktrans  %}
+                    Se escogió la <b>Decisión {{decision}}</b> al azar para determinar el pago.
+                {% endblocktrans %}
                 <p> Como se indica arriba, ustéd escogió la <b>Bolsa 2</b>.
-                        Para la bolsa escogida, una de dos posibles opciones se tomaron aleatoriamente teniendo en cuenta
+                        Para la bolsa escogida, una de dos posibles opciones se tomaron al azar teniendo en cuenta
                         las correspondientes probabilidades.</p>
             {% endif %}
             </p>

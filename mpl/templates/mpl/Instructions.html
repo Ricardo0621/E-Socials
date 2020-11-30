@@ -15,7 +15,7 @@
 {# *** TITLE *** #}
 {# ****************************************************************************************************************** #}
 {% block title %}
-    {% trans "Actividad 1 - Instrucciones" %}
+    {% trans "Actividad 4 - Instrucciones" %}
 {% endblock %}
 
 
@@ -27,18 +27,19 @@
     <div class="wrapper instructions">
         <p align = "justify">
             {% blocktrans trimmed with n=num_choices %}
-                En esta actividad deberás tomar {{ n }} decisiones, <b>pero solo una</b> será escogida al azar para
-                realizar tu pago. Al finalizar toda la actividad podrás revisar un enlace en el que se te
-                informará cuál ha sido la decisión escogida para tus pagos.<br><br>
+                En esta actividad realizaremos <b>un sorteo</b> y tú definirás algunas de las condiciones del mismo. 
+                Existen {{ n }} sorteos posibles pero al final, sólo se seleccionará uno al azar. <br><br>
 
-                Ten en cuenta que el dinero que podrás ganar en esta actividad dependerá de las
-                posibilidades que tengas de sacar al final una pelota azul.<br><br>
-
-                Tendrás la posibilidad de escoger entre dos bolsas que contienen 10 pelotas, algunas
-                azules y otras rojas.<br><br>
-
-                Ganaras <b>$15,000</b> si al final de la actividad es escogida al azar una pelota de color azul y
-                no ganas nada si al final la balota escogida es roja.
+                El sorteo consiste en unas bolsas virtuales que tienen <b>10 pelotitas</b> de dos colores, <b>azul o rojo</b>. No hay bolas de ningún otro color. 
+                <b>Ganarás $15,000</b> si de la bolsa virtual saliera una <b>bola azul</b>. 
+                Si sale una bola roja,  no ganarás nada, pero tampoco perderás el dinero que tienes hasta el momento.<br><br>
+                
+                <b>Tu decisión:</b> elegir la bolsa de la cual quieres que se realice el sorteo. 
+                Como hay {{ n }} sorteos posibles, deberás tomar {{ n }} decisiones. 
+                Piensa en cada una de ellas como si fuera la definitiva.<br><br>
+                
+                <b>Nota:</b> siempre sabrás cuántas bolitas azules y rojas hay en la bolsa 1. En la bolsa 2 sólo hay bolitas azules y rojas, pero nunca sabrás cuántas hay de cada color. 
+                <b>Recuerda, sólo ganas si sale una pelotita azul.</b>
             {% endblocktrans %}
             {% comment %} {% blocktrans trimmed with n=num_choices %}
                 In the following, you'll face {{ n }} decisions listed on your screen. Each decision is a paired

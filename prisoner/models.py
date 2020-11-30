@@ -9,27 +9,26 @@ from otree.api import (
     currency_range,
 )
 
+import math
 doc = """
-This is a one-shot "Prisoner's Dilemma". Two players are asked separately
-whether they want to cooperate or defect. Their choices directly determine the
-payoffs.
+Gift_exhange game.
 """
 
 
 class Constants(BaseConstants):
     name_in_url = 'prisoner'
     players_per_group = 2
-    num_rounds = 1
+    num_rounds = 3
 
     instructions_template = 'prisoner/instructions.html'
 
     # payoff if 1 player defects and the other cooperates""",
-    betray_payoff = c(300)
-    betrayed_payoff = c(0)
+    betray_payoff = 30000
+    betrayed_payoff = 0
 
     # payoff if both players cooperate or both defect
-    both_cooperate_payoff = c(200)
-    both_defect_payoff = c(100)
+    both_cooperate_payoff = 20000
+    both_defect_payoff = 10000
 
 
 class Subsession(BaseSubsession):
@@ -44,22 +43,36 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     decision = models.StringField(
-        choices=[['Cooperate', 'Cooperate'], ['Defect', 'Defect']],
-        doc="""This player's decision""",
+        choices=[['Coopera', 'Coopera'], ['Traiciona', 'Traiciona']],
+        doc="""Decisión del jugador""",
         widget=widgets.RadioSelect,
     )
+ # ******************************************************************************************************************** #
+# *** Variables Consentimiento
+# ******************************************************************************************************************** #
+    name = models.StringField(label= "Nombre Completo")
+    id_cc = models.IntegerField(label="Cédula de Ciudadanía (Sin puntos)")
+    accepts_data = models.BooleanField(
+        label = "¿Autoriza el uso de los datos recolectados para futuros estudios?",
+        choices = [
+            [True, "Sí"],
+            [False, "No"],
+        ],
+        default=True)
+    accepts_terms = models.BooleanField()
 
     def other_player(self):
         return self.get_others_in_group()[0]
 
     def set_payoff(self):
         payoff_matrix = dict(
-            Cooperate=dict(
-                Cooperate=Constants.both_cooperate_payoff,
-                Defect=Constants.betrayed_payoff,
+            Coopera=dict(
+                Coopera=Constants.both_cooperate_payoff,
+                Traiciona=Constants.betrayed_payoff,
             ),
-            Defect=dict(
-                Cooperate=Constants.betray_payoff, Defect=Constants.both_defect_payoff
+            Traiciona=dict(
+                Coopera=Constants.betray_payoff,
+                Traiciona=Constants.both_defect_payoff
             ),
         )
 

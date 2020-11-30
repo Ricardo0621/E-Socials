@@ -4,40 +4,38 @@
     <div class="card-body">
 
     <h3>
-        Instructions
+        Instrucciones
     </h3>
 
     <link rel="stylesheet" type="text/css"
           href="{% static 'global/matrix.css' %}"/>
 
     <p>
-        In this study, you will be randomly and anonymously paired with another
-        participant.
-        Each of you simultaneously and privately chooses whether you want to
-        cooperate or defect.
-        Your payoffs will be determined by the choices of both as below:
+        Enunciado provisional: En este estudio, se le emparejará al azar y de forma anónima con otro participante.
+        Cada uno de ustedes, de forma simultánea y privada, elige si quiere cooperar o traicionar. 
+        Sus ganancias serán determinadas por las elecciones de ambos como se indica a continuación:
     </p>
-    <p><i>In each cell, the amount to the left is the payoff for
-        you and to the right for the other participant.</i></p>
+    <p><i>En esta matriz, a su izquierda, se muestra el pago que usted puede recibir.
+        A la derecha se encuentra el potencial pago del otro participante.</i></p>
 
     <table class='table table-bordered text-center'
            style='width: auto; margin: auto'>
         <tr>
             <th colspan=2 rowspan=2></th>
-            <th colspan=2>The Other Participant</th>
+            <th colspan=2>El otro participante</th>
         </tr>
         <tr>
-            <th>Cooperate</th>
-            <th>Defect</th>
+            <th>Coopera</th>
+            <th>Traiciona</th>
         </tr>
         <tr>
-            <th rowspan=2><span style="transform: rotate(-90deg);">You</span></th>
-            <th>Cooperate</th>
+            <th rowspan=2><span style="transform: rotate(-90deg);">Usted</span></th>
+            <th>Coopera</th>
             <td>{{ Constants.both_cooperate_payoff }}, {{ Constants.both_cooperate_payoff }}</td>
             <td>0, {{ Constants.betray_payoff }}</td>
         </tr>
         <tr>
-            <th>Defect</th>
+            <th>Traiciona</th>
             <td>{{ Constants.betray_payoff }}, 0</td>
             <td>{{ Constants.both_defect_payoff }}, {{ Constants.both_defect_payoff }}</td>
         </tr>
