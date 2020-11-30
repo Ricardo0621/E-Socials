@@ -18,17 +18,31 @@
                 <th>Coopera</th>
                 <th>Traiciona</th>
             </tr>
+            {% if player.id_in_group == 1 %}                
             <tr>
                 <th rowspan="2"><span>Usted</span></th>
-                <td><button name="decision" value="Coopera" class="btn btn-primary btn-large">Voy a cooperar</button></td>
+                <td><button name="decision" value="Coopera" class="btn btn-primary btn-large">Contrato</button></td>
                 <td>{{Constants.both_cooperate_payoff}}, {{Constants.both_cooperate_payoff}}</td>
                 <td>{{ Constants.betrayed_payoff }}, {{Constants.betray_payoff}}</td>
             </tr>
             <tr>
-                <td><button name="decision" value="Traiciona" class="btn btn-primary btn-large">Voy a traicionar</button></td>
+                <td><button name="decision" value="Traiciona" class="btn btn-primary btn-large">No Contrato</button></td>
                 <td>{{Constants.betray_payoff}}, {{ Constants.betrayed_payoff }}</td>
                 <td>{{Constants.both_defect_payoff}}, {{Constants.both_defect_payoff}}</td>
             </tr>
+            {% else %}
+            <tr>
+                <th rowspan="2"><span>Usted</span></th>
+                <td><button name="decision" value="Coopera" class="btn btn-primary btn-large">Max esfuerzo</button></td>
+                <td>{{Constants.both_cooperate_payoff}}, {{Constants.both_cooperate_payoff}}</td>
+                <td>{{ Constants.betrayed_payoff }}, {{Constants.betray_payoff}}</td>
+            </tr>
+            <tr>
+                <td><button name="decision" value="Traiciona" class="btn btn-primary btn-large">Min esfuerzo</button></td>
+                <td>{{Constants.betray_payoff}}, {{ Constants.betrayed_payoff }}</td>
+                <td>{{Constants.both_defect_payoff}}, {{Constants.both_defect_payoff}}</td>
+            </tr>
+            {% endif %} 
         </table>
     </div>
 
