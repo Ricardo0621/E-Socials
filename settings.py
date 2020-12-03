@@ -20,6 +20,12 @@ SESSION_CONFIGS = [
         num_demo_participants=2,
         app_sequence=['prisoner'],
     ),
+dict(
+        name='experimiento_1',
+        display_name="Experimento 2",
+        num_demo_participants=3,
+        app_sequence=['experimiento_1']
+    ),
     # dict(
     #     name='cem',
     #     display_name="Certainty Equivalent Method",
