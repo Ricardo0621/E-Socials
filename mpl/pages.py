@@ -174,7 +174,7 @@ class Results(Page):
 
 class Consent(Page):
     form_model = 'player' #Le dice que es un jugador
-    form_fields = ['accepts_data', 'name', 'id_cc', 'accepts_terms']
+    form_fields = ['num_temporal','accepts_terms']
 
 class DoubleMoney(Page):
     form_model = 'player' #Le dice que es un jugador
@@ -237,13 +237,16 @@ class SocioDemSurvey(Page):
     'no_cuenta_bancaria_otros_apropiado', 'pedir_prestado_otros_apropiado', 'transporte_alternativo_otros_apropiado', 'vender_informal_otros_apropiado', 'no_votar_otros_apropiado', 'comprar_sin_factura_otros_apropiado',
     'tarde_cita_ilegal', 'comprar_vendedores_ambulantes_ilegal', 'trabajar_sin_contrato_ilegal', 'emplear_sin_contrato_ilegal', 'no_cotizar_pension_ilegal', 'no_cotizar_salud_ilegal',
     'no_cuenta_bancaria_ilegal', 'pedir_prestado_ilegal', 'transporte_alternativo_ilegal', 'vender_informal_ilegal', 'no_votar_ilegal', 'comprar_sin_factura_ilegal',
-    ]    
+    ]
+
+class ReminderNequi(Page):
+    form_model = 'player'    
 # ******************************************************************************************************************** #
 # *** PAGE SEQUENCE *** #Usted obtuvo invertió {{inversion }}y obtuvo {{cara_sello}} 
 # por lo que su pago en esta activdad es de {{cara_sello_payoff}} y su pago total es {{combined_payoff}}
 # ******************************************************************************************************************** #
 # page_sequence = [Consent,Priming,Tips, Instructions, Decision, Results, DoubleMoney, ResultsDoubleMoney]
-page_sequence = [Consent,Priming,Tips,DoubleMoney, ResultsDoubleMoney, Instructions, Decision, Results, CombinedResults, SocioDemSurvey]
+page_sequence = [Consent,Priming,Tips,DoubleMoney, ResultsDoubleMoney, Instructions, Decision, Results, CombinedResults, SocioDemSurvey, ReminderNequi]
 # if Constants.instructions:
 #     page_sequence.insert(0, Instructions)
 

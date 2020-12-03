@@ -22,7 +22,7 @@ SESSION_CONFIGS = [
     ),
 dict(
         name='experimiento_1',
-        display_name="Experimento 2",
+        display_name="Experimento Leidy",
         num_demo_participants=3,
         app_sequence=['experimiento_1']
     ),

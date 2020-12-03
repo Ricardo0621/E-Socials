@@ -16,7 +16,7 @@ class Results(Page):
 
 class Consent(Page):
     form_model = 'player' 
-    form_fields = ['accepts_data', 'name', 'id_cc', 'accepts_terms']
+    form_fields = ['num_temporal','accepts_terms']
 
 class Survey(Page):
     form_model = 'player'    

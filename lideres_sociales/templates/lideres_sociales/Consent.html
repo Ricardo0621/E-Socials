@@ -54,10 +54,8 @@
                 cédula de ciudadanía a continuación y acepte los términos de esta actividad. <b>Si usted desea, podrá
                 solicitar una copia de este consentimiento</b> al correo <a href="mailto:daniela.pedroza@correounivalle.edu.co">daniela.pedroza@correounivalle.edu.co</a>.
 
-            {% formfield player.accepts_data %}
-            {% formfield player.name %}
-            {% formfield player.id_cc %}
-            <p>¿Acepta los términos de esta actividad?</p>
+            {% formfield player.num_temporal %}
+            <p>¿Usted desea continuar?</p>
                 <div>
                     <button name="accepts_terms" value="True">Sí</button>
                     <button type="button" name="accepts_terms" onclick="location.href='https://google.com';" value="False">No</button>
