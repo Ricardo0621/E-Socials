@@ -213,12 +213,18 @@ class Priming(Page):
     form_model = 'player' #Le dice que es un jugador
     form_fields = ['nombre_entidad', 'tiempo_entidad', 'tipo_contrato', 'horas_semanales', 'rango_pago', 'satisfecho_trabajo_actual',
     'satisfecho_beneficios', 'satisfecho_jornada', 'conforme_contrato', 'empleo_estable', 'contrato_credito_vivienda','contrato_credito_carro' ,
-    'contrato_opciones' ,'aporte_vejez' ,'cambiar_empresa' , 'cambiar_trabajo', 'mejorar_capacidades', 'mejorar_ingresos', 'trabajar_menos', 
+
+    'recibe_prima' , 'recibe_cesantias', 'recibe_vacaciones_sueldo','aporte_pension' , 'aporte_ahorro', 'aporte_inversiones', 'aporte_seguro',
+    'aporte_hijos_vejez', 'aporte_otro', 'aporte_nada',
+
+    'cambiar_empresa' , 'cambiar_trabajo', 'mejorar_capacidades', 'mejorar_ingresos', 'trabajar_menos', 
     'trabajo_temporal', 'trabajo_estable', 'crecimiento_profesional', 'dinero_compra_vivienda', 'contrato_compra_vivienda', 'problemas_companeros',
     'problemas_jefe', 'labor_desempenada', 'esfuerzo_fisico', 'problemas_ambientales', 'otro_problema' ]     
 
 class Tips(Page):
     form_model = 'player'
+    form_fields = ['pregunta_uno', 'pregunta_dos','pregunta_tres', 'pregunta_cuatro', 'pregunta_cinco','pregunta_seis', 'pregunta_siete' ]
+    
 
 class SocioDemSurvey(Page):
     form_model = 'player'
@@ -232,11 +238,7 @@ class SocioDemSurvey(Page):
     'tarde_cita_otros', 'comprar_vendedores_ambulantes_otros', 'trabajar_sin_contrato_otros', 'emplear_sin_contrato_otros', 'no_cotizar_pension_otros', 'no_cotizar_salud_otros',
     'no_cuenta_bancaria_otros', 'pedir_prestado_otros', 'transporte_alternativo_otros', 'vender_informal_otros', 'no_votar_otros', 'comprar_sin_factura_otros',
     'tarde_cita_apropiado', 'comprar_vendedores_ambulantes_apropiado', 'trabajar_sin_contrato_apropiado', 'emplear_sin_contrato_apropiado', 'no_cotizar_pension_apropiado', 'no_cotizar_salud_apropiado',
-    'no_cuenta_bancaria_apropiado', 'pedir_prestado_apropiado', 'transporte_alternativo_apropiado', 'vender_informal_apropiado', 'no_votar_apropiado', 'comprar_sin_factura_apropiado',
-    'tarde_cita_otros_apropiado', 'comprar_vendedores_ambulantes_otros_apropiado', 'trabajar_sin_contrato_otros_apropiado', 'emplear_sin_contrato_otros_apropiado', 'no_cotizar_pension_otros_apropiado', 'no_cotizar_salud_otros_apropiado',
-    'no_cuenta_bancaria_otros_apropiado', 'pedir_prestado_otros_apropiado', 'transporte_alternativo_otros_apropiado', 'vender_informal_otros_apropiado', 'no_votar_otros_apropiado', 'comprar_sin_factura_otros_apropiado',
-    'tarde_cita_ilegal', 'comprar_vendedores_ambulantes_ilegal', 'trabajar_sin_contrato_ilegal', 'emplear_sin_contrato_ilegal', 'no_cotizar_pension_ilegal', 'no_cotizar_salud_ilegal',
-    'no_cuenta_bancaria_ilegal', 'pedir_prestado_ilegal', 'transporte_alternativo_ilegal', 'vender_informal_ilegal', 'no_votar_ilegal', 'comprar_sin_factura_ilegal',
+    'no_cuenta_bancaria_apropiado', 'pedir_prestado_apropiado', 'transporte_alternativo_apropiado', 'vender_informal_apropiado', 'no_votar_apropiado', 'comprar_sin_factura_apropiado'
     ]
 
 class ReminderNequi(Page):
@@ -245,8 +247,8 @@ class ReminderNequi(Page):
 # *** PAGE SEQUENCE *** #Usted obtuvo invertió {{inversion }}y obtuvo {{cara_sello}} 
 # por lo que su pago en esta activdad es de {{cara_sello_payoff}} y su pago total es {{combined_payoff}}
 # ******************************************************************************************************************** #
-# page_sequence = [Consent,Priming,Tips, Instructions, Decision, Results, DoubleMoney, ResultsDoubleMoney]
 page_sequence = [Consent,Priming,Tips,DoubleMoney, ResultsDoubleMoney, Instructions, Decision, Results, CombinedResults, SocioDemSurvey, ReminderNequi]
+# page_sequence = [Consent,Priming,Tips,DoubleMoney, ResultsDoubleMoney, Instructions, Decision, Results, CombinedResults, SocioDemSurvey, ReminderNequi]
 # if Constants.instructions:
 #     page_sequence.insert(0, Instructions)
 

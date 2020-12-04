@@ -47,8 +47,21 @@
             {% formfield player.empleo_estable %}
             {% formfield player.contrato_credito_vivienda %}
             {% formfield player.contrato_credito_carro %}
-            {% formfield player.contrato_opciones %}
-            {% formfield player.aporte_vejez %}
+            De acuerdo con su contrato actual, usted recibe o tiene derecho a algunas de las siguientes opciones:
+            <!--Multiples opciones 1-->
+            {% formfield player.recibe_prima %}
+            {% formfield player.recibe_cesantias %}
+            {% formfield player.recibe_vacaciones_sueldo %}
+            ¿Qué está haciendo usted actualmente para mantener económicamente en su vejez?
+            <!--Multiples opciones 2-->
+            {% formfield player.aporte_pension %}
+            {% formfield player.aporte_ahorro %} 
+            {% formfield player.aporte_inversiones %} 
+            {% formfield player.aporte_seguro %} 
+            {% formfield player.aporte_hijos_vejez %} 
+            {% formfield player.aporte_otro %} 
+            {% formfield player.aporte_nada %}
+            <!--Termina Multiples opciones--> 
             {% formfield player.cambiar_empresa %}
             {% formfield player.cambiar_trabajo %}
             ¿Por qué motivos desea cambiar de trabajo o empleo?<br><br>

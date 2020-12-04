@@ -71,7 +71,7 @@
             {% formfield player.tareas_dificiles %}
             {% formfield player.alcanzar_objetivos %}
             <b>¿Ha realizado las siguientes situaciones o acciones en los <u>últimos 4 años</u>?. Por favor, utilice una
-            escala de 0 a 4, siendo 0 “nunca la hice en el último año”, y 4 es “las hago/he hecho todo el tiempo
+            escala de 0 a 5, siendo 0 “nunca la hice en el último año”, y 5 es “las hago/he hecho todo el tiempo
             en el último año”</b>
             {% formfield player.tarde_cita %}
             {% formfield player.comprar_vendedores_ambulantes %}
@@ -101,8 +101,8 @@
             {% formfield player.no_votar_otros %}
             {% formfield player.comprar_sin_factura_otros %}
             <b>¿Qué tan apropiado o inapropiado cree usted que es hacer estas acciones?
-            Por favor, utilice la siguiente escala de -2 a 2, donde -2 es Completamente inapropiado, 
-            -1 Poco inapropiado, 0 Ni apropiado ni inapropiado, 1 Poco apropiado y 2 Completamente apropiado</b>
+            Por favor, utilice la siguiente escala de 0 a 5, donde 0 es Completamente inapropiado, 
+            y 5 es Completamente apropiado</b>
             {% formfield player.tarde_cita_apropiado %}
             {% formfield player.comprar_vendedores_ambulantes_apropiado %}
             {% formfield player.trabajar_sin_contrato_apropiado %}
@@ -115,34 +115,6 @@
             {% formfield player.vender_informal_apropiado %}
             {% formfield player.no_votar_apropiado %}
             {% formfield player.comprar_sin_factura_apropiado %}
-            <b>¿Cuántas personas de su entorno cree usted que piensan que es apropiado hacerlas?
-            Utilice una escala de 0 a 4, en donde 0 es “ninguna o casi nadie piensa que es apropiado”, y 4 es
-            “todas o la mayoría piensan que es apropiado”</b>
-            {% formfield player.tarde_cita_otros_apropiado %}
-            {% formfield player.comprar_vendedores_ambulantes_otros_apropiado %}
-            {% formfield player.trabajar_sin_contrato_otros_apropiado %}
-            {% formfield player.emplear_sin_contrato_otros_apropiado %}
-            {% formfield player.no_cotizar_pension_otros_apropiado %}
-            {% formfield player.no_cotizar_salud_otros_apropiado %}
-            {% formfield player.no_cuenta_bancaria_otros_apropiado %}
-            {% formfield player.pedir_prestado_otros_apropiado %}
-            {% formfield player.transporte_alternativo_otros_apropiado %}
-            {% formfield player.vender_informal_otros_apropiado %}
-            {% formfield player.no_votar_otros_apropiado %}
-            {% formfield player.comprar_sin_factura_otros_apropiado %}
-            <b>¿Cree usted que es ilegal hacerlas?</b> Por favor, Indique 1 si cree que es ilegal, o 0 no es ilegal.
-            {% formfield player.tarde_cita_ilegal %}
-            {% formfield player.comprar_vendedores_ambulantes_ilegal %}
-            {% formfield player.trabajar_sin_contrato_ilegal %}
-            {% formfield player.emplear_sin_contrato_ilegal %}
-            {% formfield player.no_cotizar_pension_ilegal %}
-            {% formfield player.no_cotizar_salud_ilegal %}
-            {% formfield player.no_cuenta_bancaria_ilegal %}
-            {% formfield player.pedir_prestado_ilegal %}
-            {% formfield player.transporte_alternativo_ilegal %}
-            {% formfield player.vender_informal_ilegal %}
-            {% formfield player.no_votar_ilegal %}
-            {% formfield player.comprar_sin_factura_ilegal %}
         </p>
 
     </div>
