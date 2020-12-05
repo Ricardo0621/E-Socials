@@ -1126,7 +1126,6 @@ class Player(BasePlayer):
     pregunta_siete = models.StringField(
         label="¿A quién(es) le deben preguntar y por qué?", 
     )
-
     # set player's payoff
     # ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
     def set_payoffs(self):

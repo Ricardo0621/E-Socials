@@ -177,11 +177,13 @@
                                 <td class="lottery-a">
                                     <b>Decision {{ i}}</b>. Tiene {{ i|add:"-1" }} bolas azules y {{  p}} bolas rojas
                                     <p class="center">
-                                    {% with 'mpl/images/Bolsa_' as ruta%}
-                                        {% with '.png' as extension%}
-                                            {% with i|stringformat:"s" as bla %}
-                                                {% with ruta|add:bla|add:extension as ble %}
-                                                    <img src="{% static ble %}" alt="Organigrama" style= "height: 29%; width: 29%; object-fit: cover">
+                                    {% with 'mpl/images/Bolsa_' as path%}
+                                        {% with '.png' as file_extension%}
+                                            {% with i|stringformat:"s" as decision_number %}
+                                                {% with path|add:decision_number|add:file_extension as full_path %}
+                                                    <img src="{% static full_path %}" 
+                                                    alt="Imagen que muestra bolas de colores azul y rojo. Comienza con 10 bolas rojas y cero azules y disminuye el número de bolas rojas y aumenta el número de bolas azules gradualmente" 
+                                                    style= "height: 29%; width: 29%; object-fit: cover">
                                                 {% endwith %}
                                             {% endwith %}
                                         {% endwith %}
