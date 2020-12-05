@@ -196,6 +196,7 @@ class ResultsDoubleMoney(Page):
         else:
             cara_sello_name = "Sello"
             self.player.monto = 10000-inversion + 0
+        print(cara_sello_name)
         #combined_payoff = math.trunc(self.player.payoff) + cara_sello_payoff
         return {
             #'combined_payoff' : combined_payoff,
@@ -243,13 +244,16 @@ class SocioDemSurvey(Page):
     ]
 
 class ReminderNequi(Page):
-    form_model = 'player'    
+    form_model = 'player'
+
+class HeadTails(Page):
+    form_model = 'player'         
 # ******************************************************************************************************************** #
 # *** PAGE SEQUENCE *** #Usted obtuvo invertió {{inversion }}y obtuvo {{cara_sello}} 
 # por lo que su pago en esta activdad es de {{cara_sello_payoff}} y su pago total es {{combined_payoff}}
 # ******************************************************************************************************************** #
-# page_sequence = [Instructions, Decision,Results, Consent,Priming,Tips,DoubleMoney, ResultsDoubleMoney, Instructions, Decision, Results, CombinedResults, SocioDemSurvey, ReminderNequi]
-page_sequence = [Consent,Priming,Tips,DoubleMoney, ResultsDoubleMoney, Instructions, Decision, Results, CombinedResults, SocioDemSurvey, ReminderNequi]
+# page_sequence = [DoubleMoney, HeadTails, ResultsDoubleMoney, Instructions, Decision,Results, Consent,Priming,Tips,DoubleMoney, ResultsDoubleMoney, Instructions, Decision, Results, CombinedResults, SocioDemSurvey, ReminderNequi]
+page_sequence = [Consent,Priming,Tips,DoubleMoney,HeadTails,ResultsDoubleMoney, Instructions, Decision, Results, CombinedResults, SocioDemSurvey, ReminderNequi]
 # if Constants.instructions:
 #     page_sequence.insert(0, Instructions)
 
