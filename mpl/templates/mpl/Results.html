@@ -207,24 +207,18 @@
             <p>
             {% if option_to_pay == 'A' %}
                 {% blocktrans  %}
-                    Se escogió la <b>Decisión {{decision}}</b> al azar para determinar el pago.
+                    Nuestro software escogió la <b>Decisión {{decision}}</b> al azar para determinar tu pago.
                 {% endblocktrans %}
-                    <p>Como se indica arriba, se escogió la <b>Bolsa 1</b>.
-                    Para la bolsa escogida, una de dos posibles opciones se tomaron al azar teniendo en cuenta
-                    las correspondientes probabilidades </p>
+                    Como se indica arriba, usted se escogió la <b>Bolsa 1</b> y
+                    la suerte indica que ha salido una pelotita {{pelota}}.
             {% elif option_to_pay == 'B' %}
                 {% blocktrans  %}
-                    Se escogió la <b>Decisión {{decision}}</b> al azar para determinar el pago.
+                    Nuestro software escogió la <b>Decisión {{decision}}</b> al azar para determinar tu pago.
                 {% endblocktrans %}
-                <p> Como se indica arriba, ustéd escogió la <b>Bolsa 2</b>.
-                        Para la bolsa escogida, una de dos posibles opciones se tomaron al azar teniendo en cuenta
-                        las correspondientes probabilidades.</p>
+                Como se indica arriba, usted escogió la <b>Bolsa 2</b> y
+                    la suerte indica que ha salido una pelotita {{pelota}}.
             {% endif %}
-            </p>
-            <p>
-                {% blocktrans trimmed with payoff=payoff %}
-                    Su pago en esta actividad equivale a <b>${{ payoff}}</b>.
-                {% endblocktrans %}
+            Por lo tanto, usted ha ganado <b>${{ payoff}}
             </p>
         </div>
 

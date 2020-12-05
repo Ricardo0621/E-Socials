@@ -4,6 +4,13 @@
 /* p {
     text-align: center;
 } */
+.center {
+    /* display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%; */
+    text-align: center;
+  }
 h2 {
     text-align: center !important;
 }
@@ -82,7 +89,7 @@ h2 {
 }
 
 .lottery-a {
-    min-width: 160px;
+    min-width: 170px;
     text-align: right;
 }
 
@@ -91,9 +98,6 @@ h2 {
     text-align: left;
 }
 
-.center {
-    text-align: center;
-}
 
 .info {
     padding: 15px;

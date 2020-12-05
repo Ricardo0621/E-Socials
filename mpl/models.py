@@ -101,6 +101,7 @@ class Player(BasePlayer):
     option_to_pay = models.StringField()
     inconsistent = models.IntegerField()
     switching_row = models.IntegerField()
+    ball = models.StringField()
     # ******************************************************************************************************************** #
 # *** Variables Consentimiento
 # ******************************************************************************************************************** #
@@ -1153,14 +1154,18 @@ class Player(BasePlayer):
         if self.option_to_pay == 'A': #A Toma la opción a ganar y la compara con con un número aleatorio. Si es menor escoge el mayor pago
             if self.random_draw <= self.participant.vars['mpl_index_to_pay']:
                 self.payoff = Constants.lottery_a_hi
+                self.ball = "Azul"
             else:
                 self.payoff = Constants.lottery_a_lo
+                self.ball = "Roja"
         else:
             if self.random_draw <= self.participant.vars['mpl_index_to_pay']:
                 self.payoff = Constants.lottery_b_hi
+                self.ball = "Azul"
             else:
                 self.payoff = Constants.lottery_b_lo
-
+                self.ball = "Azul"
+        print("Salió la pelota" + self.ball)
         # set payoff as global variable
         # ------------------------------------------------------------------------------------------------------------
         self.participant.vars['mpl_payoff'] = self.payoff
