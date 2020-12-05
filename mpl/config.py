@@ -88,7 +88,7 @@ class Constants(BaseConstants):
     results = True
 
     cara_sello_value = random.randint(0, 1)
-    print(cara_sello_value)
+    # print(cara_sello_value)
     # ---------------------------------------------------------------------------------------------------------------- #
     # --- oTree Settings (Don't Modify) --- #
     # ---------------------------------------------------------------------------------------------------------------- #
