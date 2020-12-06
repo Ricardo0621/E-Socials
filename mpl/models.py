@@ -138,7 +138,8 @@ class Player(BasePlayer):
             ["Contrato de obra o labor", "Contrato de obra o labor"],
             ["Contrato por prestación de servicios", "Contrato por prestación de servicios"],
             ["Contrato a término fijo", "Contrato a término fijo"],
-        ]
+        ],
+        widget=widgets.RadioSelect
     )
     horas_semanales = models.IntegerField(label="Cuántas horas a la semana trabaja normalmente en este trabajo?")    
     rango_pago = models.StringField(
@@ -158,56 +159,64 @@ class Player(BasePlayer):
             ["Entre 1.600.001 y 2.000.000", "Entre 1.600.001 y 2.000.000"],
             ["Entre 2.000.001 y 3.150.000", "Entre 2.000.001 y 3.150.000"],
             ["Más de 3.150.000", "Más de 3.150.000"],
-        ]
+        ],
+        widget=widgets.RadioSelect
     )
     satisfecho_trabajo_actual = models.BooleanField(
         label = "¿Con su trabajo actual?",
         choices = [
             [True, "Sí"],
             [False, "No"],
-        ]
+        ],
+        widget=widgets.RadioSelect
     )
     satisfecho_beneficios = models.BooleanField(
         label = "¿Con los beneficios y las prestaciones que recibe?",
         choices = [
             [True, "Sí"],
             [False, "No"],
-        ]
+        ],
+        widget=widgets.RadioSelect
     )
     satisfecho_jornada = models.BooleanField(
         label = "¿Con su jornada laboral actual?",
         choices = [
             [True, "Sí"],
             [False, "No"],
-        ]
+        ],
+        widget=widgets.RadioSelect
     )
     conforme_contrato = models.BooleanField(
         label = "¿Está conforme con su tipo de contrato?",
         choices = [
             [True, "Sí"],
             [False, "No"],
-        ]
+        ],
+        widget=widgets.RadioSelect
     )
     empleo_estable = models.BooleanField(
         label = "¿Considera que su empleo actual es estable?",
         choices = [
             [True, "Sí"],
             [False, "No"],
-        ]
+        ],
+        widget=widgets.RadioSelect
     )
     contrato_credito_vivienda = models.BooleanField(
         label = "¿Su tipo de contrato actual le permite acceder a créditos de vivienda?",
         choices = [
             [True, "Sí"],
             [False, "No"],
-        ]
+        ],
+        widget=widgets.RadioSelect
     )
     contrato_credito_carro = models.BooleanField(
         label = "¿Su tipo de contrato actual le permite acceder a créditos para carro o educación?",
         choices = [
             [True, "Sí"],
             [False, "No"],
-        ]
+        ],
+        widget=widgets.RadioSelect
     )
     # ******************************************************************************************************************** #
 # *** Múltiples variables 1
@@ -273,14 +282,16 @@ class Player(BasePlayer):
         choices = [
             [True, "Sí"],
             [False, "No"],
-        ]
+        ],
+        widget=widgets.RadioSelect
     )
     cambiar_trabajo = models.BooleanField(
         label = "¿Desea cambiar el tipo de trabajo que realiza actualmente?",
         choices = [
             [True, "Sí"],
             [False, "No"],
-        ]
+        ],
+        widget=widgets.RadioSelect
     )
     # ******************************************************************************************************************** #
 # *** Se despliegan cuando se responde a "sí" en la pregunta anterior. 

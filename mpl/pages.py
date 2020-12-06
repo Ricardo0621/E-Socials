@@ -252,7 +252,7 @@ class HeadTails(Page):
 # *** PAGE SEQUENCE *** #Usted obtuvo invertió {{inversion }}y obtuvo {{cara_sello}} 
 # por lo que su pago en esta activdad es de {{cara_sello_payoff}} y su pago total es {{combined_payoff}}
 # ******************************************************************************************************************** #
-# page_sequence = [DoubleMoney, HeadTails, ResultsDoubleMoney, Instructions, Decision,Results, Consent,Priming,Tips,DoubleMoney, ResultsDoubleMoney, Instructions, Decision, Results, CombinedResults, SocioDemSurvey, ReminderNequi]
+# page_sequence = [Priming, DoubleMoney, HeadTails, ResultsDoubleMoney, Instructions, Decision,Results, Consent,Priming,Tips,DoubleMoney, ResultsDoubleMoney, Instructions, Decision, Results, CombinedResults, SocioDemSurvey, ReminderNequi]
 page_sequence = [Consent,Priming,Tips,DoubleMoney,HeadTails,ResultsDoubleMoney, Instructions, Decision, Results, CombinedResults, SocioDemSurvey, ReminderNequi]
 # if Constants.instructions:
 #     page_sequence.insert(0, Instructions)

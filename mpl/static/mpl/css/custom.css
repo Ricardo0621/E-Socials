@@ -112,9 +112,9 @@ h2 {
     opacity: 1;
 }
 
-input[type="radio"]{
-    margin: 7px;
-}
+/* input[type="radio"]{
+    margin: 0px;
+} */
 
 .panel {
     border: 0.5pt solid #e3e3e3;

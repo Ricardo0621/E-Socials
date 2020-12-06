@@ -1,8 +1,8 @@
 {% extends "otree/Page.html" %}
-{% load otree static %}
+{% comment %} {% load otree static %} {% endcomment %}
 
 {% block global_styles %}
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+    {% comment %} <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="{% static 'fonts/icomoon/style.css' %}">
     <link rel="stylesheet" href="{% static 'fonts/brand/style.css' %}">
@@ -17,20 +17,20 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link href="https://surveyjs.azureedge.net/1.8.0/survey.css" type="text/css" rel="stylesheet"/>
     {% block local_styles %}
-    {% endblock local_styles %}
+    {% endblock local_styles %} {% endcomment %}
 {% endblock %}
 
 {% block global_scripts %}
-    {% block local_scripts %}
-    {% endblock local_scripts %}
+    {% comment %} {% block local_scripts %}
+    {% endblock local_scripts %} {% endcomment %}
 {% endblock %}
 
 {% block content %}
-    <div class="site-wrap" id="home-section">
+    {% comment %} <div class="site-wrap" id="home-section">
         <div class="site-section">
             {% block body %}
 
             {% endblock %}
-        </div>
+        </div> {% endcomment %}
     </div>
 {% endblock %}
