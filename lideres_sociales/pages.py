@@ -16,7 +16,7 @@ class Results(Page):
 
 class Consent(Page):
     form_model = 'player' 
-    form_fields = ['num_temporal','accepts_terms']
+    form_fields = ['num_temporal','genero', 'accepts_terms']
 
 class Survey(Page):
     form_model = 'player'    
@@ -24,7 +24,7 @@ class Survey(Page):
     'noticia_calidad', 'noticia_imagenes', 'noticia_publico_general', 'noticia_informacion_importante',
     'noticia_informacion_importante_politicos', 'noticia_lenguaje', 'noticia_lideres_similar',
     'noticia_impactante', 'noticia_angustiante', 'noticia_violenta', 'lider_necesario', 'acuerdo_paz', 
-    'gobierno_responsable_lideres', 'frase_identificado_1', 'frase_identificado_2', 'frase_identificado_3',
+    'gobierno_responsable_lideres', 'conflicto_armado_cesado', 'frase_identificado_1', 'frase_identificado_2', 'frase_identificado_3',
     'victima_responsable', 'siente_compasion', 'entristece_persona_solitaria', 'importancia_sentimientos',
     'muestras_afecto', 'molestan_personas_infelices', 'ponerse_nervioso', 'llorar_felicidad', 'involucrarse_emocionalmente', 
     'cancion_conmueve', 'perder_control_malas_noticias', 'gente_influencia_estado_animo', 'extrajeros_geniales', 'trabajador_social',
@@ -36,7 +36,7 @@ class Survey(Page):
 
 class SocioDemSurvey(Page):
     form_model = 'player'
-    form_fields = ['genero', 'edad', 'ciudad', 'estrato', 'estado_civil', 'numero_hijos', 'identifica_cultura',
+    form_fields = ['edad', 'ciudad', 'estrato', 'estado_civil', 'numero_hijos', 'identifica_cultura',
     'identifica_religion','nivel_estudios', 'tendencia_politica', 'disposicion_riesgos', 'victima_violencia_farc_eln', 
     'victima_violencia_auc_otros', 'victima_violencia_otros_delicuencia', 'victima_no_violencia', 'familia_victima_farc_eln', 
     'familia_victima_auc_otros', 'familia_victima_otros_delincuencia', 'familia_victima_no_violencia',
