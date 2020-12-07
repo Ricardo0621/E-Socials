@@ -4,6 +4,11 @@
 /* p {
     text-align: center;
 } */
+
+.form-check-input {
+    position: relative;
+    margin-left: 0rem;
+}
 .center {
     /* display: block;
     margin-left: auto;

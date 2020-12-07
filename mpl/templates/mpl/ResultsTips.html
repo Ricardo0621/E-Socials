@@ -15,7 +15,7 @@
 {# *** TITLE *** #}
 {# ****************************************************************************************************************** #}
 {% block title %}
-    {% trans "Pago acumulado" %}
+    {% trans "Etapa 2 - Pago" %}
 {% endblock %}
 
 
@@ -25,10 +25,9 @@
 {% block content %}
 
     <div class="wrapper instructions">
-        <p align = "justify">
-        Su pago acumulado es <b>${{combined_payoff}}</b>
+        <p align = "justify"> 
+            Su pago es <b>${{payoff}}</b>
         </p>
-        
     </div>
 
     {% next_button %}

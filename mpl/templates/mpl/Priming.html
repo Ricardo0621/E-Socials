@@ -48,18 +48,19 @@
                         {% endfor %}
                     </tr>
                 {% endfor %}
-            </table> {% endcomment %}
+            </table>  {% endcomment %}
             {% comment %} <tr>
                 <th>{{ form.satisfecho_trabajo_actual.label }}</th>
-                    {% comment %} <td>{{ choice.tag}}</td> {% endcomment %}
-                {% comment %} {% endfor %} 
-            </tr>{% endcomment %}
-             {% comment %} <tr>
+                {% for choice in form.satisfecho_trabajo_actual %}
+                    <td>{{ choice.tag}}</td>
+                 {% endfor %} 
+            </tr> {% endcomment %}
+            {% comment %} <tr>
                 <th>{{ form.satisfecho_jornada.label }}</th>
                 {% for choice in form.satisfecho_jornada %}
-                    <td>{{ choice.tag }}</td>
+                    <td>{{ choice.tag}}</td>
                 {% endfor %}
-            </tr> {% endcomment %}
+            </tr>  {% endcomment %}
             ¿Está satisfecho con ... ?
             <table class="table">
             <td>
@@ -116,77 +117,77 @@
                 </td>
                 <tr>
                     <th>{{ form.mejorar_capacidades.label }}</th>
-                        <td><input name="mejorar_capacidades" type="radio" value="True" required></td>
-                        <td><input name="mejorar_capacidades" type="radio" value="False" required></td>
+                        <td><input name="mejorar_capacidades" type="radio" value="True" ></td>
+                        <td><input name="mejorar_capacidades" type="radio" value="False" ></td>
                 </tr>
                 <tr>
                     <th>{{ form.mejorar_ingresos.label }}</th>
-                        <td><input name="mejorar_ingresos" type="radio" value="True" required></td>
-                        <td><input name="mejorar_ingresos" type="radio" value="False" required></td>
+                        <td><input name="mejorar_ingresos" type="radio" value="True" ></td>
+                        <td><input name="mejorar_ingresos" type="radio" value="False" ></td>
                 </tr>
                 <tr>
                     <th>{{ form.trabajar_menos.label }}</th>
-                        <td><input name="trabajar_menos" type="radio" value="True" required></td>
-                        <td><input name="trabajar_menos" type="radio" value="False" required></td>
+                        <td><input name="trabajar_menos" type="radio" value="True" ></td>
+                        <td><input name="trabajar_menos" type="radio" value="False" ></td>
                 </tr>
                 <tr>
                     <th>{{ form.trabajo_temporal.label }}</th>
-                        <td><input name="trabajo_temporal" type="radio" value="True" required></td>
-                        <td><input name="trabajo_temporal" type="radio" value="False" required></td>
+                        <td><input name="trabajo_temporal" type="radio" value="True" ></td>
+                        <td><input name="trabajo_temporal" type="radio" value="False" ></td>
                 </tr>
                 <tr>
                     <th>{{ form.trabajo_estable.label }}</th>
-                        <td><input name="trabajo_estable" type="radio" value="True" required></td>
-                        <td><input name="trabajo_estable" type="radio" value="False" required></td>
+                        <td><input name="trabajo_estable" type="radio" value="True" ></td>
+                        <td><input name="trabajo_estable" type="radio" value="False"></td>
                 </tr>
                 <tr>
                     <th>{{ form.crecimiento_profesional.label }}</th>
-                        <td><input name="crecimiento_profesional" type="radio" value="True" required></td>
-                        <td><input name="crecimiento_profesional" type="radio" value="False" required></td>
+                        <td><input name="crecimiento_profesional" type="radio" value="True" ></td>
+                        <td><input name="crecimiento_profesional" type="radio" value="False" ></td>
                 </tr>
                 <tr>
                     <th>{{ form.dinero_compra_vivienda.label }}</th>
-                        <td><input name="dinero_compra_vivienda" type="radio" value="True" required></td>
-                        <td><input name="dinero_compra_vivienda" type="radio" value="False" required></td>
+                        <td><input name="dinero_compra_vivienda" type="radio" value="True" ></td>
+                        <td><input name="dinero_compra_vivienda" type="radio" value="False" ></td>
                 </tr>
                 <tr>
                     <th>{{ form.contrato_compra_vivienda.label }}</th>
-                        <td><input name="contrato_compra_vivienda" type="radio" value="True" required></td>
-                        <td><input name="contrato_compra_vivienda" type="radio" value="False" required></td>
+                        <td><input name="contrato_compra_vivienda" type="radio" value="True" ></td>
+                        <td><input name="contrato_compra_vivienda" type="radio" value="False" ></td>
                 </tr>
                 <tr>
                     <th>{{ form.problemas_companeros.label }}</th>
-                        <td><input name="problemas_companeros" type="radio" value="True" required></td>
-                        <td><input name="problemas_companeros" type="radio" value="False" required></td>
+                        <td><input name="problemas_companeros" type="radio" value="True" ></td>
+                        <td><input name="problemas_companeros" type="radio" value="False" ></td>
                 </tr>
                 <tr>
                     <th>{{ form.problemas_jefe.label }}</th>
-                        <td><input name="problemas_jefe" type="radio" value="True" required></td>
-                        <td><input name="problemas_jefe" type="radio" value="False" required></td>
+                        <td><input name="problemas_jefe" type="radio" value="True" ></td>
+                        <td><input name="problemas_jefe" type="radio" value="False" ></td>
                 </tr>
                 <tr>
                     <th>{{ form.labor_desempenada.label }}</th>
-                        <td><input name="labor_desempenada" type="radio" value="True" required></td>
-                        <td><input name="labor_desempenada" type="radio" value="False" required></td>
+                        <td><input name="labor_desempenada" type="radio" value="True" ></td>
+                        <td><input name="labor_desempenada" type="radio" value="False" ></td>
                 </tr>
                 <tr>
                     <th>{{ form.esfuerzo_fisico.label }}</th>
-                        <td><input name="esfuerzo_fisico" type="radio" value="True" required></td>
-                        <td><input name="esfuerzo_fisico" type="radio" value="False" required></td>
+                        <td><input name="esfuerzo_fisico" type="radio" value="True" ></td>
+                        <td><input name="esfuerzo_fisico" type="radio" value="False" ></td>
                 </tr>
                 <tr>
                     <th>{{ form.problemas_ambientales.label }}</th>
-                        <td><input name="problemas_ambientales" type="radio" value="True" required></td>
-                        <td><input name="problemas_ambientales" type="radio" value="False" required></td>
+                        <td><input name="problemas_ambientales" type="radio" value="True" ></td>
+                        <td><input name="problemas_ambientales" type="radio" value="False" ></td>
                 </tr>
                 <tr>
                     <th>{{ form.otro_problema.label }}</th>
-                        <td><input name="otro_problema" type="radio" value="True" required></td>
-                        <td><input name="otro_problema" type="radio" value="False" required></td>
+                        <td><input name="otro_problema" type="radio" value="True" ></td>
+                        <td><input name="otro_problema" type="radio" value="False" ></td>
                 </tr>
 
                 </table>
-            </div
+            </div>
         </p>
 
     </div>
