@@ -1,6 +1,7 @@
 from otree.api import Currency as c, currency_range
 from ._builtin import Page, WaitPage
 from .models import Constants
+from .models import Player
 
 
 class MyPage(Page):
@@ -47,4 +48,21 @@ class SocioDemSurvey(Page):
 class Invitation(Page):
     form_model = 'player'
 
-page_sequence = [Consent, Survey, SocioDemSurvey, Invitation]
+class Video(Page):
+    form_model = 'player'
+    # print(Player.objects.get(pk=1))
+    # print(Player.objects.all())
+    # for p in Player.objects.raw('SELECT id, genero FROM lideres_sociales_player'):
+    #     print(p)
+    # print(list(Player.objects.raw('SELECT id, genero FROM lideres_sociales_player'))[0])
+    # print(len(Player.objects.filter(genero__exact='Masculino')))
+    def vars_for_template(self):
+        self.player.contador_masculino = Player.objects.filter(genero__exact='Masculino').count()
+        self.player.contador_femenino = Player.objects.filter(genero__exact='Femenino').count()
+        return {
+            'contador_masculino' : self.player.contador_masculino,
+            'contador_femenino' : self.player.contador_femenino,
+            'genero': self.player.genero
+        }
+
+page_sequence = [Consent, Video, Survey, SocioDemSurvey, Invitation]

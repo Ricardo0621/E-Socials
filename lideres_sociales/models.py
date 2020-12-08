@@ -9,6 +9,7 @@ from otree.api import (
     currency_range,
 )
 
+import math
 
 author = 'Ricardo Diaz Rincon'
 
@@ -559,6 +560,8 @@ class Player(BasePlayer):
                 ["Femenino", "Femenino"]],
         widget=widgets.RadioSelect,
     )
+    contador_masculino = models.IntegerField(initial=0)
+    contador_femenino = models.IntegerField(initial=0)
     edad = models.IntegerField(label="¿Cuántos años cumplidos tiene usted?")
     ciudad = models.StringField(label="¿En qué ciudad vive actualmente?")
     estrato = models.IntegerField(label="¿Cuál es el estrato de la vivienda en la cual habita actualmente?", min=0, max=6)
@@ -968,3 +971,9 @@ class Player(BasePlayer):
         ],
         widget=widgets.RadioSelect,
     )
+    # def set_contador(self):
+    #     # print(self.genero)
+    #     if self.genero == 'Masculino':
+    #         self.contador_masculino +=  1
+    #     else:
+    #         self.contador_femenino +=  1
