@@ -33,10 +33,20 @@ class AddNumbers(Page):
             self.player.correct_answers = 1
         return
 
-class Introduction(Page):
+class GenInstructions(Page):
     def is_displayed(self):
         return self.round_number == 1
-        
+
+class Stage1Instructions(Page):
+    def is_displayed(self):
+        return self.round_number == 1
+
+class Stage1Questions(Page):
+    form_model = 'player'
+    form_fields = ['control_question_1', 'control_question_2']
+    def is_displayed(self):
+        return self.round_number == 1
+
 class Consent(Page):
     form_model = 'player'
     form_fields = ['accepts_data', 'num_temporal', 'accepts_terms']
@@ -55,7 +65,7 @@ class CombinedResults(Page):
         return {
             'combined_payoff' : math.trunc(combined_payoff)
         }
-page_sequence = [Consent, Introduction, AddNumbers, CombinedResults]
+page_sequence = [Consent, GenInstructions,Stage1Instructions, Stage1Questions, AddNumbers, CombinedResults]
 # page_sequence = [AddNumbers, CombinedResults]
 
 
