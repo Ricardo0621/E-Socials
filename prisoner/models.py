@@ -50,8 +50,7 @@ class Player(BasePlayer):
  # ******************************************************************************************************************** #
 # *** Variables Consentimiento
 # ******************************************************************************************************************** #
-    name = models.StringField(label= "Nombre Completo")
-    id_cc = models.IntegerField(label="Cédula de Ciudadanía (Sin puntos)")
+    num_temporal = models.IntegerField(label= "Por favor, ingrese el numero de identificación temporal que le llegó en el correo de invitación")
     accepts_data = models.BooleanField(
         label = "¿Autoriza el uso de los datos recolectados para futuros estudios?",
         choices = [

@@ -11,6 +11,7 @@ class Introduction(Page):
 class Decision(Page):
     form_model = 'player'
     form_fields = ['decision']
+    timeout_seconds = 60
 
 
 class ResultsWaitPage(WaitPage):
@@ -28,7 +29,7 @@ class Results(Page):
         )
 class Consent(Page):
     form_model = 'player' #El jugador
-    form_fields = ['accepts_data', 'name', 'id_cc', 'accepts_terms']
+    form_fields = ['accepts_data', 'num_temporal', 'accepts_terms']
     def is_displayed(self):
         return self.round_number == 1
 
