@@ -29,7 +29,7 @@ dict(
 dict(
         name='real_effort_numbers',
         display_name="Gift-exchange Game T-T",
-        num_demo_participants=3,
+        num_demo_participants=4,
         app_sequence=['real_effort_numbers']
     ),    
     # dict(
