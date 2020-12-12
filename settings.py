@@ -17,7 +17,7 @@ SESSION_CONFIGS = [
     # dict(
     #     name='prisoner',
     #     display_name="Gift-exchange game",
-    #     num_demo_participants=2,
+    #     num_demo_participants=4,
     #     app_sequence=['prisoner'],
     # ),
 dict(
@@ -51,10 +51,10 @@ dict(
     #     app_sequence=['guess_two_thirds', 'payment_info'],
     # ),
     # dict(
-    #     name='survey',
-    #     display_name='survey',
-    #     num_demo_participants=1,
-    #     app_sequence=['survey', 'payment_info'],
+    #     name='public_goods',
+    #     display_name='PGasa',
+    #     num_demo_participants=4,
+    #     app_sequence=['public_goods'],
     # ),
 ]
 

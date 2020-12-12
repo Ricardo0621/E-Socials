@@ -1243,14 +1243,14 @@ class Player(BasePlayer):
                 self.ball = "Azul"
             else:
                 self.payoff = Constants.lottery_a_lo
-                self.ball = "Roja"
+                self.ball = "Rosada"
         else:
             if self.random_draw <= self.participant.vars['mpl_index_to_pay']:
                 self.payoff = Constants.lottery_b_hi
                 self.ball = "Azul"
             else:
                 self.payoff = Constants.lottery_b_lo
-                self.ball = "Azul"
+                self.ball = "Rosada"
         print("Salió la pelota" + self.ball)
         # set payoff as global variable
         # ------------------------------------------------------------------------------------------------------------

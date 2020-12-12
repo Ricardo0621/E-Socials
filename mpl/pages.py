@@ -269,7 +269,7 @@ class PlayCoin(Page):
 # *** PAGE SEQUENCE *** #Usted obtuvo invertió {{inversion }}y obtuvo {{cara_sello}} 
 # por lo que su pago en esta activdad es de {{cara_sello_payoff}} y su pago total es {{combined_payoff}}
 # ******************************************************************************************************************** #
-# page_sequence = [Tips,ResultsTips, DoubleMoney,HeadTails,ResultsDoubleMoney, Instructions, Decision, Results, CombinedResults, TotalPayoff]
+# page_sequence = [Instructions, Decision, Results,Tips,ResultsTips, DoubleMoney,HeadTails,ResultsDoubleMoney, Instructions, Decision, Results, CombinedResults, TotalPayoff]
 page_sequence = [Consent,Priming,Tips,ResultsTips, PlayCoin, DoubleMoney,HeadTails,ResultsDoubleMoney, Instructions, Decision, Results, CombinedResults, TotalPayoff, SocioDemSurvey, ReminderNequi, TotalPayoff]
 # if Constants.instructions:
 #     page_sequence.insert(0, Instructions)

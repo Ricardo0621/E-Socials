@@ -82,4 +82,5 @@ class Player(BasePlayer):
     accepts_terms = models.BooleanField()
 
     def other_player(self):
+        #self.get_others_in_group() -> Vector[<Player  2>, <Player  3>, <Player  4>]
         return self.get_others_in_group()[0]

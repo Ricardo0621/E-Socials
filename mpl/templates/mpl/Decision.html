@@ -131,15 +131,15 @@
                 En esta actividad realizaremos <b>un sorteo</b> y tú definirás algunas de las condiciones del mismo. 
                 Existen 11 sorteos posibles pero al final, sólo se seleccionará uno al azar. <br><br>
 
-                El sorteo consiste en unas bolsas virtuales que tienen <b>10 pelotitas</b> de dos colores, <b>azul o rojo</b>. No hay bolas de ningún otro color. 
+                El sorteo consiste en unas bolsas virtuales que tienen <b>10 pelotitas</b> de dos colores, <b>azul o rosado</b>. No hay bolas de ningún otro color. 
                 <b>Ganarás $15,000</b> si de la bolsa virtual saliera una <b>bola azul</b>. 
-                Si sale una bola roja,  no ganarás nada, pero tampoco perderás el dinero que tienes hasta el momento.<br><br>
+                Si sale una bola rosada,  no ganarás nada, pero tampoco perderás el dinero que tienes hasta el momento.<br><br>
                 
                 <b>Tu decisión:</b> elegir la bolsa de la cual quieres que se realice el sorteo. 
                 Como hay 11 sorteos posibles, deberás tomar 11 decisiones. 
                 Piensa en cada una de ellas como si fuera la definitiva.<br><br>
                 
-                <b>Nota:</b> siempre sabrás cuántas bolitas azules y rojas hay en la bolsa 1. En la bolsa 2 sólo hay bolitas azules y rojas, pero nunca sabrás cuántas hay de cada color. 
+                <b>Nota:</b> siempre sabrás cuántas bolitas azules y rosadas hay en la bolsa 1. En la bolsa 2 sólo hay bolitas azules y rosadas, pero nunca sabrás cuántas hay de cada color. 
                 <b>Recuerda, sólo ganas si sale una pelotita azul.</b>
             </p>
     </div>
@@ -175,14 +175,14 @@
                             
                                 <!-- A lotteries -->
                                 <td class="lottery-a">
-                                    <b>Decision {{ i}}</b>. Tiene {{ i|add:"-1" }} bolas azules y {{  p}} bolas rojas
+                                    <b>Decision {{ i}}</b>. Tiene {{ i|add:"-1" }} bolas azules y {{  p}} bolas rosadas
                                     <p class="center">
                                     {% with 'mpl/images/Bolsa_' as path%}
                                         {% with '.png' as file_extension%}
                                             {% with i|stringformat:"s" as decision_number %}
                                                 {% with path|add:decision_number|add:file_extension as full_path %}
                                                     <img src="{% static full_path %}" 
-                                                    alt="Imagen que muestra bolas de colores azul y rojo. Comienza con 10 bolas rojas y cero azules y disminuye el número de bolas rojas y aumenta el número de bolas azules gradualmente" 
+                                                    alt="Imagen que muestra bolas de colores azul y rosado. Comienza con 10 bolas rosadas y cero azules y disminuye el número de bolas rosadas y aumenta el número de bolas azules gradualmente" 
                                                     style= "height: 29%; width: 29%; object-fit: cover">
                                                 {% endwith %}
                                             {% endwith %}
@@ -201,7 +201,7 @@
 
                                 <!-- B lotteries -->
                                 <td class="lottery-b">
-                                    <b>Decision {{ i}}</b>. Tiene 10 pelotas. No sabes cuántas son azules ni son rojas
+                                    <b>Decision {{ i}}</b>. Tiene 10 pelotas. No sabes cuántas son azules ni son rosadas
                                     <p class="center">
                                     <img src="{% static 'mpl/images/BolsaIncognita.png' %}" alt="Ilustración de una bolsa con bolas que tienen signos de pregunta en cada una" style= "height: 20%; width: 20%; object-fit: cover">
                                     </p>

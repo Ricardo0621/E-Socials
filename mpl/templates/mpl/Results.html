@@ -50,7 +50,7 @@
 
         <div class="card info">
             {% blocktrans trimmed %}
-                La siguiente decisión fué generada al azar para realizar su pago: <u>El Programa escogió la <b>Decisión{{decision}}</b></u>
+                La siguiente decisión fué generada al azar para realizar su pago: <u>El Programa escogió la <b>Decisión {{decision}}</b>.</u>
             {% endblocktrans %}
         </div>
         <br/>
@@ -155,14 +155,14 @@
 
                                 <!-- A lotteries -->
                                 <td class="lottery-a">
-                                <b>Decision {{ i}}</b>. Tiene {{ i|add:"-1" }} bolas azules y {{  p}} bolas rojas
+                                <b>Decision {{ i}}</b>. Tiene {{ i|add:"-1" }} bolas azules y {{  p}} bolas rosadas
                                     <p class="center">
                                     {% with 'mpl/images/Bolsa_' as path%}
                                         {% with '.png' as file_extension%}
                                             {% with i|stringformat:"s" as decision_number %}
                                                 {% with path|add:decision_number|add:file_extension as full_path %}
                                                     <img src="{% static full_path %}" 
-                                                    alt="Imagen que muestra bolas de colores azul y rojo. Comienza con 10 bolas rojas y cero azules y disminuye el número de bolas rojas y aumenta el número de bolas azules gradualmente" 
+                                                    alt="Imagen que muestra bolas de colores azul y rosado. Comienza con 10 bolas rosadas y cero azules y disminuye el número de bolas rosadas y aumenta el número de bolas azules gradualmente" 
                                                     style= "height: 29%; width: 29%; object-fit: cover">
                                                 {% endwith %}
                                             {% endwith %}
@@ -188,7 +188,7 @@
 
                                 <!-- B lotteries -->
                                 <td class="lottery-b">
-                                <b>Decision {{ i}}</b>. Tiene 10 pelotas. No sabes cuántas son azules ni son rojas
+                                <b>Decision {{ i}}</b>. Tiene 10 pelotas. No sabes cuántas son azules ni son rosadas
                                     <p class="center">
                                     <img src="{% static 'mpl/images/BolsaIncognita.png' %}" alt="Ilustración de una bolsa con bolas que tienen signos de pregunta en cada una" style= "height: 20%; width: 20%; object-fit: cover">
                                     </p>
@@ -215,23 +215,49 @@
         <!-- ------------------------------------------------------------------------------------------------------- -->
         <!-- payoff information -->
         <!-- ------------------------------------------------------------------------------------------------------- -->
+        {% for i,f,p in choice_to_pay %}
         <div class="card info">
             <p>
             {% if option_to_pay == 'A' %}
-                {% blocktrans  %}
-                    Nuestro software escogió la <b>Decisión {{decision}}</b> al azar para determinar tu pago.
-                {% endblocktrans %}
-                    Como se indica arriba, usted se escogió la <b>Bolsa 1</b> y
-                    la suerte indica que ha salido una pelotita {{pelota}}.
+                Nuestro software escogió la <b>Decisión {{decision}}</b> al azar para determinar tu pago.
+                En el siguiente video te mostramos cómo se ha metido en la bolsa el número de bolas azules que corresponde con tu decisión:<br>
+                {% with 'mpl/gifs/Bolsa_' as path%}
+                    {% with '.mp4' as file_extension%}
+                        {% with i|stringformat:"s" as decision_number %}
+                            {% with path|add:decision_number|add:file_extension as full_path %}
+                                <p align="center"><video width="320" height="240" type="video/mp4" controls src="{% static full_path %}"><p/>
+                             {% endwith %}
+                        {% endwith %}
+                    {% endwith %}
+                {% endwith %}
+            <p>Como se indica arriba, usted escogió la <b>Bolsa 1</b> y la suerte indica que ha salido una pelotita <b>{{pelota}}</b>. El video a continuación muestra la opción escogida</p>
+            {% with 'mpl/gifs/Bola_' as path%}
+                    {% with '.mp4' as file_extension%}
+                        {% with pelota|stringformat:"s" as decision_ball %}
+                            {% with path|add:decision_ball|add:file_extension as full_path %}
+                                <p align="center"><video width="320" height="240" type="video/mp4" controls src="{% static full_path %}"><p/>
+                             {% endwith %}
+                        {% endwith %}
+                    {% endwith %}
+                {% endwith %}
             {% elif option_to_pay == 'B' %}
-                {% blocktrans  %}
-                    Nuestro software escogió la <b>Decisión {{decision}}</b> al azar para determinar tu pago.
-                {% endblocktrans %}
-                Como se indica arriba, usted escogió la <b>Bolsa 2</b> y
-                    la suerte indica que ha salido una pelotita {{pelota}}.
+                    Nuestro software escogió la <b>Decisión {{decision}}</b> al azar para determinar tu pago. Como se indica arriba, usted escogió la <b>Bolsa 2</b> y
+                    la suerte indica que ha salido una pelotita <b>{{pelota}}</b>. El video a continuación muestra la opción escogida.
+                    {% with 'mpl/gifs/Bola_' as path%}
+                    {% with '.mp4' as file_extension%}
+                        {% with pelota|stringformat:"s" as decision_ball %}
+                            {% with path|add:decision_ball|add:file_extension as full_path %}
+                                <p align="center"><video width="320" height="240" type="video/mp4" controls src="{% static full_path %}"><p/>
+                             {% endwith %}
+                        {% endwith %}
+                    {% endwith %}
+                {% endwith %}
+                    
             {% endif %}
-            Por lo tanto, usted ha ganado <b>${{ payoff}}
+            {% endfor %}
+            <p>Por lo tanto, usted ha ganado <b>${{ payoff}}</p>
             </p>
+        
         </div>
     </div>
 

@@ -19,9 +19,15 @@ class ResultsWaitPage(WaitPage):
 
 
 class Results(Page):
+    form_model = 'player'
     def vars_for_template(self):
         me = self.player
         opponent = me.other_player()
+        print("Me " + str(me))
+        print("Me id " + str(me.id_in_group))
+        print("Opponent " + str(opponent))
+        print("Opponent id " + str(opponent.id_in_group))
+        print("Vector" + str(self.player.get_others_in_group()))
         return dict(
             my_decision=me.decision,
             opponent_decision=opponent.decision,

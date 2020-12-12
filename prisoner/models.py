@@ -17,7 +17,7 @@ Gift_exhange game.
 
 class Constants(BaseConstants):
     name_in_url = 'prisoner'
-    players_per_group = 2
+    players_per_group = 4
     num_rounds = 3
 
     instructions_template = 'prisoner/instructions.html'

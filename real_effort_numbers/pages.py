@@ -7,7 +7,6 @@ class AddNumbers(Page):
     form_model = 'player'
     form_fields = ['number_entered']
     timer_text = 'Tiempo restante para completar esta etapa:'
-    # opponent = self.player.other_player()
 
     def before_next_page(self):
         if self.player.sum_of_numbers == self.player.number_entered:
@@ -30,6 +29,7 @@ class AddNumbers(Page):
         all_players = self.player.in_all_rounds()
         correct_answers = 0
         combined_payoff = 0
+        opponent = self.player.other_player()
         for player in all_players:
             combined_payoff += player.payoff
             correct_answers += player.correct_answers
@@ -38,7 +38,8 @@ class AddNumbers(Page):
             'number_2': number_2,
             'combined_payoff' : math.trunc(combined_payoff),
             'correct_answers': correct_answers,
-            'round_number' : self.round_number
+            'round_number' : self.round_number,
+            'opponent': opponent
         }
     
 class GenInstructions(Page):
@@ -69,6 +70,11 @@ class Consent(Page):
     def is_displayed(self):
         return self.round_number == 1
 
+class ResultsWaitPage(WaitPage):
+    #Muestra el WaitPage al final de la cuarta ronda. Antes del pago
+    def is_displayed(self):
+        return self.round_number == 4
+
 class CombinedResults(Page):
     def is_displayed(self):
         return self.round_number == Constants.num_rounds
@@ -82,9 +88,10 @@ class CombinedResults(Page):
             correct_answers += player.correct_answers
         return {
             'combined_payoff' : math.trunc(combined_payoff),
-            'correct_answers': correct_answers
+            'correct_answers': correct_answers,
+            'round_number' : self.round_number,
         }
-# page_sequence = [Consent, GenInstructions,Stage1Instructions, Stage1Questions, Start, AddNumbers, CombinedResults]
-page_sequence = [Start, AddNumbers, CombinedResults]
+# page_sequence = [Consent, GenInstructions,Stage1Instructions, Stage1Questions, Start, AddNumbers, ResultsWaitPage,  CombinedResults]
+page_sequence = [Start, AddNumbers, ResultsWaitPage, CombinedResults]
 
 
