@@ -91,7 +91,7 @@ class CombinedResults(Page):
             'correct_answers': correct_answers,
             'round_number' : self.round_number,
         }
-# page_sequence = [Consent, GenInstructions,Stage1Instructions, Stage1Questions, Start, AddNumbers, ResultsWaitPage,  CombinedResults]
-page_sequence = [Start, AddNumbers, ResultsWaitPage, CombinedResults]
+page_sequence = [Consent, GenInstructions,Stage1Instructions, Stage1Questions, Start, AddNumbers, ResultsWaitPage,  CombinedResults]
+# page_sequence = [Start, AddNumbers, ResultsWaitPage, CombinedResults]
 
 
