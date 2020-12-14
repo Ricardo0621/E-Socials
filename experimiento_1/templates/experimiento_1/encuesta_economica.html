@@ -1,4 +1,4 @@
-{% extends "global/Page.html" %}
+{% extends "base/Page.html" %}
 {% load otree %}
 
 {% block title %}
@@ -189,7 +189,6 @@
                                 type: 'text',
                                 title: "¿Cuántas horas a la semana trabaja normalmente en este trabajo?"
                             },
-                            {type: 'text', title: "¿Cuánto ganó el mes pasado por el trabajo que usted desempeña?"},
 
                             {
 
@@ -223,7 +222,7 @@
                             },
                             {
                                 title: "¿Considera que su empleo actual es estable?",
-                                type: 'text',
+                                type: 'radiogroup',
                                 choices: [
                                     "Sí",
                                     "No",

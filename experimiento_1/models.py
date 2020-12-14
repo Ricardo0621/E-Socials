@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from random import randint
 
 from django.db import models as django_models
@@ -23,8 +23,7 @@ class Constants(BaseConstants):
     players_per_group = None
     name_in_url = 'experimiento_1'
     num_rounds = 1
-    start_date = datetime.strptime("2020-09-03", "%Y-%m-%d")
-    end_date = datetime.strptime("2020-09-30", "%Y-%m-%d")
+    experiment_days = 15
 
 
 class Subsession(BaseSubsession):
@@ -67,6 +66,7 @@ class Player(BasePlayer):
                                          verbose_name="Como desea reclamar su dinero?",
                                          widget=widgets.RadioSelect)
     contract_type = models.IntegerField(choices=CONTRACT_TYPE)
+    experiment_start_date = django_models.DateTimeField(auto_now=True)
     intermedio = models.IntegerField(default=0)
     percentage_saved = models.IntegerField(max=100, min=0, default=0, verbose_name="Porcentaje guardado")
     file_session_1 = models.LongStringField(default="", verbose_name="Ingrese el texto del documento",
@@ -77,14 +77,20 @@ class Player(BasePlayer):
                                             widget=Textarea(attrs={'rows': 40, 'cols': 40}))
     monto_session_2 = django_models.IntegerField(default=0)
     updated_at = django_models.DateTimeField(auto_now=True)
+    disbursement = models.CurrencyField(null=True, doc="Valor retirado", default=0)
     survey = models.LongStringField()
     tracker = FieldTracker()
 
     def start(self):
         if not self.contract_type:
+            self.experiment_start_date = datetime.now()
             self.contract_type = randint(0, 1)
             self.save()
 
     @property
     def intermedio_actual(self):
         return self.intermedio + 1
+
+    @property
+    def experiment_end_date(self):
+        return self.experiment_start_date + timedelta(days=Constants.experiment_days)

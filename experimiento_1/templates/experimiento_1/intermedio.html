@@ -1,4 +1,4 @@
-{% extends "global/Page.html" %}
+{% extends "base/Page.html" %}
 {% load otree %}
 
 {% block title %}
@@ -6,6 +6,9 @@
 {% endblock %}
 
 {% block body %}
+    <p>
+        En el momento usted cuenta con {{ player.payoff }}COP y ha retirado un total de {{ player.disbursement }}COP
+    </p>
     <div class="row">
         <div class="col-12">
             {% formfield player.money_decision %}

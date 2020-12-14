@@ -1,4 +1,4 @@
-{% extends "global/Page.html" %}
+{% extends "base/Page.html" %}
 {% load otree %}
 
 {% block title %}
@@ -10,10 +10,10 @@
         <h1>Bienvenido.</h1>
         Usted desempeñará la labor de digitador (a), trabajando por un periodo de 3
         sesiones, con una duración de 15 minutos cada una. El salario será de $4.000 por
-        sesión. Con fecha de iniciación de labores a los {{ Constants.start_date|date:"d" }} días , del
-        {{ Constants.start_date|date:"m" }} mes de {{ Constants.start_date|date:"Y" }} y
-        fecha de culminación a los {{ Constants.end_date|date:"d" }} días del mes {{ Constants.end_date|date:"m" }} de
-        {{ Constants.end_date|date:"Y" }}. Las labores a desempeñar
+        sesión. Con fecha de iniciación de labores a los {{ player.experiment_start_date|date:"d" }} días , del
+        {{ player.experiment_start_date|date:"m" }} mes de {{ player.experiment_start_date|date:"Y" }} y
+        fecha de culminación a los {{ player.experiment_end_date|date:"d" }} días del mes {{ player.experiment_end_date|date:"m" }} de
+        {{ player.experiment_end_date|date:"Y" }}. Las labores a desempeñar
         se realizan totalmente de forma virtual.
         {% if player.contract_type == 0 %}
 
