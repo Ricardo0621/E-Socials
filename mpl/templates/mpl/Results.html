@@ -48,12 +48,12 @@
 
     <div class="wrapper">
 
-        <div class="card info">
+        {% comment %} <div class="card info">
             {% blocktrans trimmed %}
                 La siguiente decisión fué generada al azar para realizar su pago: <u>El Programa escogió la <b>Decisión {{decision}}</b>.</u>
             {% endblocktrans %}
-        </div>
-        <br/>
+        </div> {% endcomment %}
+        
 
         <!-- ------------------------------------------------------------------------------------------------------- -->
         <!-- Choice To Pay: Large Pies -->
@@ -124,20 +124,20 @@
         {% else %}
 
             <div class="card">
-                <table class="table table-striped">
+                {% comment %} <table class="table table-striped">
                     <thead>
                         <tr class="header">
                             {% if Constants.small_pies == True %}
-                                {% comment %} <th class="pie-chart"></th> {% endcomment %}
+                                <!--<th class="pie-chart"></th> -->
                             {% endif %}
                             <th class="lottery-a">{% trans "Bolsa 1" %}</th>
                             <th class="formfield"></th>
                             <th class="lottery-b">{% trans "Bolsa 2" %}</th>
                             {% if Constants.small_pies == True %}
-                                {% comment %} <th class="pie-chart"></th> {% endcomment %}
+                                <!--<th class="pie-chart"></th>-->
                             {% endif %}
                         </tr>
-                    </thead>
+                    </thead> {% endcomment %}
 
                     <tbody>
                         {% for i,f,p in choice_to_pay %}
@@ -154,7 +154,7 @@
                                 {% endif %} {% endcomment %}
 
                                 <!-- A lotteries -->
-                                <td class="lottery-a">
+                                {% comment %} <td class="lottery-a">
                                 <b>Decision {{ i}}</b>. Tiene {{ i|add:"-1" }} bolas azules y {{  p}} bolas rosadas
                                     <p class="center">
                                     {% with 'mpl/images/Bolsa_' as path%}
@@ -192,7 +192,7 @@
                                     <p class="center">
                                     <img src="{% static 'mpl/images/BolsaIncognita.png' %}" alt="Ilustración de una bolsa con bolas que tienen signos de pregunta en cada una" style= "height: 20%; width: 20%; object-fit: cover">
                                     </p>
-                                </td>
+                                </td> {% endcomment %}
 
                                 <!-- pie charts for B lotteries -->
                                 {% comment %} {% if Constants.small_pies == True %}
@@ -208,7 +208,7 @@
                         {% endfor %}
                     </tbody>
                 </table>
-            </div>
+            
         {% endif %}
         <br/>
 
