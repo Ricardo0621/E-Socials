@@ -37,7 +37,7 @@
 {# *** TITLE *** #}
 {# ****************************************************************************************************************** #}
 {% block title %}
-    {% trans "Etapa 4 - Resultados Finales" %}
+    {% trans "Etapa 4 - Vamos a hacer el sorteo" %}
 {% endblock %}
 
 
@@ -219,14 +219,34 @@
         <div class="card info">
             <p>
             {% if option_to_pay == 'A' %}
-                La suerte indica que ha salido una pelotita <b>{{pelota}}</b>.
+            {% with 'mpl/gifs/Bola_' as path%}
+                    {% with '.mp4' as file_extension%}
+                        {% with pelota|stringformat:"s" as decision_ball %}
+                            {% with path|add:decision_ball|add:file_extension as full_path %}
+                                <p align="center">
+                                <video width="320" height="240" loop="true" autoplay="autoplay" controls muted>
+                                 <source src="{% static full_path %}" type="video/mp4" alt="Video que muestra como sale una pelota azul o rosada"><p/>
+                                </video>
+                             {% endwith %}
+                        {% endwith %}
+                    {% endwith %}
+                {% endwith %}
             {% elif option_to_pay == 'B' %}
-                La suerte indica que ha salido una pelotita <b>{{pelota}}</b>.   
+                    {% with 'mpl/gifs/Bola_' as path%}
+                    {% with '.mp4' as file_extension%}
+                        {% with pelota|stringformat:"s" as decision_ball %}
+                            {% with path|add:decision_ball|add:file_extension as full_path %}
+                                <p align="center">
+                                <video  width="320" height="240" loop="true" autoplay="autoplay" controls muted>
+                                 <source src="{% static full_path %}" type="video/mp4" alt="Video que muestra como sale una pelota azul o rosada"><p/>
+                                </video>                             
+                                {% endwith %}
+                        {% endwith %}
+                    {% endwith %}
+                {% endwith %}
+                    
             {% endif %}
-            {% endfor %}
-            Por lo tanto, has ganado <b>${{ payoff}}</b> en esta Etapa
-            </p>
-        
+            {% endfor %}        
         </div>
     </div>
 

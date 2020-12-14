@@ -37,7 +37,7 @@
 {# *** TITLE *** #}
 {# ****************************************************************************************************************** #}
 {% block title %}
-    {% trans "Etapa 4 - Resultados Finales" %}
+    {% trans "Etapa 4 - Resultados" %}
 {% endblock %}
 
 
@@ -219,13 +219,21 @@
         <div class="card info">
             <p>
             {% if option_to_pay == 'A' %}
-                La suerte indica que ha salido una pelotita <b>{{pelota}}</b>.
+                Nuestro software escogió la <b>Decisión {{decision}}</b> al azar para determinar tu pago.
+                En el siguiente video te mostramos cómo se ha metido en la bolsa el número de bolas azules que corresponde con tu decisión:<br>
+                {% with 'mpl/gifs/Bolsa_' as path%}
+                    {% with '.mp4' as file_extension%}
+                        {% with i|stringformat:"s" as decision_number %}
+                            {% with path|add:decision_number|add:file_extension as full_path %}
+                                <p align="center"><video width="320" height="240" type="video/mp4" controls src="{% static full_path %}" alt="Video que muestra como se meten pelotas azul y/o rosadas en una bolsa"><p/>
+                             {% endwith %}
+                        {% endwith %}
+                    {% endwith %}
+                {% endwith %}
             {% elif option_to_pay == 'B' %}
-                La suerte indica que ha salido una pelotita <b>{{pelota}}</b>.   
+                Nuestro software escogió la <b>Decisión {{decision}}</b> al azar para determinar tu pago. 
             {% endif %}
             {% endfor %}
-            Por lo tanto, has ganado <b>${{ payoff}}</b> en esta Etapa
-            </p>
         
         </div>
     </div>
