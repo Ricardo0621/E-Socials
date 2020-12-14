@@ -1,13 +1,31 @@
 {% extends "global/Page.html" %}
-{% load otree static %}
+{% load staticfiles otree %}
+{% load i18n %}
+
+{# ****************************************************************************************************************** #}
+{# *** STYLES *** #}
+{# ****************************************************************************************************************** #}
+{% block styles %}
+    <link href="{% static 'real_effort_numbers/css/custom.css' %}" rel="stylesheet"/>
+{% endblock %}
+{# ****************************************************************************************************************** #}
+{# *** TITLE *** #}
+{# ****************************************************************************************************************** #}
 
 {% block title %}
-    Combined Results Page
+    Pagos Etapa 1
 {% endblock %}
 
 {% block content %}
-    Your combined payoff is: {{ combined_payoff }}
+ <div class="wrapper instructions">
+    <p align = "justify">
+    Número de sumas correctas <b>Equipo AB</b>: {{correct_answers}}<br>
+    Ganancias totales Etapa 1: {{ combined_payoff }}<br>
+    Ganancias acumuladas <b>Equipo AB</b>: Tales
+    </p>
+</div>
     {% next_button %}
+
 {% endblock %}
 
 

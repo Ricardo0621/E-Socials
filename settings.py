@@ -14,18 +14,24 @@ SESSION_CONFIGS = [
         num_demo_participants=1,
         app_sequence=['lideres_sociales'],
     ),
-    dict(
-        name='prisoner',
-        display_name="Gift-exchange game",
-        num_demo_participants=2,
-        app_sequence=['prisoner'],
-    ),
+    # dict(
+    #     name='prisoner',
+    #     display_name="Gift-exchange game",
+    #     num_demo_participants=4,
+    #     app_sequence=['prisoner'],
+    # ),
 dict(
         name='experimiento_1',
-        display_name="Experimento 2",
+        display_name="Experimento Leidy",
         num_demo_participants=3,
         app_sequence=['experimiento_1']
     ),
+dict(
+        name='real_effort_numbers',
+        display_name="Gift-exchange Game T-T",
+        num_demo_participants=4,
+        app_sequence=['real_effort_numbers']
+    ),    
     # dict(
     #     name='cem',
     #     display_name="Certainty Equivalent Method",
@@ -35,7 +41,7 @@ dict(
     # dict(
     #     name='public_goods',
     #     display_name="Public Goods",
-    #     num_demo_participants=3,
+    #     num_demo_participants=6,
     #     app_sequence=['public_goods', 'payment_info'],
     # ),
     # dict(
@@ -45,10 +51,10 @@ dict(
     #     app_sequence=['guess_two_thirds', 'payment_info'],
     # ),
     # dict(
-    #     name='survey',
-    #     display_name='survey',
-    #     num_demo_participants=1,
-    #     app_sequence=['survey', 'payment_info'],
+    #     name='public_goods',
+    #     display_name='PGasa',
+    #     num_demo_participants=4,
+    #     app_sequence=['public_goods'],
     # ),
 ]
 

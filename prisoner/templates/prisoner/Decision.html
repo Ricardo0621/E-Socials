@@ -18,7 +18,7 @@
                 <th>Coopera</th>
                 <th>Traiciona</th>
             </tr>
-            {% if player.id_in_group == 1 %}                
+            {% if player.id_in_group == 1 or player.id_in_group == 3%}                
             <tr>
                 <th rowspan="2"><span>Usted</span></th>
                 <td><button name="decision" value="Coopera" class="btn btn-primary btn-large">Contrato</button></td>

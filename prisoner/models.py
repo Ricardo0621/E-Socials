@@ -17,7 +17,7 @@ Gift_exhange game.
 
 class Constants(BaseConstants):
     name_in_url = 'prisoner'
-    players_per_group = 2
+    players_per_group = 4
     num_rounds = 3
 
     instructions_template = 'prisoner/instructions.html'
@@ -50,8 +50,7 @@ class Player(BasePlayer):
  # ******************************************************************************************************************** #
 # *** Variables Consentimiento
 # ******************************************************************************************************************** #
-    name = models.StringField(label= "Nombre Completo")
-    id_cc = models.IntegerField(label="Cédula de Ciudadanía (Sin puntos)")
+    num_temporal = models.IntegerField(label= "Por favor, ingrese el numero de identificación temporal que le llegó en el correo de invitación")
     accepts_data = models.BooleanField(
         label = "¿Autoriza el uso de los datos recolectados para futuros estudios?",
         choices = [
