@@ -25,11 +25,27 @@ class AddNumbers(Page):
     def vars_for_template(self):
         number_1 = random.randint(1,100)
         number_2 = random.randint(1,100)
-        self.player.sum_of_numbers = number_1 + number_2
-        all_players = self.player.in_all_rounds()
         correct_answers = 0
         combined_payoff = 0
-        opponent = self.player.other_player()
+        self.player.sum_of_numbers = number_1 + number_2
+        all_players = self.player.in_all_rounds()
+        me = self.player.id_in_group
+        me_in_session = self.player.participant.id_in_session
+        opponent = self.player.other_player().id_in_group #self.player.get_others_in_group()[0].id_in_group
+        others = self.player.get_others_in_group() #Como es un juego de dos jugadres, devuelve al oponente. Nótese que "Oponente" es sólamente el id del otro jugador en el grupo
+        # Matriz del grupo: 
+        # [[<Player  1>, <Player  2>], 
+        # [<Player  3>, <Player  4>]]
+        # Yo: 1
+        # Yo en la sesión: 1
+        # Oponente: 2 
+        # all_players: Jugadores en todas las rondas. O sea yo, en mi ronda.
+        # Others: Otros jugadores (distintos a mí) en el grupo. 
+        print("Yo " + str(me))
+        print("Yo en la sesión " + str(me_in_session))
+        print("Oponente " + str(opponent))
+        print("All players: " + str(all_players))
+        print("Others: " + str(others))
         for player in all_players:
             combined_payoff += player.payoff
             correct_answers += player.correct_answers
@@ -41,7 +57,7 @@ class AddNumbers(Page):
             'round_number' : self.round_number,
             'opponent': opponent
         }
-    
+
 class GenInstructions(Page):
     def is_displayed(self):
         return self.round_number == 1
@@ -55,6 +71,16 @@ class Stage1Questions(Page):
     form_fields = ['control_question_1', 'control_question_2']
     def is_displayed(self):
         return self.round_number == 1
+
+class Stage2Instructions(Page):
+    def is_displayed(self):
+        return self.round_number == Constants.num_rounds        
+
+class Stage2Questions(Page):
+    form_model = 'player'
+    form_fields = ['control_question_3', 'control_question_4', 'control_question_5', 'control_question_6', 'control_question_7']
+    def is_displayed(self):
+        return self.round_number == Constants.num_rounds        
 
 class Start(Page):
     def is_displayed(self):
@@ -73,7 +99,7 @@ class Consent(Page):
 class ResultsWaitPage(WaitPage):
     #Muestra el WaitPage al final de la cuarta ronda. Antes del pago
     def is_displayed(self):
-        return self.round_number == 4
+        return self.round_number == Constants.num_rounds
 
 class CombinedResults(Page):
     def is_displayed(self):
@@ -91,7 +117,7 @@ class CombinedResults(Page):
             'correct_answers': correct_answers,
             'round_number' : self.round_number,
         }
-page_sequence = [Consent, GenInstructions,Stage1Instructions, Stage1Questions, Start, AddNumbers, ResultsWaitPage,  CombinedResults]
-# page_sequence = [Start, AddNumbers, ResultsWaitPage, CombinedResults]
+page_sequence = [Consent, GenInstructions,Stage1Instructions, Stage1Questions, Start, AddNumbers, ResultsWaitPage,  CombinedResults, Stage2Instructions, Stage2Questions]
+# page_sequence = [Start, AddNumbers, CombinedResults, Stage2Instructions, Stage2Questions]
 
 

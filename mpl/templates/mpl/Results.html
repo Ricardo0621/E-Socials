@@ -225,7 +225,7 @@
                     {% with '.mp4' as file_extension%}
                         {% with i|stringformat:"s" as decision_number %}
                             {% with path|add:decision_number|add:file_extension as full_path %}
-                                <p align="center"><video width="320" height="240" type="video/mp4" controls src="{% static full_path %}"><p/>
+                                <p align="center"><video width="320" height="240" type="video/mp4" controls src="{% static full_path %}" alt="Video que muestra como se meten pelotas azul y/o rosadas en una bolsa"><p/>
                              {% endwith %}
                         {% endwith %}
                     {% endwith %}
@@ -235,7 +235,7 @@
                     {% with '.mp4' as file_extension%}
                         {% with pelota|stringformat:"s" as decision_ball %}
                             {% with path|add:decision_ball|add:file_extension as full_path %}
-                                <p align="center"><video width="320" height="240" type="video/mp4" controls src="{% static full_path %}"><p/>
+                                <p align="center"><video width="320" height="240" type="video/mp4" controls src="{% static full_path %}" alt="Video que muestra como sale una pelota azul o rosada"><p/>
                              {% endwith %}
                         {% endwith %}
                     {% endwith %}
@@ -247,7 +247,7 @@
                     {% with '.mp4' as file_extension%}
                         {% with pelota|stringformat:"s" as decision_ball %}
                             {% with path|add:decision_ball|add:file_extension as full_path %}
-                                <p align="center"><video width="320" height="240" type="video/mp4" controls src="{% static full_path %}"><p/>
+                                <p align="center"><video width="320" height="240" type="video/mp4" controls src="{% static full_path %}" alt="Video que muestra como sale una pelota azul o rosada"><p/>
                              {% endwith %}
                         {% endwith %}
                     {% endwith %}
