@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 
 from ._builtin import Page, WaitPage
+from .models import MONEY_DECISION_CHOICES
 
 
 class MyPage(Page):
@@ -11,17 +12,24 @@ class ResultsWaitPage(WaitPage):
     pass
 
 
+class SessionBase(object):
+
+    def post(self, *args, **kwargs):
+        self.player.payoff = self.player.payoff + 4000
+        return super(SessionBase, self).post(*args, **kwargs)
+
+
 class EncuestaSocioEconomica(Page):
     template_name = 'experimiento_1/encuesta_economica.html'
     form_model = 'player'
     form_fields = ['survey']
 
 
-class Session1(Page):
+class Session1(SessionBase, Page):
     template_name = 'experimiento_1/session_1.html'
     form_model = 'player'
     form_fields = ['file_session_1']
-    document = 'experimiento_1/session_1.pdf'
+    document = 'experimento_1/session_1.pdf'
     text_info = "Las siguientes páginas hacen parte del libro El crimen como oficio: ensayos sobre economía del crimen en Colombia (2007), y es necesario para nosotros transcribir la información contenida en el documento. El tiempo aproximado del siguiente trabajo es de 15 min, por favor transcriba la información en el espacio disponible. "
 
     def get_context_data(self, *args, **kwargs):
@@ -31,11 +39,11 @@ class Session1(Page):
         return context
 
 
-class Session2(Page):
+class Session2(SessionBase, Page):
     template_name = 'experimiento_1/session_1.html'
     form_model = 'player'
     form_fields = ['file_session_2']
-    document = 'experimiento_1/session_2.pdf'
+    document = 'experimento_1/session_2.pdf'
 
     text_info = "Las siguientes páginas hacen parte del libro Informe de la desigualdad global (2018), y es necesario para nosotros transcribir la información contenida en el documento. El tiempo aproximado del siguiente trabajo es de 15 min, por favor transcriba la información en el espacio disponible. "
 
@@ -46,11 +54,11 @@ class Session2(Page):
         return context
 
 
-class Session3(Page):
+class Session3(SessionBase, Page):
     template_name = 'experimiento_1/session_1.html'
     form_model = 'player'
     form_fields = ['file_session_3']
-    document = 'experimiento_1/session_3.pdf'
+    document = 'experimento_1/session_3.pdf'
     text_info = "Las siguientes páginas hacen parte del libro Informe de la desigualdad global (2018), y es necesario para nosotros transcribir la información contenida en el documento. El tiempo aproximado del siguiente trabajo es de 15 min, por favor transcriba la información en el espacio disponible. "
 
     def get_context_data(self, *args, **kwargs):
@@ -65,12 +73,25 @@ class Session4(Page):
     form_model = 'player'
     form_fields = ['monto_session_2']
 
+
 class IntermedioSession(Page):
     template_name = 'experimiento_1/intermedio.html'
     form_model = 'player'
     form_fields = ['money_decision', 'percentage_saved']
 
     def post(self, *args, **kwargs):
+        money_decision = self.request.POST.get('money_decision')
+        percentage_saved = self.request.POST.get('percentage_saved')
+        if self.player.payoff:
+            if money_decision == MONEY_DECISION_CHOICES[0]:
+                self.player.disbursement = self.player.disbursement + self.player.payoff
+                self.player.save()
+                self.player.payoff = 0
+            elif money_decision == MONEY_DECISION_CHOICES[0]:
+                new_value = self.player.payoff - (self.player.payoff * (percentage_saved / 100))
+                self.player.disbursement = self.player.disbursement + new_value
+                self.player.save()
+                self.player.payoff = self.player.payoff - new_value
         self.player.intermedio = self.player.intermedio + 1
         self.player.save()
         return super(IntermedioSession, self).post(*args, **kwargs)
@@ -93,11 +114,11 @@ page_sequence = [
     IntermedioSession,
     Session1,
     IntermedioSession,
-    #SevenDaysWaitPage,
+    # SevenDaysWaitPage,
     Session2,
     IntermedioSession,
-    #SevenDaysWaitPage,
+    # SevenDaysWaitPage,
     Session2,
-    EncuestaSocioEconomica,
     Session4,
+    EncuestaSocioEconomica,
 ]
