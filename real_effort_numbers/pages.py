@@ -27,12 +27,16 @@ class AddNumbers(Page):
         number_2 = random.randint(1,100)
         correct_answers = 0
         combined_payoff = 0
+        combined_payoff_others = 0
         self.player.sum_of_numbers = number_1 + number_2
         all_players = self.player.in_all_rounds()
         me = self.player.id_in_group
         me_in_session = self.player.participant.id_in_session
-        opponent = self.player.other_player().id_in_group #self.player.get_others_in_group()[0].id_in_group
-        others = self.player.get_others_in_group() #Como es un juego de dos jugadres, devuelve al oponente. Nótese que "Oponente" es sólamente el id del otro jugador en el grupo
+        #opponent = self.player.other_player().id_in_group #self.player.get_others_in_group()[0].id_in_group
+        others = self.player.get_others_in_group()[0] #Como es un juego de dos jugadres, devuelve al oponente. Nótese que "Oponente" es sólamente el id del otro jugador en el grupo
+        opponent = self.player.other_player()
+        correct_answers_opponent = 0
+        opponent_id = self.player.other_player().id_in_group
         # Matriz del grupo: 
         # [[<Player  1>, <Player  2>], 
         # [<Player  3>, <Player  4>]]
@@ -41,11 +45,12 @@ class AddNumbers(Page):
         # Oponente: 2 
         # all_players: Jugadores en todas las rondas. O sea yo, en mi ronda.
         # Others: Otros jugadores (distintos a mí) en el grupo. 
-        print("Yo " + str(me))
-        print("Yo en la sesión " + str(me_in_session))
-        print("Oponente " + str(opponent))
-        print("All players: " + str(all_players))
-        print("Others: " + str(others))
+        # print("Yo " + str(me))
+        # print("Yo en la sesión " + str(me_in_session))
+        # print("Oponente " + str(opponent))
+        # print("All players: " + str(all_players))
+        # print("Others: " + str(others))
+        # print("Epa: " + str(self.player.get_others_in_subsession()))
         for player in all_players:
             combined_payoff += player.payoff
             correct_answers += player.correct_answers
@@ -55,7 +60,7 @@ class AddNumbers(Page):
             'combined_payoff' : math.trunc(combined_payoff),
             'correct_answers': correct_answers,
             'round_number' : self.round_number,
-            'opponent': opponent
+            'opponent_id': opponent_id
         }
 
 class GenInstructions(Page):
@@ -106,18 +111,42 @@ class CombinedResults(Page):
         return self.round_number == Constants.num_rounds
 
     def vars_for_template(self):
+        # self.player.get_others_in_group()[0] == self.player.other_player() -> Player Object
         all_players = self.player.in_all_rounds()
+        all_others = self.player.get_others_in_group()[0].in_all_rounds()
+        others = self.player.get_others_in_group()[0]
         combined_payoff = 0
         correct_answers = 0
+        correct_answers_opponent = 0
+        correct_answers_team = 0
+        combined_payoff_opponent = 0
+        combined_payoff_team = 0
+        opponent = self.player.other_player()
+        opponent_id = self.player.other_player().id_in_group
+        # print("Yo " + str(me))
+        # print("Oponente " + str(opponent_id))
+        # print("Other " + str(others))
+        # print("All Others " + str(all_others))
+        # print("Group players" + str(self.group.get_players()))
         for player in all_players:
             combined_payoff += player.payoff
             correct_answers += player.correct_answers
+            correct_answers_opponent += player.other_player().correct_answers
+            combined_payoff_opponent += player.other_player().payoff
+
+        correct_answers_team = correct_answers + correct_answers_opponent
+        combined_payoff_team = combined_payoff + combined_payoff_opponent
         return {
             'combined_payoff' : math.trunc(combined_payoff),
+            'combined_payoff_opponent': math.trunc(combined_payoff_opponent),
             'correct_answers': correct_answers,
+            'correct_answers_opponent': correct_answers_opponent,
             'round_number' : self.round_number,
+            'opponent_id': opponent_id,
+            'correct_answers_team': correct_answers_team,
+            'combined_payoff_team': math.trunc(combined_payoff_team)
         }
-page_sequence = [Consent, GenInstructions,Stage1Instructions, Stage1Questions, Start, AddNumbers, ResultsWaitPage,  CombinedResults, Stage2Instructions, Stage2Questions]
-# page_sequence = [Start, AddNumbers, CombinedResults, Stage2Instructions, Stage2Questions]
+# page_sequence = [Consent, GenInstructions,Stage1Instructions, Stage1Questions, Start, AddNumbers, ResultsWaitPage,  CombinedResults, Stage2Instructions, Stage2Questions]
+page_sequence = [Start, AddNumbers, ResultsWaitPage, CombinedResults, Stage2Instructions, Stage2Questions]
 
 

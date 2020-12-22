@@ -19,9 +19,13 @@
 {% block content %}
  <div class="wrapper instructions">
     <p align = "justify">
-    Número de sumas correctas <b>Equipo AB</b>: {{correct_answers}}<br>
-    Ganancias totales Etapa 1: {{ combined_payoff }}<br>
-    Ganancias acumuladas <b>Equipo AB</b>: Tales
+    <b>Jugador {{player.id_in_group}}</b> vs Jugador {{opponent_id}}.<br><br>
+    Número de sumas correctas <b>Jugador {{player.id_in_group}}</b>: {{correct_answers}}<br>
+    Número de sumas correctas <b>Jugador {{opponent_id}}</b>: {{correct_answers_opponent}}<br>
+    Número de sumas correctas <b>Equipo AB</b>: {{correct_answers_team}}<br><br>
+    Ganancias totales <b>Jugador {{player.id_in_group}}</b> Etapa 1: {{ combined_payoff }}<br>
+    Ganancias totales <b>Jugador {{opponent_id}}</b> Etapa 1: {{ combined_payoff_opponent }}<br>
+    Ganancias acumuladas <b>Equipo AB</b>: {{combined_payoff_team}}
     </p>
 </div>
     {% next_button %}
