@@ -4,14 +4,18 @@ from .models import Constants
 import random, math
 
 class AddNumbers(Page):
+    #Falta algoritmo de asignación de equipos
     form_model = 'player'
     form_fields = ['number_entered']
     timer_text = 'Tiempo restante para completar esta etapa:'
 
     def before_next_page(self):
+        self.player.total_sums = 1
         if self.player.sum_of_numbers == self.player.number_entered:
             self.player.payoff = Constants.payment_per_correct_answer
             self.player.correct_answers = 1
+        else:
+            self.player.wrong_sums = 1    
         return
 
     def get_timeout_seconds(self):
@@ -28,6 +32,8 @@ class AddNumbers(Page):
         correct_answers = 0
         combined_payoff = 0
         combined_payoff_others = 0
+        wrong_sums = 0
+        total_sums = 0
         self.player.sum_of_numbers = number_1 + number_2
         all_players = self.player.in_all_rounds()
         me = self.player.id_in_group
@@ -54,13 +60,17 @@ class AddNumbers(Page):
         for player in all_players:
             combined_payoff += player.payoff
             correct_answers += player.correct_answers
+            wrong_sums += player.wrong_sums
+            total_sums += player.total_sums
         return {
             'number_1': number_1,
             'number_2': number_2,
             'combined_payoff' : math.trunc(combined_payoff),
             'correct_answers': correct_answers,
             'round_number' : self.round_number,
-            'opponent_id': opponent_id
+            'opponent_id': opponent_id,
+            'wrong_sums': wrong_sums,
+            'total_sums': total_sums
         }
 
 class GenInstructions(Page):
@@ -98,6 +108,7 @@ class Start(Page):
 class Consent(Page):
     form_model = 'player'
     form_fields = ['accepts_data', 'num_temporal', 'accepts_terms']
+
     def is_displayed(self):
         return self.round_number == 1
 
@@ -121,6 +132,7 @@ class CombinedResults(Page):
         correct_answers_team = 0
         combined_payoff_opponent = 0
         combined_payoff_team = 0
+        combined_payoff_total = 0
         opponent = self.player.other_player()
         opponent_id = self.player.other_player().id_in_group
         # print("Yo " + str(me))
@@ -136,6 +148,9 @@ class CombinedResults(Page):
 
         correct_answers_team = correct_answers + correct_answers_opponent
         combined_payoff_team = combined_payoff + combined_payoff_opponent
+        combined_payoff_total = combined_payoff + Constants.fixed_payment
+        self.player.payment_stage_1 = math.trunc(combined_payoff_total)
+        print("Jugador "+ str(player.id_in_group) + ". Pago total "+ str(self.player.payment_stage_1))
         return {
             'combined_payoff' : math.trunc(combined_payoff),
             'combined_payoff_opponent': math.trunc(combined_payoff_opponent),
@@ -144,9 +159,10 @@ class CombinedResults(Page):
             'round_number' : self.round_number,
             'opponent_id': opponent_id,
             'correct_answers_team': correct_answers_team,
-            'combined_payoff_team': math.trunc(combined_payoff_team)
+            'combined_payoff_team': math.trunc(combined_payoff_team),
+            'combined_payoff_total': math.trunc(combined_payoff_total)
         }
-page_sequence = [Consent, GenInstructions,Stage1Instructions, Stage1Questions, Start, AddNumbers, ResultsWaitPage,  CombinedResults, Stage2Instructions, Stage2Questions]
-# page_sequence = [Start, AddNumbers, ResultsWaitPage, CombinedResults, Stage2Instructions, Stage2Questions]
+# page_sequence = [Consent, GenInstructions,Stage1Instructions, Stage1Questions, Start, AddNumbers, ResultsWaitPage,  CombinedResults, Stage2Instructions, Stage2Questions]
+page_sequence = [Start, AddNumbers, ResultsWaitPage, CombinedResults, Stage2Instructions, Stage2Questions]
 
 

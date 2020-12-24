@@ -2,6 +2,7 @@ from os import environ
 
 
 SESSION_CONFIGS = [
+#as
     dict(
         name='mpl',
         display_name="Contratos y consumo: una aproximación cuasi-experimental",
@@ -14,12 +15,18 @@ SESSION_CONFIGS = [
         num_demo_participants=1,
         app_sequence=['lideres_sociales'],
     ),
-    # dict(
-    #     name='prisoner',
-    #     display_name="Gift-exchange game",
-    #     num_demo_participants=4,
-    #     app_sequence=['prisoner'],
-    # ),
+    dict(
+        name='myprisoners_dilemma',
+        display_name="Gift-exchange game",
+        num_demo_participants=4,
+        app_sequence=['myprisoners_dilemma'],
+    ),
+    dict(
+        name='prisoner',
+        display_name="Epa",
+        num_demo_participants=4,
+        app_sequence=['prisoner'],
+    ),
 dict(
         name='experimiento_1',
         display_name="Experimento Leidy",

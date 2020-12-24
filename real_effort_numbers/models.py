@@ -22,15 +22,15 @@ class Constants(BaseConstants):
     players_per_group = 2
     num_rounds = 4
     payment_per_correct_answer = 50
+    fixed_payment = 5000
 
 class Subsession(BaseSubsession):
     def creating_session(self):
-        return
-        # print("Matriz del grupo: " + str(self.get_group_matrix()))
-        # print("Grupos: " + str(self.get_groups()))
-        # for player in self.get_players():
-        #     print("Jugador id_group: " + str(player.id_in_group))
-        #     print("Jugador id_session: " + str(player.participant.id_in_session))
+        print("Matriz del grupo: " + str(self.get_group_matrix()))
+        print("Grupos: " + str(self.get_groups()))
+        for player in self.get_players():
+            print("Jugador id_group: " + str(player.id_in_group))
+            print("Jugador id_session: " + str(player.participant.id_in_session))
 
 class Group(BaseGroup):
     pass
@@ -39,6 +39,9 @@ class Player(BasePlayer):
     number_entered = models.IntegerField(label="")
     sum_of_numbers = models.IntegerField()
     correct_answers = models.IntegerField(initial=0)
+    wrong_sums = models.IntegerField(initial=0)
+    total_sums = models.IntegerField(initial=0)
+    payment_stage_1 = models.IntegerField(initial=0)
 # ******************************************************************************************************************** #
 # *** Preguntas de Control: 1
 # ******************************************************************************************************************** #
