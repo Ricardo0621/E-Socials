@@ -160,7 +160,25 @@ class Player(BasePlayer):
         ],
         default=True)
     accepts_terms = models.BooleanField()
-
+    pay_contract = models.BooleanField(
+        label = "",
+         choices = [
+            [True, "Sí"],
+            [False, "No"],
+        ],
+        widget = widgets.RadioSelect,
+        blank = True
+    )
+    believe_pay_contract = models.BooleanField(
+        label = "",
+         choices = [
+            [True, "Sí"],
+            [False, "No"],
+        ],
+        widget = widgets.RadioSelect,
+        blank = True
+    )
+    suggested_sums = models.IntegerField(blank = True, label="")
     def other_player(self):
         #self.get_others_in_group() -> Vector[<Player  2>, <Player  3>, <Player  4>]
         return self.get_others_in_group()[0]

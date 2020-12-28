@@ -117,6 +117,49 @@ class ResultsWaitPage(WaitPage):
     def is_displayed(self):
         return self.round_number == Constants.num_rounds
 
+class RoleAssignment(Page):
+    form_model = 'player'
+
+    def is_displayed(self):
+        return self.round_number == Constants.num_rounds
+
+class Decision(Page):
+    form_model = 'player'
+    form_fields = ['pay_contract', 'believe_pay_contract', 'suggested_sums']
+    def is_displayed(self):
+        return self.round_number == Constants.num_rounds 
+    def vars_for_template(self):
+        me = self.player.id_in_group
+        titulo = ""
+        if me == 1:
+            titulo = "Decision Jugador X - Parte 1"
+        else:
+            titulo = "Decision Jugador Y - Parte 1"
+        return{
+                'titulo': titulo
+            }
+
+class Decision2(Page):
+    form_model = 'player'
+    form_fields = ['suggested_sums']
+    def is_displayed(self):
+        return self.round_number == Constants.num_rounds 
+    def vars_for_template(self):
+        me = self.player.id_in_group
+        opponent = self.player.other_player()
+        opponent_contract_decision = opponent.pay_contract
+        opponent_suggested_sums = opponent.suggested_sums
+        titulo = ""
+        if me == 1:
+            titulo = "Reporte de decisión Jugador X"
+        else:
+            titulo = "Decision Jugador Y - Parte 2"
+        return{
+                'titulo': titulo,
+                'opponent_contract_decision': opponent_contract_decision,
+                'opponent_suggested_sums': opponent_suggested_sums
+            }
+
 class CombinedResults(Page):
     def is_displayed(self):
         return self.round_number == Constants.num_rounds
@@ -162,7 +205,7 @@ class CombinedResults(Page):
             'combined_payoff_team': math.trunc(combined_payoff_team),
             'combined_payoff_total': math.trunc(combined_payoff_total)
         }
-# page_sequence = [Consent, GenInstructions,Stage1Instructions, Stage1Questions, Start, AddNumbers, ResultsWaitPage,  CombinedResults, Stage2Instructions, Stage2Questions]
-page_sequence = [Start, AddNumbers, ResultsWaitPage, CombinedResults, Stage2Instructions, Stage2Questions]
-
+page_sequence = [Consent, GenInstructions,Stage1Instructions, Stage1Questions, Start, AddNumbers, ResultsWaitPage,  CombinedResults, Stage2Instructions, Stage2Questions, RoleAssignment, Decision,ResultsWaitPage, Decision2]
+# page_sequence = [Start, AddNumbers, ResultsWaitPage, CombinedResults, Stage2Instructions, Stage2Questions, RoleAssignment, Decision, ResultsWaitPage, Decision2]
+page_sequence = [Decision, ResultsWaitPage, Decision2]
 
