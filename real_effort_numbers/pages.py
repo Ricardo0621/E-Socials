@@ -207,5 +207,5 @@ class CombinedResults(Page):
         }
 page_sequence = [Consent, GenInstructions,Stage1Instructions, Stage1Questions, Start, AddNumbers, ResultsWaitPage,  CombinedResults, Stage2Instructions, Stage2Questions, RoleAssignment, Decision,ResultsWaitPage, Decision2]
 # page_sequence = [Start, AddNumbers, ResultsWaitPage, CombinedResults, Stage2Instructions, Stage2Questions, RoleAssignment, Decision, ResultsWaitPage, Decision2]
-page_sequence = [Decision, ResultsWaitPage, Decision2]
+# page_sequence = [Decision, ResultsWaitPage, Decision2]
 
