@@ -24,7 +24,7 @@ class AddNumbers(Page):
 
     def is_displayed(self):
         #Luego de que se acaba el tiempo, se salta las rondas (no las muestra) y va automáticamente a la siguiente página (Pagos).
-        if self.round_number <= 4:
+        if self.round_number <= Constants.num_rounds/2:
             return self.get_timeout_seconds() > 3
 
     def vars_for_template(self):
@@ -96,7 +96,7 @@ class AddNumbers2(Page):
 
     def is_displayed(self):
         #Luego de que se acaba el tiempo, se salta las rondas (no las muestra) y va automáticamente a la siguiente página (Pagos).
-        if self.round_number >= 5:
+        if self.round_number >= (Constants.num_rounds/2)+1:
             return self.get_timeout_seconds() > 3    
 
     def vars_for_template(self):
@@ -162,13 +162,13 @@ class Stage1Questions(Page):
 
 class Stage2Instructions(Page):
     def is_displayed(self):
-        return self.round_number == 4        
+        return self.round_number == Constants.num_rounds/2        
 
 class Stage2Questions(Page):
     form_model = 'player'
     form_fields = ['control_question_3', 'control_question_4', 'control_question_5', 'control_question_6', 'control_question_7']
     def is_displayed(self):
-        return self.round_number == 4        
+        return self.round_number == Constants.num_rounds/2        
 
 class Start(Page):
     def is_displayed(self):
@@ -180,7 +180,7 @@ class Start(Page):
 
 class Start2(Page):
     def is_displayed(self):
-        return self.round_number == 4   
+        return self.round_number == Constants.num_rounds/2   
 
     def before_next_page(self):
         import time
@@ -196,19 +196,24 @@ class Consent(Page):
 class ResultsWaitPage(WaitPage):
     #Muestra el WaitPage al final de la cuarta ronda. Antes del pago
     def is_displayed(self):
-        return self.round_number == 4
+        return self.round_number == Constants.num_rounds/2
+
+class ResultsWaitPage2(WaitPage):
+    #Muestra el WaitPage al final de todo. Antes del pago
+    def is_displayed(self):
+        return self.round_number == Constants.num_rounds
 
 class RoleAssignment(Page):
     form_model = 'player'
 
     def is_displayed(self):
-        return self.round_number == 4
+        return self.round_number == Constants.num_rounds/2
 
 class Decision(Page):
     form_model = 'player'
     form_fields = ['pay_contract', 'believe_pay_contract', 'suggested_sums']
     def is_displayed(self):
-        return self.round_number == 4
+        return self.round_number == Constants.num_rounds/2
     def vars_for_template(self):
         me = self.player.id_in_group
         titulo = ""
@@ -224,7 +229,7 @@ class Decision2(Page):
     form_model = 'player'
     form_fields = ['suggested_sums']
     def is_displayed(self):
-        return self.round_number == 4 
+        return self.round_number == Constants.num_rounds/2 
     def vars_for_template(self):
         me = self.player.id_in_group
         opponent = self.player.other_player()
@@ -243,7 +248,7 @@ class Decision2(Page):
 
 class CombinedResults(Page):
     def is_displayed(self):
-        return self.round_number == 4
+        return self.round_number == Constants.num_rounds/2
 
     def vars_for_template(self):
         # self.player.get_others_in_group()[0] == self.player.other_player() -> Player Object
@@ -286,7 +291,54 @@ class CombinedResults(Page):
             'combined_payoff_team': math.trunc(combined_payoff_team),
             'combined_payoff_total': math.trunc(combined_payoff_total)
         }
-page_sequence = [Consent, GenInstructions,Stage1Instructions, Stage1Questions, Start, AddNumbers, ResultsWaitPage,  CombinedResults, Stage2Instructions, Stage2Questions, RoleAssignment, Decision,ResultsWaitPage, Decision2, Start2, AddNumbers2 ]
+
+class CombinedResults2(Page):
+    def is_displayed(self):
+        return self.round_number == Constants.num_rounds/2
+
+    def vars_for_template(self):
+        # self.player.get_others_in_group()[0] == self.player.other_player() -> Player Object
+        all_players = self.player.in_all_rounds()
+        all_others = self.player.get_others_in_group()[0].in_all_rounds()
+        others = self.player.get_others_in_group()[0]
+        combined_payoff = 0
+        correct_answers = 0
+        correct_answers_opponent = 0
+        correct_answers_team = 0
+        combined_payoff_opponent = 0
+        combined_payoff_team = 0
+        combined_payoff_total = 0
+        opponent = self.player.other_player()
+        opponent_id = self.player.other_player().id_in_group
+        # print("Yo " + str(me))
+        # print("Oponente " + str(opponent_id))
+        # print("Other " + str(others))
+        # print("All Others " + str(all_others))
+        # print("Group players" + str(self.group.get_players()))
+        for player in all_players:
+            combined_payoff += player.payoff
+            correct_answers += player.correct_answers
+            correct_answers_opponent += player.other_player().correct_answers
+            combined_payoff_opponent += player.other_player().payoff
+
+        correct_answers_team = correct_answers + correct_answers_opponent
+        combined_payoff_team = combined_payoff + combined_payoff_opponent
+        combined_payoff_total = combined_payoff + Constants.fixed_payment
+        self.player.payment_stage_1 = math.trunc(combined_payoff_total)
+        print("Jugador "+ str(player.id_in_group) + ". Pago total "+ str(self.player.payment_stage_1))
+        return {
+            'combined_payoff' : math.trunc(combined_payoff),
+            'combined_payoff_opponent': math.trunc(combined_payoff_opponent),
+            'correct_answers': correct_answers,
+            'correct_answers_opponent': correct_answers_opponent,
+            'round_number' : self.round_number,
+            'opponent_id': opponent_id,
+            'correct_answers_team': correct_answers_team,
+            'combined_payoff_team': math.trunc(combined_payoff_team),
+            'combined_payoff_total': math.trunc(combined_payoff_total)
+        }
+
+page_sequence = [Consent, GenInstructions,Stage1Instructions, Stage1Questions, Start, AddNumbers, ResultsWaitPage,  CombinedResults, Stage2Instructions, Stage2Questions, RoleAssignment, Decision,ResultsWaitPage, Decision2, Start2, AddNumbers2, ResultsWaitPage2 ]
 # page_sequence = [Start, AddNumbers, ResultsWaitPage, CombinedResults, Stage2Instructions, Stage2Questions, RoleAssignment, Decision, ResultsWaitPage, Decision2, Start2, AddNumbers2]
 # page_sequence = [Decision, ResultsWaitPage, Decision2]
 
