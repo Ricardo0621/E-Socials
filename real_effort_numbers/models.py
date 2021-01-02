@@ -20,8 +20,10 @@ Your app description
 class Constants(BaseConstants):
     name_in_url = 'real_effort_numbers'
     players_per_group = 2
-    num_rounds = 4
+    num_rounds = 8
+    num_rounds_2 = 4
     payment_per_correct_answer = 50
+    payment_per_correct_answer_2 = 50
     fixed_payment = 5000
 
 class Subsession(BaseSubsession):
@@ -36,12 +38,25 @@ class Group(BaseGroup):
     pass
 
 class Player(BasePlayer):
+# ******************************************************************************************************************** #
+# *** Variables Etapa 1
+# ******************************************************************************************************************** #    
     number_entered = models.IntegerField(label="")
     sum_of_numbers = models.IntegerField()
     correct_answers = models.IntegerField(initial=0)
     wrong_sums = models.IntegerField(initial=0)
     total_sums = models.IntegerField(initial=0)
     payment_stage_1 = models.IntegerField(initial=0)
+# ******************************************************************************************************************** #
+# *** Variables Etapa 2
+# ******************************************************************************************************************** #
+    number_entered_2 = models.IntegerField(label="")
+    sum_of_numbers_2 = models.IntegerField()
+    correct_answers_2 = models.IntegerField(initial=0)
+    wrong_sums_2 = models.IntegerField(initial=0)
+    total_sums_2 = models.IntegerField(initial=0)
+    payment_stage_2 = models.IntegerField(initial=0)
+    pago = models.IntegerField(initial=0)
 # ******************************************************************************************************************** #
 # *** Preguntas de Control: 1
 # ******************************************************************************************************************** #
@@ -182,3 +197,7 @@ class Player(BasePlayer):
     def other_player(self):
         #self.get_others_in_group() -> Vector[<Player  2>, <Player  3>, <Player  4>]
         return self.get_others_in_group()[0]
+
+    def set_round(self):
+        self.round_number = 1
+        return self.round_number     
