@@ -79,7 +79,6 @@ class AddNumbers2(Page):
     form_model = 'player'
     form_fields = ['number_entered_2']
     timer_text = 'Tiempo restante para completar la Etapa 2:'
-    
 
     def before_next_page(self):
         self.player.total_sums_2 = 1
@@ -114,8 +113,9 @@ class AddNumbers2(Page):
         #opponent = self.player.other_player().id_in_group #self.player.get_others_in_group()[0].id_in_group
         others = self.player.get_others_in_group()[0] #Como es un juego de dos jugadres, devuelve al oponente. Nótese que "Oponente" es sólamente el id del otro jugador en el grupo
         opponent = self.player.other_player()
-        correct_answers_opponent = 0
         opponent_id = self.player.other_player().id_in_group
+        opponent_contract_decision = opponent.pay_contract
+        opponent_suggested_sums = opponent.suggested_sums
         # Matriz del grupo: 
         # [[<Player  1>, <Player  2>], 
         # [<Player  3>, <Player  4>]]
@@ -135,6 +135,12 @@ class AddNumbers2(Page):
             correct_answers += player.correct_answers_2
             wrong_sums_2 += player.wrong_sums_2
             total_sums_2 += player.total_sums_2
+        
+        pay_contract = self.player.in_round(4).pay_contract
+        opponent_contract_decision = self.player.other_player().in_round(4).pay_contract
+
+        print(opponent_contract_decision)
+        print(pay_contract)    
         return {
             'number_1': number_1,
             'number_2': number_2,
@@ -143,7 +149,114 @@ class AddNumbers2(Page):
             'round_number' : self.round_number,
             'opponent_id': opponent_id,
             'wrong_sums': wrong_sums_2,
-            'total_sums': total_sums_2
+            'total_sums': total_sums_2,
+            'opponent_contract_decision': opponent_contract_decision
+        }
+
+class CombinedResults2(Page):
+    def is_displayed(self):
+        return self.round_number == Constants.num_rounds
+
+    def vars_for_template(self):
+        # self.player.get_others_in_group()[0] == self.player.other_player() -> Player Object
+        all_players = self.player.in_all_rounds()
+        all_others = self.player.get_others_in_group()[0].in_all_rounds()
+        others = self.player.get_others_in_group()[0]
+        combined_payoff = 0
+        correct_answers = 0
+        correct_answers_opponent = 0
+        correct_answers_team = 0
+        combined_payoff_opponent = 0
+        combined_payoff_team = 0
+        combined_payoff_total = 0
+        opponent = self.player.other_player()
+        opponent_id = self.player.other_player().id_in_group
+        correct_answers = 0
+        combined_payoff = 0
+        combined_payoff_others = 0
+        wrong_sums_2 = 0
+        total_sums_2 = 0
+        wrong_sums_2_opponent = 0
+        total_sums_2_opponent = 0
+        me = self.player.id_in_group
+        titulo = ""
+        opponent_suggested_sums = opponent.in_round(Constants.num_rounds/2).suggested_sums
+        contrato = 0
+        pay_contract = self.player.in_round(Constants.num_rounds/2).pay_contract
+        opponent_contract_decision = opponent.in_round(Constants.num_rounds/2).pay_contract
+        if me == 1:
+            titulo = "Pagos Etapa 2 - Jugador X"
+        else:
+            titulo = "Pagos Etapa 2 - Jugador Y"
+        # print("Yo " + str(me))
+        # print("Oponente " + str(opponent_id))
+        # print("Other " + str(others))
+        # print("All Others " + str(all_others))
+        # print("Group players" + str(self.group.get_players()))
+        for player in all_players:
+            combined_payoff += player.pago
+            correct_answers += player.correct_answers_2
+            correct_answers_opponent += player.other_player().correct_answers_2
+            combined_payoff_opponent += player.other_player().pago
+            wrong_sums_2 += player.wrong_sums_2
+            wrong_sums_2_opponent += player.other_player().wrong_sums_2
+            total_sums_2 += player.total_sums_2
+            total_sums_2_opponent += player.other_player().total_sums_2
+
+        #Jugador X sin contrato
+        if player.id_in_group == 1 and opponent_contract_decision == False:
+            print("11" + "Ba") 
+            self.player.payment_stage_2 = 2500 - (20 * total_sums_2 )
+            contrato = 0
+
+         #Jugador Y sin contrato
+        if player.id_in_group == 2 and pay_contract == False:
+            self.player.payment_stage_2 = -2500 + (100 * correct_answers_opponent )
+            print("22" + "Be")
+            contrato = 0
+
+        #Jugador X cumple con sumas
+        if player.id_in_group == 1 and opponent_contract_decision == True:
+            if correct_answers >= Constants.sumas_obligatorias_contrato:
+                print(33) 
+                self.player.payment_stage_2 = 2500 - (20 * total_sums_2 )
+                contrato = 2500
+        
+        #Jugador X no cumple con sumas
+        if player.id_in_group == 1 and opponent_contract_decision == True:
+            if correct_answers < Constants.sumas_obligatorias_contrato: 
+                print(44)
+                self.player.payment_stage_2 = -2500
+                contrato = 2500
+        
+        #Y: Jugador X cumple con sumas
+        if player.id_in_group == 2 and pay_contract == True:
+            if correct_answers_opponent >= Constants.sumas_obligatorias_contrato: 
+                print(55)
+                self.player.payment_stage_2 = -5000 + (100 * correct_answers_opponent )
+                contrato = 2500
+
+        #Y: Jugador X no cumple con sumas
+        if player.id_in_group == 2 and pay_contract == True:
+            if correct_answers_opponent < Constants.sumas_obligatorias_contrato: 
+                print(66)
+                self.player.payment_stage_2 = 0
+                contrato = 2500
+
+        print("Jugador "+ str(player.id_in_group) + ". Contrato Op "+ str(opponent_contract_decision))
+        print("Jugador "+ str(player.id_in_group) + ". Contrato Jug "+ str(pay_contract))
+        self.player.payment_stage_1 = math.trunc(combined_payoff) + Constants.fixed_payment
+        combined_payoff_total = self.player.payment_stage_2 + self.player.payment_stage_1
+        return {
+            'payment_stage_1': self.player.payment_stage_1,
+            'payment_stage_2': self.player.payment_stage_2,
+            'combined_payoff_total' : math.trunc(combined_payoff_total),
+            'contrato': contrato,
+            'titulo': titulo,
+            'opponent_contract_decision': opponent_contract_decision,
+            'pay_contract': pay_contract,
+            'correct_answers': correct_answers,
+            'correct_answers_opponent': correct_answers_opponent
         }
 
 class GenInstructions(Page):
@@ -292,53 +405,7 @@ class CombinedResults(Page):
             'combined_payoff_total': math.trunc(combined_payoff_total)
         }
 
-class CombinedResults2(Page):
-    def is_displayed(self):
-        return self.round_number == Constants.num_rounds/2
-
-    def vars_for_template(self):
-        # self.player.get_others_in_group()[0] == self.player.other_player() -> Player Object
-        all_players = self.player.in_all_rounds()
-        all_others = self.player.get_others_in_group()[0].in_all_rounds()
-        others = self.player.get_others_in_group()[0]
-        combined_payoff = 0
-        correct_answers = 0
-        correct_answers_opponent = 0
-        correct_answers_team = 0
-        combined_payoff_opponent = 0
-        combined_payoff_team = 0
-        combined_payoff_total = 0
-        opponent = self.player.other_player()
-        opponent_id = self.player.other_player().id_in_group
-        # print("Yo " + str(me))
-        # print("Oponente " + str(opponent_id))
-        # print("Other " + str(others))
-        # print("All Others " + str(all_others))
-        # print("Group players" + str(self.group.get_players()))
-        for player in all_players:
-            combined_payoff += player.payoff
-            correct_answers += player.correct_answers
-            correct_answers_opponent += player.other_player().correct_answers
-            combined_payoff_opponent += player.other_player().payoff
-
-        correct_answers_team = correct_answers + correct_answers_opponent
-        combined_payoff_team = combined_payoff + combined_payoff_opponent
-        combined_payoff_total = combined_payoff + Constants.fixed_payment
-        self.player.payment_stage_1 = math.trunc(combined_payoff_total)
-        print("Jugador "+ str(player.id_in_group) + ". Pago total "+ str(self.player.payment_stage_1))
-        return {
-            'combined_payoff' : math.trunc(combined_payoff),
-            'combined_payoff_opponent': math.trunc(combined_payoff_opponent),
-            'correct_answers': correct_answers,
-            'correct_answers_opponent': correct_answers_opponent,
-            'round_number' : self.round_number,
-            'opponent_id': opponent_id,
-            'correct_answers_team': correct_answers_team,
-            'combined_payoff_team': math.trunc(combined_payoff_team),
-            'combined_payoff_total': math.trunc(combined_payoff_total)
-        }
-
-page_sequence = [Consent, GenInstructions,Stage1Instructions, Stage1Questions, Start, AddNumbers, ResultsWaitPage,  CombinedResults, Stage2Instructions, Stage2Questions, RoleAssignment, Decision,ResultsWaitPage, Decision2, Start2, AddNumbers2, ResultsWaitPage2 ]
-# page_sequence = [Start, AddNumbers, ResultsWaitPage, CombinedResults, Stage2Instructions, Stage2Questions, RoleAssignment, Decision, ResultsWaitPage, Decision2, Start2, AddNumbers2]
-# page_sequence = [Decision, ResultsWaitPage, Decision2]
+page_sequence = [Consent, GenInstructions,Stage1Instructions, Stage1Questions, Start, AddNumbers, ResultsWaitPage,  CombinedResults, Stage2Instructions, Stage2Questions, RoleAssignment, Decision,ResultsWaitPage, Decision2, Start2, AddNumbers2, ResultsWaitPage2, CombinedResults2 ]
+# page_sequence = [Start, AddNumbers, ResultsWaitPage, CombinedResults, RoleAssignment, Decision, ResultsWaitPage, Decision2, Start2, AddNumbers2, ResultsWaitPage2, CombinedResults2]
+# page_sequence = [Start, AddNumbers, ResultsWaitPage, CombinedResults]
 
