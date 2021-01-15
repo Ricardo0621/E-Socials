@@ -48,7 +48,7 @@ class AddNumbers(Page):
         numero_aux = self.player.num_min_stage_1
         contador_numero_aux = 1
         round_label = 0
-        print("Matriz Ronda 1" + str(self.subsession.get_group_matrix()))
+        # print("Matriz Ronda 1" + str(self.subsession.get_group_matrix()))
         # Matriz del grupo: 
         # [[<Player  1>, <Player  2>], 
         # [<Player  3>, <Player  4>]]
@@ -148,12 +148,12 @@ class AddNumbers2(Page):
         
         pay_contract = self.player.in_round(Constants.num_rounds/2).pay_contract
         opponent_contract_decision = self.player.other_player().in_round(Constants.num_rounds/2).pay_contract
-        print(me)
-        print(opponent_id)
-        print(opponent_contract_decision)
-        print(pay_contract)
-        print("Matriz Ronda 3" + str(self.subsession.get_group_matrix()))
-        print("Pago ronda 1" + str(self.player.payment_stage_1))
+        # print(me)
+        # print(opponent_id)
+        # print(opponent_contract_decision)
+        # print(pay_contract)
+        # print("Matriz Ronda 3" + str(self.subsession.get_group_matrix()))
+        # print("Pago ronda 1" + str(self.player.payment_stage_1))
         return {
             'number_1': number_1,
             'number_2': number_2,
@@ -257,8 +257,8 @@ class CombinedResults2(Page):
                 self.player.payment_stage_2 = 0
                 contrato = 2500
 
-        print("Jugador "+ str(player.id_in_group) + ". Contrato Op "+ str(opponent_contract_decision))
-        print("Jugador "+ str(player.id_in_group) + ". Contrato Jug "+ str(pay_contract))
+        # print("Jugador "+ str(player.id_in_group) + ". Contrato Op "+ str(opponent_contract_decision))
+        # print("Jugador "+ str(player.id_in_group) + ". Contrato Jug "+ str(pay_contract))
         self.player.payment_stage_1 = math.trunc(combined_payoff) + Constants.fixed_payment
         combined_payoff_total = self.player.payment_stage_2 + self.player.payment_stage_1
         return {
@@ -325,7 +325,7 @@ class Consent(Page):
 class ResultsWaitPage(WaitPage):
     #Muestra el WaitPage al final de la cuarta ronda. Antes del pago
     def is_displayed(self):
-        print("Matriz Ronda 2" + str(self.subsession.get_group_matrix()))
+        # print("Matriz Ronda 2" + str(self.subsession.get_group_matrix()))
         return self.round_number == Constants.num_rounds/2
 
 class ResultsWaitPage2(WaitPage):
@@ -410,7 +410,7 @@ class CombinedResults(Page):
         combined_payoff_total = combined_payoff + Constants.fixed_payment
         #Si es T-T o T-NT el pago en la etapa uno es el pago del equipo más el pago fijo
         self.player.payment_stage_1 = math.trunc(combined_payoff_total)
-        print("Jugador "+ str(player.id_in_group) + ". Pago total "+ str(self.player.payment_stage_1))
+        # print("Jugador "+ str(player.id_in_group) + ". Pago total "+ str(self.player.payment_stage_1))
         return {
             'combined_payoff' : math.trunc(combined_payoff),
             'combined_payoff_opponent': math.trunc(combined_payoff_opponent),
