@@ -26,14 +26,14 @@
         <table class="table" style="text-align:right" colspan="2" >
             <tr>
                 <td style="font-size:30px">{{ number_1 }} + {{ number_2 }} = </td>
-                <td> {% formfields %} </td>
+                <td> <input type="number" name="number_entered" required id="id_number_entered" class="form-control" autofocus=""> </td>
             </tr>
         </table>
             <b>Sumas correctas:</b> <font color='blue'>{{correct_answers}}</font><br>
             <b>Sumas incorrectas:</b> <font color='red'>{{wrong_sums}}</font><br>
             <b>Sumas totales:</b> {{total_sums}}<br>
             <b>Pago por sumas:</b> ${{combined_payoff}}<br>
-            <b>Ronda {{round_label}} de 10</b>
+            {% comment %} <b>Ronda {{round_label}} de 10</b> {% endcomment %}
     </p>
 </div>
 {% next_button %}

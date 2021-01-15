@@ -21,17 +21,17 @@ Your app description
 class Constants(BaseConstants):
     name_in_url = 'real_effort_numbers'
     players_per_group = 2
-    num_rounds = 100
+    num_rounds = 180
     payment_per_correct_answer = 50
     payment_per_correct_answer_2 = 50
     fixed_payment = 5000
-    sumas_obligatorias_contrato = 3
-    num_min_stage_1 = 1
+    sumas_obligatorias_contrato = 50
+    num_min_stage_1 = 10
     cara_sello_value = random.randint(0, 1)
 
 class Subsession(BaseSubsession):
     def creating_session(self):
-        print("Matriz del grupo: " + str(self.get_group_matrix()))
+        #print("Matriz del grupo: " + str(self.get_group_matrix()))
         #print("Grupos: " + str(self.get_groups()))
         # for player in self.get_players():
         #     print("Jugador id_group: " + str(player.id_in_group))

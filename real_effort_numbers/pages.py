@@ -259,7 +259,7 @@ class CombinedResults2(Page):
 
         # print("Jugador "+ str(player.id_in_group) + ". Contrato Op "+ str(opponent_contract_decision))
         # print("Jugador "+ str(player.id_in_group) + ". Contrato Jug "+ str(pay_contract))
-        self.player.payment_stage_1 = math.trunc(combined_payoff) + Constants.fixed_payment
+        #self.player.payment_stage_1 = math.trunc(combined_payoff) + Constants.fixed_payment
         combined_payoff_total = self.player.payment_stage_2 + self.player.payment_stage_1
         return {
             'payment_stage_1': self.player.payment_stage_1,
@@ -313,7 +313,7 @@ class Start2(Page):
 
     def before_next_page(self):
         import time
-        self.participant.vars['expiry'] = time.time() + 3*60        
+        self.participant.vars['expiry'] = time.time() + 5*60        
 
 class Consent(Page):
     form_model = 'player'
@@ -481,7 +481,7 @@ class CombinedResults3(Page):
             'payment_stage_3' : self.player.monto
         }
 
-page_sequence = [Consent, GenInstructions,Stage1Instructions, Stage1Questions, Start, AddNumbers, ResultsWaitPage,  CombinedResults, Stage2Instructions, Stage2Questions, RoleAssignment, Decision,ResultsWaitPage, Decision2, Start2, AddNumbers2, ResultsWaitPage2, CombinedResults2 ]
-# page_sequence = [Start, AddNumbers, ResultsWaitPage, CombinedResults, RoleAssignment, Decision, ResultsWaitPage, Decision2, Start2, AddNumbers2, ResultsWaitPage2, CombinedResults2, PlayCoin,DoubleMoney,HeadTails,ResultsDoubleMoney, CombinedResults3]
+# page_sequence = [Consent, GenInstructions,Stage1Instructions, Stage1Questions, Start, AddNumbers, ResultsWaitPage,  CombinedResults, Stage2Instructions, Stage2Questions, RoleAssignment, Decision,ResultsWaitPage, Decision2, Start2, AddNumbers2, ResultsWaitPage2, CombinedResults2,PlayCoin,DoubleMoney,HeadTails,ResultsDoubleMoney, CombinedResults3]
+page_sequence = [Start, AddNumbers, ResultsWaitPage, CombinedResults, RoleAssignment, Decision, ResultsWaitPage, Decision2, Start2, AddNumbers2, ResultsWaitPage2, CombinedResults2, PlayCoin,DoubleMoney,HeadTails,ResultsDoubleMoney, CombinedResults3]
 # page_sequence = [Start, AddNumbers, ResultsWaitPage, CombinedResults]
 
