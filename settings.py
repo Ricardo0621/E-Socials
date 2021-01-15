@@ -74,6 +74,8 @@ SESSION_CONFIG_DEFAULTS = dict(
     real_world_currency_per_point=1, participation_fee=0.00, doc=""
 )
 
+ROOT_URLCONF = 'urls'
+
 # ISO-639 code
 # for example: de, fr, ja, ko, zh-hans
 LANGUAGE_CODE = 'en'

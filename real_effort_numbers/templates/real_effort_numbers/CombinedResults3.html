@@ -13,34 +13,25 @@
 {# ****************************************************************************************************************** #}
 
 {% block title %}
-    {{titulo}}
+    Pagos
 {% endblock %}
 
 {% block content %}
 {% if player.id_in_group == 1 %}
  <div class="wrapper instructions">
     <p align = "justify">
-    Ganancias Etapa 1: {{payment_stage_1}}<br>
-    Ganancias Etapa 2: {{payment_stage_2}}<br>
-    Salario: -$2500<br>
-    Sumas correctas: {{correct_answers}} <br>
-    Sumas totales: {{total_sums_2}} <br>
-    Ganancias Acumuladas: {{combined_payoff_total}}<br>
-    Trabajó con Contrato: {{opponent_contract_decision}}
+    <b>Ganancias Etapa 1:</b> {{payment_stage_1}}<br>
+    <b>Ganancias Etapa 2:</b> {{payment_stage_2}}<br>
+    <b>Ganancias Etapa 3:</b> {{payment_stage_3}}<br>
     </p>
 </div>
 {% else %}
 <!--Jugador Y (2)-->
 <div class="wrapper instructions">
     <p align = "justify">
-    Ganancias Etapa 1: {{payment_stage_1}}<br>
-    Ganancias Etapa 2: {{payment_stage_2}}<br>
-    Salario Jugador X: -$2500<br>
-    Sumas correctas Jugador X: {{correct_answers_opponent}} <br>
-    Sumas totales Jugador X: {{total_sums_2_opponent}}<br>
-    Valor Contrato: {{contrato}}<br>
-    Ganancias Acumuladas: {{combined_payoff_total}}<br>
-    Jugador Y pagó Contrato: {{pay_contract}}
+    <b>Ganancias Etapa 1:</b> {{payment_stage_1}}<br>
+    <b>Ganancias Etapa 2:</b> {{payment_stage_2}}<br>
+    <b>Ganancias Etapa 3:</b> {{payment_stage_3}}<br>
     </p>
 </div>
 {% endif %}

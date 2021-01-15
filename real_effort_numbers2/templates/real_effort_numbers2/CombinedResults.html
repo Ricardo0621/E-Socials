@@ -13,37 +13,22 @@
 {# ****************************************************************************************************************** #}
 
 {% block title %}
-    {{titulo}}
+    Pagos Etapa 1
 {% endblock %}
 
 {% block content %}
-{% if player.id_in_group == 1 %}
  <div class="wrapper instructions">
     <p align = "justify">
-    Ganancias Etapa 1: {{payment_stage_1}}<br>
-    Ganancias Etapa 2: {{payment_stage_2}}<br>
-    Salario: -$2500<br>
-    Sumas correctas: {{correct_answers}} <br>
-    Sumas totales: {{total_sums_2}} <br>
-    Ganancias Acumuladas: {{combined_payoff_total}}<br>
-    Trabajó con Contrato: {{opponent_contract_decision}}
+    <b>Jugador {{player.id_in_group}}</b> vs Jugador {{opponent_id}}.<br><br>
+    Número de sumas correctas <b>Jugador {{player.id_in_group}}</b>: {{correct_answers}}<br>
+    Número de sumas correctas <b>Jugador {{opponent_id}}</b>: {{correct_answers_opponent}}<br>
+    Número de sumas correctas <b>Equipo AB</b>: {{correct_answers_team}}<br><br>
+    Ganancias totales <b>Jugador {{player.id_in_group}}</b> Etapa 1: {{ combined_payoff }}<br>
+    Ganancias totales <b>Jugador {{opponent_id}}</b> Etapa 1: {{ combined_payoff_opponent }}<br>
+    Ganancias acumuladas <b>Equipo AB</b>: {{combined_payoff_team}} <br><br>
+    Ganancias acumuladas <b>Jugador {{player.id_in_group}}</b>: {{combined_payoff_total}}
     </p>
 </div>
-{% else %}
-<!--Jugador Y (2)-->
-<div class="wrapper instructions">
-    <p align = "justify">
-    Ganancias Etapa 1: {{payment_stage_1}}<br>
-    Ganancias Etapa 2: {{payment_stage_2}}<br>
-    Salario Jugador X: -$2500<br>
-    Sumas correctas Jugador X: {{correct_answers_opponent}} <br>
-    Sumas totales Jugador X: {{total_sums_2_opponent}}<br>
-    Valor Contrato: {{contrato}}<br>
-    Ganancias Acumuladas: {{combined_payoff_total}}<br>
-    Jugador Y pagó Contrato: {{pay_contract}}
-    </p>
-</div>
-{% endif %}
     {% next_button %}
 
 {% endblock %}

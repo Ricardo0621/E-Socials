@@ -8,8 +8,7 @@ from otree.api import (
     Currency as c,
     currency_range,
 )
-
-import random
+import math
 
 author = 'Your name here'
 
@@ -19,29 +18,24 @@ Your app description
 
 
 class Constants(BaseConstants):
-    name_in_url = 'real_effort_numbers'
+    name_in_url = 'real_effort_numbers2'
     players_per_group = 2
-    num_rounds = 100
+    num_rounds = 2
     payment_per_correct_answer = 50
     payment_per_correct_answer_2 = 50
     fixed_payment = 5000
     sumas_obligatorias_contrato = 3
-    num_min_stage_1 = 1
-    cara_sello_value = random.randint(0, 1)
 
 class Subsession(BaseSubsession):
     def creating_session(self):
         print("Matriz del grupo: " + str(self.get_group_matrix()))
-        #print("Grupos: " + str(self.get_groups()))
+        print("Grupos: " + str(self.get_groups()))
         for player in self.get_players():
             print("Jugador id_group: " + str(player.id_in_group))
             print("Jugador id_session: " + str(player.participant.id_in_session))
-        if self.round_number == (Constants.num_rounds/2)+1:
-             self.group_randomly(fixed_id_in_group=True)
-        if self.round_number >= (Constants.num_rounds/2)+1:
-            self.group_like_round((Constants.num_rounds/2+1))
-       # print("Matriz del grupo N: " + str(self.get_group_matrix()))
-        #print("Grupos N: " + str(self.get_groups()))     
+        import time
+        # user has 5 minutes to complete as many pages as possible
+        self.session.vars['expiry'] = time.time() + 15*50   
 
 class Group(BaseGroup):
     pass
@@ -56,8 +50,8 @@ class Player(BasePlayer):
     wrong_sums = models.IntegerField(initial=0)
     total_sums = models.IntegerField(initial=0)
     payment_stage_1 = models.IntegerField(initial=0)
-    num_min_stage_1 = models.IntegerField(initial=5)
-    contador_numero_aux = models.IntegerField(initial=0)
+    time_management = models.BooleanField()
+    time_management_2 = models.BooleanField()
 # ******************************************************************************************************************** #
 # *** Variables Etapa 2
 # ******************************************************************************************************************** #
@@ -68,12 +62,6 @@ class Player(BasePlayer):
     total_sums_2 = models.IntegerField(initial=0)
     payment_stage_2 = models.IntegerField(initial=0)
     pago = models.IntegerField(initial=0)
-# ******************************************************************************************************************** #
-# *** Variables Riesgo
-# ******************************************************************************************************************** #
-    monto = models.IntegerField(label = 
-    "Por favor, indica el monto que invertirás en el activo de riesgo (sin puntos o comas)", min=0, max=5000)
-    pago_total = models.IntegerField()    
 # ******************************************************************************************************************** #
 # *** Preguntas de Control: 1
 # ******************************************************************************************************************** #
@@ -221,4 +209,26 @@ class Player(BasePlayer):
     def other_player(self):
         #self.get_others_in_group() -> Vector[<Player  2>, <Player  3>, <Player  4>]
         return self.get_others_in_group()[0]
+
+    def prueba(self):
+        all_players = self.in_all_rounds()
+        correct_answers = 0
+        combined_payoff = 0
+        combined_payoff_others = 0
+        wrong_sums = 0
+        total_sums = 0
+        opponent_id = self.other_player().id_in_group
+        for player in all_players:
+            combined_payoff += player.payoff
+            correct_answers += player.correct_answers
+            wrong_sums += player.wrong_sums
+            total_sums += player.total_sums
+        return {
+            'combined_payoff' : math.trunc(combined_payoff),
+            'correct_answers': correct_answers,
+            'opponent_id': opponent_id,
+            'wrong_sums': wrong_sums,
+            'total_sums': total_sums
+        }
+
   

@@ -16,7 +16,7 @@
 {# *** TITLE *** #}
 {# ****************************************************************************************************************** #}
 {% block title %}
-    {% trans "Etapa 3 - Tira la Moneda" %}
+    {% trans "Etapa 3 - Moneda" %}
 {% endblock %}
 
 
@@ -36,35 +36,25 @@
 
                 Ejemplo: si inviertes $1,000 y la moneda cae cara (color rojo), tus pagos serán: <br><br>
 
-                <b>$6,000 =</b> $4,000 (que guardaste) + $2,000 (que ganaste) 
+                <b>6,000 =</b> $4,000 (que guardaste) + $2,000 (que ganaste) 
         </p>
     </div>
     <div id="coin">
         <div class="side-a"></div>
         <div class="side-b"></div>
     </div>
-    <h1>Haga Clic para girar la moneda. Esta vez, el resultado no determinará tu pago</h1>
-    {% block local_scripts %}
-    <script type="text/javascript">
-        $(document).ready(function ($) {
-            $('#coin').on('click', function () {
-                var flipResult = Math.random();
-                $('#coin').removeClass();
-                setTimeout(function () {
-                    if (flipResult <= 0.5) {
-                        $('#coin').addClass('heads');
-                        console.log('it is head');
-                    } else {
-                        $('#coin').addClass('tails');
-                        console.log('it is tails');
-                    }
-                }, 100);
-            });
-        });
-
-    </script>
+    <h1>Haga Clic para girar la moneda. Esta vez el resultado sí determinará tu pago</h1>
+    {% block scripts %}
+        <script> var flipResult = {{Constants.cara_sello_value}};</script>
+        <script src="{% static 'mpl/js/headtails.js' %}"></script>
+        {% comment %} <script type="text/javascript"> document.getElementById('coin').onclick = () => false; } </script>
+        <script type="text/javascript"> document.getElementById('side-a').onclick = () => false; </script>
+        <script type="text/javascript"> document.getElementById('side-b').onclick = () => false; </script>
+        <script type="text/javascript"> document.getElementById('heads').onclick = () => false; </script>
+        <script type="text/javascript"> document.getElementById('tails').onclick = () => false; </script> {% endcomment %}
     {% endblock %}
 
+    
 {% next_button %}
 {% endblock %}
 
