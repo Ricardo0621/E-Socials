@@ -2,31 +2,32 @@
 {% load staticfiles otree %}
 {% load i18n %}
 
+
 {# ****************************************************************************************************************** #}
 {# *** STYLES *** #}
 {# ****************************************************************************************************************** #}
 {% block styles %}
     <link href="{% static 'real_effort_numbers/css/custom.css' %}" rel="stylesheet"/>
 {% endblock %}
+
+
 {# ****************************************************************************************************************** #}
 {# *** TITLE *** #}
 {# ****************************************************************************************************************** #}
-
 {% block title %}
-    Pagos
+    {% trans " Inicio Etapa 1" %}
 {% endblock %}
 
+
+{# ****************************************************************************************************************** #}
+{# *** CONTENT *** #}
+{# ****************************************************************************************************************** #}
 {% block content %}
- <div class="wrapper instructions">
-    <p align = "justify">
-    <b>Ganancias Etapa 1:</b> {{payment_stage_1}}<br>
-    <b>Ganancias Etapa 2:</b> {{payment_stage_2}}<br>
-    <b>Ganancias Etapa 3:</b> {{payment_stage_3}}<br>
-    <b>Ganancias Acumuladas:</b> {{ganancias_acumuladas}}<br
-    </p>
-</div>
+
+    <div class="wrapper instructions">
+        <p align = "justify">
+            <b>La etapa comenzará a continuación. Por favor, presione siguiente para iniciar.</b>
+        </p>
+    </div>
     {% next_button %}
-
 {% endblock %}
-
-

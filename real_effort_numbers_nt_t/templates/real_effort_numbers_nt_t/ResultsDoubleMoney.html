@@ -2,31 +2,35 @@
 {% load staticfiles otree %}
 {% load i18n %}
 
+
 {# ****************************************************************************************************************** #}
 {# *** STYLES *** #}
 {# ****************************************************************************************************************** #}
 {% block styles %}
-    <link href="{% static 'real_effort_numbers/css/custom.css' %}" rel="stylesheet"/>
+    <link href="{% static 'mpl/css/custom.css' %}" rel="stylesheet"/>
 {% endblock %}
+
+
 {# ****************************************************************************************************************** #}
 {# *** TITLE *** #}
 {# ****************************************************************************************************************** #}
-
 {% block title %}
-    Pagos
+    {% trans "Etapa 3 - Resultados" %}
 {% endblock %}
 
+
+{# ****************************************************************************************************************** #}
+{# *** CONTENT *** #}
+{# ****************************************************************************************************************** #}
 {% block content %}
- <div class="wrapper instructions">
-    <p align = "justify">
-    <b>Ganancias Etapa 1:</b> {{payment_stage_1}}<br>
-    <b>Ganancias Etapa 2:</b> {{payment_stage_2}}<br>
-    <b>Ganancias Etapa 3:</b> {{payment_stage_3}}<br>
-    <b>Ganancias Acumuladas:</b> {{ganancias_acumuladas}}<br
-    </p>
-</div>
+
+    <div class="wrapper instructions">
+        <p align = "justify">
+                Usted invirtió <b>${{inversion }}</b> y la moneda cayó <b>{{cara_sello_name}}</b>. 
+                Su pago equivale a <b>${{cara_sello_payoff}}</b>
+        </p>
+    </div>
+
     {% next_button %}
 
 {% endblock %}
-
-

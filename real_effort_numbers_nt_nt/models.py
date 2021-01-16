@@ -19,7 +19,7 @@ Your app description
 
 
 class Constants(BaseConstants):
-    name_in_url = 'real_effort_numbers'
+    name_in_url = 'real_effort_numbers_nt_nt'
     players_per_group = 2
     num_rounds = 180
     payment_per_correct_answer = 50
