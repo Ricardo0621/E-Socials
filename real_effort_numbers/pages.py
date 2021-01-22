@@ -197,7 +197,9 @@ class CombinedResults2(Page):
         opponent_suggested_sums = opponent.in_round((Constants.num_rounds/2)+1).suggested_sums
         contrato = 0
         pay_contract = self.player.in_round((Constants.num_rounds/2)+1).pay_contract
+        pay_contract_label = ""
         opponent_contract_decision = opponent.in_round((Constants.num_rounds/2)+1).pay_contract
+        opponent_contract_decision_label = ""
         if me == 1:
             titulo = "Pagos Etapa 2 - Jugador X"
         else:
@@ -216,6 +218,20 @@ class CombinedResults2(Page):
             wrong_sums_2_opponent += player.other_player().wrong_sums_2
             total_sums_2 += player.total_sums_2
             total_sums_2_opponent += player.other_player().total_sums_2
+
+        #Labels:
+        if opponent_contract_decision == True:
+            opponent_contract_decision_label = "Sí"
+
+        if opponent_contract_decision == False:
+            opponent_contract_decision_label = "No"
+
+        if pay_contract == False:
+            pay_contract_label = "No"
+
+        if pay_contract == True:
+            pay_contract_label = "Sí"    
+
 
         #Jugador X sin contrato
         if player.id_in_group == 1 and opponent_contract_decision == False:
@@ -267,8 +283,8 @@ class CombinedResults2(Page):
             'combined_payoff_total' : math.trunc(combined_payoff_total),
             'contrato': contrato,
             'titulo': titulo,
-            'opponent_contract_decision': opponent_contract_decision,
-            'pay_contract': pay_contract,
+            'opponent_contract_decision': opponent_contract_decision_label,
+            'pay_contract': pay_contract_label,
             'correct_answers': correct_answers,
             'correct_answers_opponent': correct_answers_opponent,
             'total_sums_2': total_sums_2,
@@ -313,7 +329,7 @@ class Start2(Page):
 
     def before_next_page(self):
         import time
-        self.participant.vars['expiry'] = time.time() + 5*60        
+        self.participant.vars['expiry'] = time.time() + Constants.num_min_stage_2*60        
 
 class Consent(Page):
     form_model = 'player'
@@ -413,7 +429,7 @@ class CombinedResults(Page):
 
         correct_answers_team = correct_answers + correct_answers_opponent
         combined_payoff_team = combined_payoff + combined_payoff_opponent
-        combined_payoff_total = combined_payoff + Constants.fixed_payment
+        combined_payoff_total = combined_payoff_team + Constants.fixed_payment
         #Si es T-T o T-NT el pago en la etapa uno es el pago del equipo más el pago fijo
         self.player.payment_stage_1 = math.trunc(combined_payoff_total)
         # print("Jugador "+ str(player.id_in_group) + ". Pago total "+ str(self.player.payment_stage_1))

@@ -26,7 +26,8 @@ class Constants(BaseConstants):
     payment_per_correct_answer_2 = 50
     fixed_payment = 5000
     sumas_obligatorias_contrato = 50
-    num_min_stage_1 = 10
+    num_min_stage_1 = 1
+    num_min_stage_2 = 5
     cara_sello_value = random.randint(0, 1)
 
 class Subsession(BaseSubsession):
@@ -36,8 +37,14 @@ class Subsession(BaseSubsession):
         # for player in self.get_players():
         #     print("Jugador id_group: " + str(player.id_in_group))
         #     print("Jugador id_session: " + str(player.participant.id_in_session))
+        if self.round_number == 1:
+            self.group_randomly(fixed_id_in_group=True)
+
+        if self.round_number >= 1 and self.round_number <= (Constants.num_rounds/2):
+            self.group_like_round(1)
+
         if self.round_number == (Constants.num_rounds/2)+1:
-            print("Cambio")
+            # print("Cambio")
             self.group_randomly(fixed_id_in_group=True)
         if self.round_number >= (Constants.num_rounds/2)+1:
             self.group_like_round((Constants.num_rounds/2+1))

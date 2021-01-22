@@ -27,20 +27,22 @@ class Constants(BaseConstants):
     fixed_payment = 5000
     sumas_obligatorias_contrato = 50
     num_min_stage_1 = 10
+    num_min_stage_2 = 5
     cara_sello_value = random.randint(0, 1)
 
 class Subsession(BaseSubsession):
     def creating_session(self):
+        return
         #print("Matriz del grupo: " + str(self.get_group_matrix()))
         #print("Grupos: " + str(self.get_groups()))
         # for player in self.get_players():
         #     print("Jugador id_group: " + str(player.id_in_group))
         #     print("Jugador id_session: " + str(player.participant.id_in_session))
-        if self.round_number == (Constants.num_rounds/2)+1:
-            print("Cambio")
-            self.group_randomly(fixed_id_in_group=True)
-        if self.round_number >= (Constants.num_rounds/2)+1:
-            self.group_like_round((Constants.num_rounds/2+1))
+        # if self.round_number == (Constants.num_rounds/2)+1:
+        #     print("Cambio")
+        #     self.group_randomly(fixed_id_in_group=True)
+        # if self.round_number >= (Constants.num_rounds/2)+1:
+        #     self.group_like_round((Constants.num_rounds/2+1))
        # print("Matriz del grupo N: " + str(self.get_group_matrix()))
         #print("Grupos N: " + str(self.get_groups()))     
 
