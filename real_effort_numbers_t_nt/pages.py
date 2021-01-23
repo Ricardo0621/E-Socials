@@ -306,13 +306,31 @@ class Stage1Questions(Page):
 
 class Stage2Instructions(Page):
     def is_displayed(self):
-        return self.round_number == Constants.num_rounds/2        
+        return self.round_number == Constants.num_rounds/2
+
+    def vars_for_template(self):
+        team_old = self.player.in_round(1).team
+        team_new = self.player.in_round((Constants.num_rounds/2)+1).team
+        print(team_old)
+        print(team_new)
+        return{
+            'team_old': team_old,
+            'team_new': team_new
+        }            
 
 class Stage2Questions(Page):
     form_model = 'player'
     form_fields = ['control_question_3', 'control_question_4', 'control_question_5', 'control_question_6', 'control_question_7']
     def is_displayed(self):
-        return self.round_number == Constants.num_rounds/2        
+        return self.round_number == Constants.num_rounds/2
+
+    def vars_for_template(self):
+        team_old = self.player.in_round(1).team
+        team_new = self.player.in_round((Constants.num_rounds/2)+1).team
+        return{
+            'team_old': team_old,
+            'team_new': team_new
+        }             
 
 class Start(Page):
     def is_displayed(self):

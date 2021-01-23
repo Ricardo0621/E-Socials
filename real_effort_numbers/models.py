@@ -32,9 +32,11 @@ class Constants(BaseConstants):
 
 class Subsession(BaseSubsession):
     def creating_session(self):
-        return
-        #print("Matriz del grupo: " + str(self.get_group_matrix()))
-        #print("Grupos: " + str(self.get_groups()))
+        team_label = ['AB', 'CD', 'EF', 'GH', 'IJ', 'KL', 'MN', 'OP', 'QR', 'ST', 'UV', 'WX', 'YZ']
+        number_of_groups = self.session.num_participants // Constants.players_per_group
+        for i in range(0,number_of_groups):
+            for j in range(0,Constants.players_per_group):
+                self.get_group_matrix()[i][j].team = team_label[i]
         # for player in self.get_players():
         #     print("Jugador id_group: " + str(player.id_in_group))
         #     print("Jugador id_session: " + str(player.participant.id_in_session))
@@ -61,6 +63,7 @@ class Player(BasePlayer):
     payment_stage_1 = models.IntegerField(initial=0)
     num_min_stage_1 = models.IntegerField(initial=5)
     contador_numero_aux = models.IntegerField(initial=0)
+    team = models.StringField()
 # ******************************************************************************************************************** #
 # *** Variables Etapa 2
 # ******************************************************************************************************************** #
@@ -102,7 +105,7 @@ class Player(BasePlayer):
 # *** Preguntas de Control: 2
 # ******************************************************************************************************************** #
     control_question_3 = models.IntegerField(
-        label="T-T y T-NT: En la Etapa 2 usted estará emparejado con:",
+        label="En la Etapa 2 usted estará emparejado con:",
         choices = [
             [1, "Nadie, es un juego individual"],
             [2, "Con la misma persona de la Etapa 1"],
