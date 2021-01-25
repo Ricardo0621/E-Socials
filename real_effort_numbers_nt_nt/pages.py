@@ -274,10 +274,10 @@ class CombinedResults2(Page):
 
         # print("Jugador "+ str(player.id_in_group) + ". Contrato Op "+ str(opponent_contract_decision))
         # print("Jugador "+ str(player.id_in_group) + ". Contrato Jug "+ str(pay_contract))
-        self.player.payment_stage_1 = math.trunc(combined_payoff) + Constants.fixed_payment
-        combined_payoff_total = self.player.payment_stage_2 + self.player.payment_stage_1
+        #self.player.payment_stage_1 = math.trunc(combined_payoff) + Constants.fixed_payment
+        combined_payoff_total = self.player.payment_stage_2 + self.player.in_round(Constants.num_rounds/2).payment_stage_1
         return {
-            'payment_stage_1': self.player.payment_stage_1,
+            'payment_stage_1': self.player.in_round(Constants.num_rounds/2).payment_stage_1,
             'payment_stage_2': self.player.payment_stage_2,
             'combined_payoff_total' : math.trunc(combined_payoff_total),
             'contrato': contrato,
@@ -310,7 +310,7 @@ class Stage2Instructions(Page):
 
 class Stage2Questions(Page):
     form_model = 'player'
-    form_fields = ['control_question_3', 'control_question_4', 'control_question_5', 'control_question_6', 'control_question_7']
+    form_fields = ['control_question_4', 'control_question_5', 'control_question_6', 'control_question_7']
     def is_displayed(self):
         return self.round_number == Constants.num_rounds/2        
 
@@ -441,7 +441,7 @@ class CombinedResults(Page):
             'opponent_id': opponent_id,
             'correct_answers_team': correct_answers_team,
             'combined_payoff_team': math.trunc(combined_payoff_team),
-            'combined_payoff_total': math.trunc(combined_payoff_total)
+            'combined_payoff_total': self.player.payment_stage_1
         }
 
 class PlayCoin(Page):
@@ -496,9 +496,9 @@ class CombinedResults3(Page):
         return self.round_number == Constants.num_rounds
 
     def vars_for_template(self):
-        ganancias_acumuladas = self.player.payment_stage_1 + self.player.payment_stage_2 + self.player.monto
+        ganancias_acumuladas = self.player.in_round(Constants.num_rounds/2).payment_stage_1 + self.player.payment_stage_2 + self.player.monto
         return {
-            'payment_stage_1' : self.player.payment_stage_1,
+            'payment_stage_1' : self.player.in_round(Constants.num_rounds/2).payment_stage_1,
             'payment_stage_2' : self.player.payment_stage_2,
             'payment_stage_3' : self.player.monto,
             'ganancias_acumuladas': ganancias_acumuladas
@@ -510,9 +510,9 @@ class CombinedResults4(Page):
         return self.round_number == Constants.num_rounds
 
     def vars_for_template(self):
-        ganancias_acumuladas = self.player.payment_stage_1 + self.player.payment_stage_2 + self.player.monto + 5000
+        ganancias_acumuladas = self.player.in_round(Constants.num_rounds/2).payment_stage_1 + self.player.payment_stage_2 + self.player.monto + 5000
         return {
-            'payment_stage_1' : self.player.payment_stage_1,
+            'payment_stage_1' : self.player.in_round(Constants.num_rounds/2).payment_stage_1,
             'payment_stage_2' : self.player.payment_stage_2,
             'payment_stage_3' : self.player.monto,
             'ganancias_acumuladas': ganancias_acumuladas
@@ -543,7 +543,7 @@ class ReminderNequi(Page):
 
     def vars_for_template(self):
         num_temporal = self.player.in_round(1).num_temporal
-        ganancias_acumuladas = self.player.payment_stage_1 + self.player.payment_stage_2 + self.player.monto + 5000
+        ganancias_acumuladas = self.player.in_round(Constants.num_rounds/2).payment_stage_1 + self.player.payment_stage_2 + self.player.monto + 5000
         return {
             'ganancias_acumuladas': ganancias_acumuladas,
             'num_temporal': num_temporal

@@ -33,8 +33,47 @@
             <b>Sumas incorrectas:</b> <font color='red'>{{wrong_sums}}</font><br>
             <b>Sumas totales:</b> {{total_sums}}<br>
             <b>Pago por sumas:</b> ${{combined_payoff}}<br>
+            <b><p id="display"></p>
             {% comment %} <b>Ronda {{round_label}} de 10</b> {% endcomment %}
     </p>
 </div>
+{% block scripts %}
+<script>
+    $(function myFunction() {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds <= 600 && event.offset.totalSeconds >= 539) {
+                document.getElementById("display").innerHTML = "Ronda 1 de 10";
+            }
+            if (event.offset.totalSeconds <= 540  && event.offset.totalSeconds >= 479)  {
+                document.getElementById("display").innerHTML = "Ronda 2 de 10";
+            }
+            if (event.offset.totalSeconds <= 480 && event.offset.totalSeconds >= 419) {
+                document.getElementById("display").innerHTML = "Ronda 3 de 10";
+            }
+            if (event.offset.totalSeconds <= 420 && event.offset.totalSeconds >= 359) {
+                document.getElementById("display").innerHTML = "Ronda 4 de 10";
+            }
+            if (event.offset.totalSeconds <= 360 && event.offset.totalSeconds >= 299) {
+                document.getElementById("display").innerHTML = "Ronda 5 de 10";
+            }
+            if (event.offset.totalSeconds <= 300 && event.offset.totalSeconds >= 239) {
+                document.getElementById("display").innerHTML = "Ronda 6 de 10";
+            }
+            if (event.offset.totalSeconds <= 240 && event.offset.totalSeconds >= 179) {
+                document.getElementById("display").innerHTML = "Ronda 7 de 10";
+            }
+            if (event.offset.totalSeconds <= 180 && event.offset.totalSeconds >= 119 ) {
+                document.getElementById("display").innerHTML = "Ronda 8 de 10";
+            }
+            if (event.offset.totalSeconds <= 120 && event.offset.totalSeconds >= 59) {
+                document.getElementById("display").innerHTML = "Ronda 9 de 10";
+            }
+            if (event.offset.totalSeconds <= 60 && event.offset.totalSeconds >= 1) {
+                document.getElementById("display").innerHTML = "Ronda 10 de 10";
+            }
+        });
+    });
+</script>
+{% endblock %}
 {% next_button %}
 {% endblock %}

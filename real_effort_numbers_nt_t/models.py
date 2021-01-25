@@ -37,6 +37,9 @@ class Subsession(BaseSubsession):
         # for player in self.get_players():
         #     print("Jugador id_group: " + str(player.id_in_group))
         #     print("Jugador id_session: " + str(player.participant.id_in_session))
+        team_label = ['AB', 'CD', 'EF', 'GH', 'IJ', 'KL', 'MN', 'OP', 'QR', 'ST', 'UV', 'WX', 'YZ']
+        number_of_groups = self.session.num_participants // Constants.players_per_group
+        
         if self.round_number == 1:
             self.group_randomly(fixed_id_in_group=True)
 
@@ -48,6 +51,9 @@ class Subsession(BaseSubsession):
             self.group_randomly(fixed_id_in_group=True)
         if self.round_number >= (Constants.num_rounds/2)+1:
             self.group_like_round((Constants.num_rounds/2+1))
+            for i in range(0,number_of_groups):
+                for j in range(0,Constants.players_per_group):
+                    self.get_group_matrix()[i][j].team = team_label[i]
        # print("Matriz del grupo N: " + str(self.get_group_matrix()))
         #print("Grupos N: " + str(self.get_groups()))     
 
@@ -66,6 +72,7 @@ class Player(BasePlayer):
     payment_stage_1 = models.IntegerField(initial=0)
     num_min_stage_1 = models.IntegerField(initial=5)
     contador_numero_aux = models.IntegerField(initial=0)
+    team = models.StringField()
 # ******************************************************************************************************************** #
 # *** Variables Etapa 2
 # ******************************************************************************************************************** #
@@ -160,7 +167,7 @@ class Player(BasePlayer):
 # ******************************************************************************************************************** #
 
     def control_question_1_error_message(self, value):
-        if value != True:
+        if value != False:
             return 'Esta respuesta es incorrecta. Por favor, lea las instrucciones e intente de nuevo.'
 
     def control_question_2_error_message(self, value):
