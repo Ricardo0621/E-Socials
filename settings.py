@@ -42,6 +42,12 @@ dict(
         app_sequence=['experimiento_1']
     ),
 dict(
+        name='laboratorio',
+        display_name="Experimento Nicolas",
+        num_demo_participants=1,
+        app_sequence=['laboratorio'],
+    ),
+dict(
         name='real_effort_numbers',
         display_name="Gift-exchange Game T-T",
         num_demo_participants=4,
@@ -65,12 +71,6 @@ dict(
         num_demo_participants=4,
         app_sequence=['real_effort_numbers_nt_nt']
     ),                 
-    # dict(
-    #     name='cem',
-    #     display_name="Certainty Equivalent Method",
-    #     num_demo_participants=1,
-    #     app_sequence=['cem'],
-    # ),
     # dict(
     #     name='public_goods',
     #     display_name="Public Goods",
