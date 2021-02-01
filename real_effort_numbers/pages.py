@@ -336,6 +336,7 @@ class Consent(Page):
     form_fields = ['accepts_data', 'num_temporal', 'accepts_terms']
 
     def is_displayed(self):
+        print(self.player.cara_sello_value)
         return self.round_number == 1
 
 class ResultsWaitPage(WaitPage):
@@ -429,7 +430,7 @@ class CombinedResults(Page):
 
         correct_answers_team = correct_answers + correct_answers_opponent
         combined_payoff_team = combined_payoff + combined_payoff_opponent
-        combined_payoff_total = combined_payoff_team + Constants.fixed_payment
+        combined_payoff_total = combined_payoff_team
         #Si es T-T o T-NT el pago en la etapa uno es el pago del equipo más el pago fijo
         self.player.payment_stage_1 = math.trunc(combined_payoff_total)
         # print("Jugador "+ str(player.id_in_group) + ". Pago total "+ str(self.player.payment_stage_1))
@@ -462,7 +463,7 @@ class HeadTails(Page):
     form_model = 'player'
 
     def is_displayed(self):
-        return self.round_number == Constants.num_rounds        
+        return self.round_number == Constants.num_rounds       
 
 class ResultsDoubleMoney(Page):
 
@@ -476,7 +477,8 @@ class ResultsDoubleMoney(Page):
         combined_payoff = 0
         cara_sello_payof = 0
         inversion = math.trunc(c(self.player.monto))
-        if(Constants.cara_sello_value == 0):
+        # print(self.player.cara_sello_value)
+        if(self.player.cara_sello_value <= 0.5):
             cara_sello_name = "Cara"
             self.player.monto = 5000-inversion + math.trunc(self.player.monto*2)
         else:

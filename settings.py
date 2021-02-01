@@ -2,15 +2,6 @@ from os import environ
 
 
 SESSION_CONFIGS = [
-
-    #Experimento de Nicolas
-    dict(
-       name='Experimento_economico',
-       display_name="laboratorio",
-       num_demo_participants=12,
-       app_sequence=['laboratorio']
-    ),
-#as
     dict(
         name='mpl',
         display_name="Contratos y consumo: una aproximación cuasi-experimental",

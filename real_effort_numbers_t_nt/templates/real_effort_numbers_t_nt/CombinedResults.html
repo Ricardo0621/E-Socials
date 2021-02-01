@@ -19,7 +19,7 @@
 {% block content %}
  <div class="wrapper instructions">
     <p align = "justify">
-    <b>Jugador {{player.id_in_group}}</b> vs Jugador {{opponent_id}}.<br><br>
+    {% comment %} <b>Jugador {{player.id_in_group}}</b> vs Jugador {{opponent_id}}.<br><br> {% endcomment %}
     Número de sumas correctas <b>Jugador {{player.id_in_group}}</b>: {{correct_answers}}<br>
     Número de sumas correctas <b>Jugador {{opponent_id}}</b>: {{correct_answers_opponent}}<br>
     Número de sumas correctas <b>Equipo {{player.team}}</b>: {{correct_answers_team}}<br><br>

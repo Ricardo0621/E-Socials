@@ -5,7 +5,8 @@ $('#coin').on('click', function(){
     if (!doneTheStuff) {
         doneTheStuff = true;
     setTimeout(function(){
-    if(flipResult == 0){
+        console.log(flipResult);
+    if(flipResult <= 0.5){
         $('#coin').addClass('heads');
         console.log('it is head');
     }

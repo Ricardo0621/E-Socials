@@ -28,7 +28,7 @@ class Constants(BaseConstants):
     sumas_obligatorias_contrato = 50
     num_min_stage_1 = 10
     num_min_stage_2 = 5
-    cara_sello_value = random.randint(0, 1)
+   
 
 class Subsession(BaseSubsession):
     def creating_session(self):
@@ -39,6 +39,9 @@ class Subsession(BaseSubsession):
         #     print("Jugador id_session: " + str(player.participant.id_in_session))
         team_label = ['AB', 'CD', 'EF', 'GH', 'IJ', 'KL', 'MN', 'OP', 'QR', 'ST', 'UV', 'WX', 'YZ']
         number_of_groups = self.session.num_participants // Constants.players_per_group
+
+        for player in self.get_players():
+            player.cara_sello_value = random.random()
 
         if self.round_number >= 1 and self.round_number <= (Constants.num_rounds/2):
             for i in range(0,number_of_groups):
@@ -75,6 +78,7 @@ class Player(BasePlayer):
     num_min_stage_1 = models.IntegerField(initial=5)
     contador_numero_aux = models.IntegerField(initial=0)
     team = models.StringField()
+    cara_sello_value = models.FloatField(initial=0.0)
 # ******************************************************************************************************************** #
 # *** Variables Etapa 2
 # ******************************************************************************************************************** #
