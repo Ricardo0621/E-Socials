@@ -28,42 +28,12 @@
         <p align = "justify" >
                 {% if player.genero == 'Masculino'%}
                     {% comment %} Total hombres: {{player.contador_masculino}}<br> {% endcomment %}
-                    Apreciado participante,
-                    {% if player.contador_masculino >= 1 and player.contador_masculino <= 5 %} 
-                        por favor, vea el siguente video (Empatía). Luego llene el formulario que se le presentará a continuación.
-                        <p style="text-align:center"><iframe src="https://drive.google.com/file/d/1G2QVdfV6rorWWN7bEnR7CWgK3v1ga8nD/preview" width="640" height="480"></iframe></p>
-                    {% endif %}
-                     {% if player.contador_masculino >= 6 and player.contador_masculino <= 10 %}
-                        por favor, vea el siguente video (Expectativa Normativa). Luego llene el formulario que se le presentará a continuación.
-                        <p style="text-align:center"><iframe src="https://drive.google.com/file/d/1VMIP4xuGVDLpujrHuH5AqWyRHK7hLaYs/preview" width="640" height="480"></iframe></p>
-                    {% endif %}
-                    {% if player.contador_masculino >= 11 and player.contador_masculino <= 15 %} 
-                        por favor, vea el siguente video (Expectativa Empírica). Luego llene el formulario que se le presentará a continuación.
-                        <p style="text-align:center"><iframe src="https://drive.google.com/file/d/1p6GEkyC4hnrMF_2kfjlCrfa2myktLWEU/preview" width="640" height="480"></iframe></p>
-                    {% endif %}
-                     {% if player.contador_masculino >= 15 and player.contador_masculino <= 20 %}
-                        por favor, vea el siguente video (Informacional). Luego llene el formulario que se le presentará a continuación.
-                        <p style="text-align:center"><iframe src="https://drive.google.com/file/d/19xw56Bwt9Ea8Fhy_M88nTsj5YHZutbWp/preview" width="640" height="480"></iframe></p>
-                    {% endif %}
+                    Apreciado participante, por favor, vea el siguente video ({{player.tratamiento}}). Luego llene el formulario que se le presentará a continuación.
+                    <p style="text-align:center"><iframe src="{{link}}" width="640" height="480"></iframe></p>
                 {% else%}
                     {% comment %} Total mujeres: {{player.contador_femenino}}<br> {% endcomment %}
-                    Apreciada participante,
-                    {% if player.contador_femenino >= 1 and player.contador_femenino <= 5 %} 
-                        por favor, vea el siguente video (Empatía). Luego llene el formulario que se le presentará a continuación.
-                        <p style="text-align:center"><iframe src="https://drive.google.com/file/d/1G2QVdfV6rorWWN7bEnR7CWgK3v1ga8nD/preview" width="640" height="480"></iframe></p>                    
-                    {% endif %}
-                    {% if player.contador_femenino >= 6 and player.contador_femenino <= 10 %}
-                        por favor, vea el siguente video (Expectativa Normativa). Luego llene el formulario que se le presentará a continuación.
-                        <p style="text-align:center"><iframe src="https://drive.google.com/file/d/1VMIP4xuGVDLpujrHuH5AqWyRHK7hLaYs/preview" width="640" height="480"></iframe></p>
-                    {% endif %}
-                    {% if player.contador_femenino >= 11 and player.contador_femenino <= 15 %}
-                        por favor, vea el siguente video (Expectativa Empírica). Luego llene el formulario que se le presentará a continuación.
-                        <p style="text-align:center"><iframe src="https://drive.google.com/file/d/1p6GEkyC4hnrMF_2kfjlCrfa2myktLWEU/preview" width="640" height="480"></iframe></p>
-                    {% endif %}
-                    {% if player.contador_femenino >= 16 and player.contador_femenino <= 20 %}
-                        por favor, vea el siguente video (Informacional). Luego llene el formulario que se le presentará a continuación.
-                        <p style="text-align:center"><iframe src="https://drive.google.com/file/d/19xw56Bwt9Ea8Fhy_M88nTsj5YHZutbWp/preview" width="640" height="480"></iframe></p>
-                    {% endif %}
+                    Apreciada participante, por favor, vea el siguente video ({{player.tratamiento}}). Luego llene el formulario que se le presentará a continuación.
+                    <p style="text-align:center"><iframe src="{{link}}" width="640" height="480"></iframe></p
                 {% endif %}
     </div>
     {% next_button %}

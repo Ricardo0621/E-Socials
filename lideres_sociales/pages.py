@@ -59,10 +59,45 @@ class Video(Page):
     def vars_for_template(self):
         self.player.contador_masculino = Player.objects.filter(genero__exact='Masculino').count()
         self.player.contador_femenino = Player.objects.filter(genero__exact='Femenino').count()
+        link = ""
+        if self.player.genero == 'Masculino':
+            if self.player.contador_masculino >= 1 and self.player.contador_masculino <= 5:
+                self.player.tratamiento = "Empatía"
+                link = "https://drive.google.com/file/d/1G2QVdfV6rorWWN7bEnR7CWgK3v1ga8nD/preview"
+
+            if self.player.contador_masculino >= 6 and self.player.contador_masculino <= 10:
+                self.player.tratamiento = "Expectativa Normativa"
+                link = "https://drive.google.com/file/d/1VMIP4xuGVDLpujrHuH5AqWyRHK7hLaYs/preview"
+
+            if self.player.contador_masculino >= 11 and self.player.contador_masculino <= 15:
+                self.player.tratamiento = "Expectativa Empírica"
+                link = "https://drive.google.com/file/d/1p6GEkyC4hnrMF_2kfjlCrfa2myktLWEU/preview"
+
+            if self.player.contador_masculino >= 16 and self.player.contador_masculino <= 20:
+                self.player.tratamiento = "Informacional"
+                link = "https://drive.google.com/file/d/19xw56Bwt9Ea8Fhy_M88nTsj5YHZutbWp/preview"
+        else:
+            if self.player.contador_femenino >= 1 and self.player.contador_femenino <= 5:
+                self.player.tratamiento = "Empatía"
+                link = "https://drive.google.com/file/d/1G2QVdfV6rorWWN7bEnR7CWgK3v1ga8nD/preview"
+
+            if self.player.contador_femenino >= 6 and self.player.contador_femenino <= 10:
+                self.player.tratamiento = "Expectativa Normativa"
+                link = "https://drive.google.com/file/d/1VMIP4xuGVDLpujrHuH5AqWyRHK7hLaYs/preview"
+
+            if self.player.contador_femenino >= 11 and self.player.contador_femenino <= 15:
+                self.player.tratamiento = "Expectativa Empírica"
+                link = "https://drive.google.com/file/d/1p6GEkyC4hnrMF_2kfjlCrfa2myktLWEU/preview"
+                
+            if self.player.contador_femenino >= 16 and self.player.contador_femenino <= 20:
+                self.player.tratamiento = "Informacional"
+                link = "https://drive.google.com/file/d/19xw56Bwt9Ea8Fhy_M88nTsj5YHZutbWp/preview"
+
         return {
             'contador_masculino' : self.player.contador_masculino,
             'contador_femenino' : self.player.contador_femenino,
-            'genero': self.player.genero
+            'genero': self.player.genero,
+            'link' : link
         }
 
 page_sequence = [Consent, Video, Survey, SocioDemSurvey, Invitation]
