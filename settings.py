@@ -41,25 +41,25 @@ dict(
 dict(
         name='real_effort_numbers',
         display_name="Gift-exchange Game T-T",
-        num_demo_participants=4,
+        num_demo_participants=12,
         app_sequence=['real_effort_numbers']
     ),
 dict(
         name='real_effort_numbers_t_nt',
         display_name="Gift-exchange Game T-NT",
-        num_demo_participants=4,
+        num_demo_participants=12,
         app_sequence=['real_effort_numbers_t_nt']
     ), 
 dict(
         name='real_effort_numbers_nt_t',
         display_name="Gift-exchange Game NT-T",
-        num_demo_participants=4,
+        num_demo_participants=12,
         app_sequence=['real_effort_numbers_nt_t']
     ), 
 dict(
         name='real_effort_numbers_nt_nt',
         display_name="Gift-exchange Game NT-NT",
-        num_demo_participants=4,
+        num_demo_participants=12,
         app_sequence=['real_effort_numbers_nt_nt']
     ),                 
     # dict(
