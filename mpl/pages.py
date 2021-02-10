@@ -172,6 +172,82 @@ class Results(Page):
                 'decision':       decision,
                 'pelota':         self.player.ball
             }
+class Results2(Page):
+
+    # skip results until last page
+    # ----------------------------------------------------------------------------------------------------------------
+    def is_displayed(self):
+        if Constants.one_choice_per_page:
+            return self.subsession.round_number == Constants.num_rounds
+        else:
+            return True
+
+    # variables for template
+    # ----------------------------------------------------------------------------------------------------------------
+    def vars_for_template(self):
+
+        # unzip <mpl_choices> into list of lists
+        choices = [list(t) for t in zip(*self.participant.vars['mpl_choices'])]
+        indices = choices[0]
+        # get index, round, and choice to pay
+        index_to_pay = self.player.participant.vars['mpl_index_to_pay']
+        round_to_pay = indices.index(index_to_pay) + 1
+        choice_to_pay = self.participant.vars['mpl_choices'][round_to_pay - 1]
+        decision = choice_to_pay[0]
+
+        if Constants.one_choice_per_page:
+            return {
+                'choice_to_pay':  [choice_to_pay],
+                'option_to_pay':  self.player.in_round(round_to_pay).option_to_pay,
+                'payoff':         self.player.in_round(round_to_pay).payoff,
+                'decision':       decision
+            }
+        else:
+            return {
+                'choice_to_pay':  [choice_to_pay],
+                'option_to_pay':  self.player.option_to_pay,
+                'payoff':         math.trunc(self.player.payoff),
+                'decision':       decision,
+                'pelota':         self.player.ball
+            }
+class Results3(Page):
+
+    # skip results until last page
+    # ----------------------------------------------------------------------------------------------------------------
+    def is_displayed(self):
+        if Constants.one_choice_per_page:
+            return self.subsession.round_number == Constants.num_rounds
+        else:
+            return True
+
+    # variables for template
+    # ----------------------------------------------------------------------------------------------------------------
+    def vars_for_template(self):
+
+        # unzip <mpl_choices> into list of lists
+        choices = [list(t) for t in zip(*self.participant.vars['mpl_choices'])]
+        indices = choices[0]
+        # get index, round, and choice to pay
+        index_to_pay = self.player.participant.vars['mpl_index_to_pay']
+        round_to_pay = indices.index(index_to_pay) + 1
+        choice_to_pay = self.participant.vars['mpl_choices'][round_to_pay - 1]
+        decision = choice_to_pay[0]
+
+        if Constants.one_choice_per_page:
+            return {
+                'choice_to_pay':  [choice_to_pay],
+                'option_to_pay':  self.player.in_round(round_to_pay).option_to_pay,
+                'payoff':         self.player.in_round(round_to_pay).payoff,
+                'decision':       decision
+            }
+        else:
+            return {
+                'choice_to_pay':  [choice_to_pay],
+                'option_to_pay':  self.player.option_to_pay,
+                'payoff':         math.trunc(self.player.payoff),
+                'decision':       decision,
+                'pelota':         self.player.ball
+            }     
 
 class Consent(Page):
     form_model = 'player' #Le dice que es un jugador
@@ -269,8 +345,8 @@ class PlayCoin(Page):
 # *** PAGE SEQUENCE *** #Usted obtuvo invertió {{inversion }}y obtuvo {{cara_sello}} 
 # por lo que su pago en esta activdad es de {{cara_sello_payoff}} y su pago total es {{combined_payoff}}
 # ******************************************************************************************************************** #
-# page_sequence = [Instructions, Decision, Results,Tips,ResultsTips, DoubleMoney,HeadTails,ResultsDoubleMoney, Instructions, Decision, Results, CombinedResults, TotalPayoff]
-page_sequence = [Consent,Priming,Tips,ResultsTips, PlayCoin, DoubleMoney,HeadTails,ResultsDoubleMoney, Instructions, Decision, Results, CombinedResults, TotalPayoff, SocioDemSurvey, ReminderNequi, TotalPayoff]
+# page_sequence = [HeadTails, Instructions, Decision, Results,Tips,ResultsTips, DoubleMoney,HeadTails,ResultsDoubleMoney, Instructions, Decision, Results, CombinedResults, TotalPayoff]
+page_sequence = [Consent,Priming,Tips,ResultsTips, PlayCoin, DoubleMoney,HeadTails,ResultsDoubleMoney, Instructions, Decision, Results3, Results2, Results , CombinedResults, TotalPayoff, SocioDemSurvey, ReminderNequi, TotalPayoff]
 # if Constants.instructions:
 #     page_sequence.insert(0, Instructions)
 

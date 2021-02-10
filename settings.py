@@ -15,8 +15,14 @@ SESSION_CONFIGS = [
         app_sequence=['lideres_sociales'],
     ),
     # dict(
-    #     name='prisoner',
+    #     name='myprisoners_dilemma',
     #     display_name="Gift-exchange game",
+    #     num_demo_participants=4,
+    #     app_sequence=['myprisoners_dilemma'],
+    # ),
+    # dict(
+    #     name='prisoner',
+    #     display_name="Epa",
     #     num_demo_participants=4,
     #     app_sequence=['prisoner'],
     # ),
@@ -27,17 +33,35 @@ dict(
         app_sequence=['experimiento_1']
     ),
 dict(
+        name='laboratorio',
+        display_name="Experimento Nicolas",
+        num_demo_participants=1,
+        app_sequence=['laboratorio'],
+    ),
+dict(
         name='real_effort_numbers',
         display_name="Gift-exchange Game T-T",
-        num_demo_participants=4,
+        num_demo_participants=12,
         app_sequence=['real_effort_numbers']
-    ),    
-    # dict(
-    #     name='cem',
-    #     display_name="Certainty Equivalent Method",
-    #     num_demo_participants=1,
-    #     app_sequence=['cem'],
-    # ),
+    ),
+dict(
+        name='real_effort_numbers_t_nt',
+        display_name="Gift-exchange Game T-NT",
+        num_demo_participants=12,
+        app_sequence=['real_effort_numbers_t_nt']
+    ), 
+dict(
+        name='real_effort_numbers_nt_t',
+        display_name="Gift-exchange Game NT-T",
+        num_demo_participants=12,
+        app_sequence=['real_effort_numbers_nt_t']
+    ), 
+dict(
+        name='real_effort_numbers_nt_nt',
+        display_name="Gift-exchange Game NT-NT",
+        num_demo_participants=12,
+        app_sequence=['real_effort_numbers_nt_nt']
+    ),                 
     # dict(
     #     name='public_goods',
     #     display_name="Public Goods",
@@ -66,6 +90,8 @@ dict(
 SESSION_CONFIG_DEFAULTS = dict(
     real_world_currency_per_point=1, participation_fee=0.00, doc=""
 )
+
+ROOT_URLCONF = 'urls'
 
 # ISO-639 code
 # for example: de, fr, ja, ko, zh-hans

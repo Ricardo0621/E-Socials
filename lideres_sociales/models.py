@@ -38,6 +38,7 @@ class Player(BasePlayer):
 # ******************************************************************************************************************** #
     num_temporal = models.IntegerField(label= "Por favor, ingrese el numero de identificación temporal que le llegó en el correo de invitación")
     accepts_terms = models.BooleanField()
+    tratamiento = models.StringField()
     # ******************************************************************************************************************** #
 # *** Variables Cuestionario
 # ******************************************************************************************************************** #
