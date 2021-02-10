@@ -7,7 +7,13 @@
 
 {% block body %}
     <p>
-        En el momento usted cuenta con {{ player.payoff }}COP y ha retirado un total de {{ player.disbursement }}COP
+        En el momento usted cuenta con <b>{{ player.payoff }}COP</b> y ha retirado un total de
+        <b>{{ player.disbursement }}COP</b>
+    </p>
+    <p>
+        La actividad total consta de 3 sesiones de aproximadamente 15 minutos cada
+        una. A continuación, le presentamos las siguientes opciones de pago para este
+        trabajo. Por favor, lea atentamente y marque la opción deseada.
     </p>
     <div class="row">
         <div class="col-12">
@@ -18,6 +24,29 @@
         </div>
     </div>
     <div style="display: None" id="confirm_button">
+        <button id="confirm_button" type="button" class="btn btn-primary" data-toggle="modal"
+                data-target="#exampleModal">Confirmar
+        </button>
+    </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Por favor responda correctamente esta encuenta para
+                        continuar</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="surveyElement" style="display:inline-block;width:100%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="display: none">
         {% next_button %}
     </div>
 {% endblock %}
@@ -76,5 +105,90 @@
             type: 'pie',
             data: data,
         });
+    </script>
+    <script type="text/javascript" src="https://surveyjs.azureedge.net/1.1.13/survey.jquery.min.js">
+
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            Survey
+                .StylesManager
+                .applyTheme("default");
+
+            var json = {
+                pages: [
+                    {
+                        questions: [
+                            {
+                                type: "radiogroup",
+                                name: "civilwar",
+                                title: "¿Cuántas opciones de pago podrá escoger?",
+                                choices: [
+                                    "1", "2", "3"
+                                ],
+                                "isRequired": true,
+                                correctAnswer: "3"
+                            },
+                            {
+                                type: "radiogroup",
+                                title: "¿Cuánto dinero recibirá por cada $100 pesos que usted decida guardar?",
+                                choicesOrder: "random",
+                                choices: [
+                                    "50 pesos", "25 pesos", "45 pesos"
+                                ],
+                                "isRequired": true,
+                                correctAnswer: "50 pesos"
+                            },
+                            {
+                                type: "radiogroup",
+                                title: "¿Cuándo es posible retirar el monto ahorrado?",
+                                choices: [
+                                    "En la siguiente sesión", "Al final de la tercera sesión", "Todas las anteriores"
+                                ],
+                                "isRequired": true,
+                                correctAnswer: "Al final de la tercera sesión"
+                            },
+                            {
+                                type: "radiogroup",
+                                title: "Por favor, indique cuánto será el salario por cada sesión realizada",
+                                choicesOrder: "random",
+                                choices: [
+                                    "$2.500", "$3.000", "$4.000"
+                                ],
+                                "isRequired": true,
+                                correctAnswer: "$4.000"
+                            },
+                            {
+                                type: "text",
+                                title: "Por favor, indique el número de sesiones que hará semanalmente",
+                                correctAnswer: "1"
+                            },
+                            {
+                                type: "text",
+                                title: "Por favor, indique el total de sesiones de la actividad",
+                                correctAnswer: "3"
+                            },
+                            {
+                                type: "text",
+                                title: "Por favor, indique el tiempo aproximado que dura cada sesión (en minutos)",
+                                correctAnswer: "15"
+                            },
+                        ]
+                    }
+                ]
+            };
+
+            window.survey = new Survey.Model(json);
+            $("#surveyElement").Survey({
+                model: survey, onValidateQuestion: function (s, options) {
+                    if (options.value != options.question.correctAnswer) {
+                        options.error = "La respuesta es incorrecta.";
+                    }
+                }, onComplete: function (s, options) {
+                    $('.otree-btn-next').trigger('click')
+                }
+            });
+        })
+
     </script>
 {% endblock local_scripts %}

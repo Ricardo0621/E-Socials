@@ -12,7 +12,8 @@
         sesiones, con una duración de 15 minutos cada una. El salario será de $4.000 por
         sesión. Con fecha de iniciación de labores a los {{ player.experiment_start_date|date:"d" }} días , del
         {{ player.experiment_start_date|date:"m" }} mes de {{ player.experiment_start_date|date:"Y" }} y
-        fecha de culminación a los {{ player.experiment_end_date|date:"d" }} días del mes {{ player.experiment_end_date|date:"m" }} de
+        fecha de culminación a los {{ player.experiment_end_date|date:"d" }} días del
+        mes {{ player.experiment_end_date|date:"m" }} de
         {{ player.experiment_end_date|date:"Y" }}. Las labores a desempeñar
         se realizan totalmente de forma virtual.
         {% if player.contract_type == 0 %}
@@ -22,7 +23,7 @@
             <br/>
             En la parte inferior puede ver una copia de su contrato
             <br/>
-            <object style="min-height: 800px; margin-top: 15px" data="{% static 'experimiento_1/contrato.pdf' %}"
+            <object style="min-height: 800px; margin-top: 15px" data="{% static 'experimento_1/contrato.pdf' %}"
                     type="application/pdf" width="100%" height="100%">
                 <p>Alternative text - include a link <a href="https://drive.google.com/uc?export=download&id=1aWiIQRWRjYbo0MhR5Ql6WD4Bxo5Gn7-E">to the
                     PDF!</a>
@@ -33,12 +34,12 @@
         <br>
         <br>
         <br>
-        <button id="confirm_button" type="button" class="btn btn-primary" data-toggle="modal"
-                data-target="#exampleModal">
-            Confirmar
-        </button>
-    </div>
-    <div style="display: none">
+
+        <p>
+            La actividad total consta de 3 sesiones de aproximadamente 15 minutos cada
+            una. A continuación, le presentamos las siguientes opciones de pago para este
+            trabajo. Por favor, lea atentamente y marque la opción deseada.
+        </p>
         {% next_button %}
     </div>
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -94,7 +95,7 @@
                                     "50 pesos", "25 pesos", "45 pesos"
                                 ],
                                 "isRequired": true,
-                                correctAnswer: "50 pesos"
+                                correctAnswer: {% if player.intermedio_actual == 1 %} "50 pesos" {% else %} "25 pesos" {% endif %}
                             },
                             {
                                 type: "radiogroup",
@@ -103,7 +104,7 @@
                                     "En la siguiente sesión", "Al final de la tercera sesión", "Todas las anteriores"
                                 ],
                                 "isRequired": true,
-                                correctAnswer: "Todas las anteriores"
+                                correctAnswer: "Al final de la tercera sesión"
                             },
                             {
                                 type: "radiogroup",
