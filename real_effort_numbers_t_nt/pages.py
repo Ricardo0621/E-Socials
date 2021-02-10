@@ -234,41 +234,41 @@ class CombinedResults2(Page):
 
         #Jugador X sin contrato
         if player.id_in_group == 1 and opponent_contract_decision == False:
-            print("11" + "Ba") 
+            # print("11" + "Ba") 
             self.player.payment_stage_2 = 2500 - (20 * total_sums_2 )
             contrato = 0
 
          #Jugador Y sin contrato
         if player.id_in_group == 2 and pay_contract == False:
             self.player.payment_stage_2 = -2500 + (100 * correct_answers_opponent )
-            print("22" + "Be")
+            # print("22" + "Be")
             contrato = 0
 
         #Jugador X cumple con sumas
         if player.id_in_group == 1 and opponent_contract_decision == True:
             if correct_answers >= Constants.sumas_obligatorias_contrato:
-                print(33) 
+                # print(33) 
                 self.player.payment_stage_2 = 2500 - (20 * total_sums_2 )
                 contrato = 2500
         
         #Jugador X no cumple con sumas
         if player.id_in_group == 1 and opponent_contract_decision == True:
             if correct_answers < Constants.sumas_obligatorias_contrato: 
-                print(44)
+                # print(44)
                 self.player.payment_stage_2 = -2500
                 contrato = 2500
         
         #Y: Jugador X cumple con sumas
         if player.id_in_group == 2 and pay_contract == True:
             if correct_answers_opponent >= Constants.sumas_obligatorias_contrato: 
-                print(55)
+                # print(55)
                 self.player.payment_stage_2 = -5000 + (100 * correct_answers_opponent )
                 contrato = 2500
 
         #Y: Jugador X no cumple con sumas
         if player.id_in_group == 2 and pay_contract == True:
             if correct_answers_opponent < Constants.sumas_obligatorias_contrato: 
-                print(66)
+                # print(66)
                 self.player.payment_stage_2 = 0
                 contrato = 2500
 
