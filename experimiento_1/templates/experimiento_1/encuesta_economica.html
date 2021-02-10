@@ -21,6 +21,17 @@
 
     </script>
     <script type="text/javascript">
+        function surveyValidateQuestion(s, options) {
+            if (options.question.hasRows) {
+                var question = s.getQuestionByName(options.name);
+                if (!question.rows.every(function (row) {
+                    return (options.value || {})[row.itemValue] !== undefined;
+                })) {
+                    options.error = "Todas las preguntas deben responderse";
+                }
+            }
+        }
+
         $(document).ready(function () {
             Survey
                 .StylesManager
@@ -31,60 +42,26 @@
                     {
                         questions: [
                             {
-                                type: "matrixdropdown",
-                                title: "De acuerdo con su cotidianidad en los últimos cuatro años, por favor evalúe la frecuencia\n" +
-                                    "con la que usted realiza las siguientes acciones. Escoja un número entre el 1 y el 5, siendo\n" +
-                                    "1 “nunca la hice”, y 5 “las hago/he hecho todo el tiempo”.",
-                                columns: [
-                                    {
-                                        choices: ["1", "2", "3", "4", "5"]
-                                    }
-                                ],
-                                rows: [
-                                    "Comprar a vendedores ambulantes",
-                                    "Tirar basura en la calle",
-                                    "Trabajar y recibir un pago sin que haya firmado un contrato formal (pintar una casa, realizar un reporte, etc.)",
-                                    "Silbar o decirle un piropo a un (a) desconocido (a) en la calle",
-                                    "Darle trabajo a alguien y pagarle sin pedirle que firme un contrato formal (pintar una casa, realizar un reporte, etc.)",
-                                    "Consumir cerveza, aguardiente, ron u otras bebidas alcohólicas en un andén o parque",
-                                    "No cotizar al sistema de pensiones",
-                                    "No aportar al sistema de salud",
-                                    "No ceder un asiento preferente a una embarazada o un(a) anciano(a) se sube al bus",
-                                    "Colarse en las filas",
-                                    "No tener cuenta bancaria",
-                                    "Pedir dinero prestado a prestamistas informales (ejemplo: gota a gota)",
-                                    "No recoger los desechos de las mascotas",
-                                    "Usar transportes alternativos como piratas o mototaxis",
-                                    "Vender cosas o hacer negocios de manera informal",
-                                    "No votar",
-                                    "Ir a eventos políticos para conseguir empleo/beneficios personales",
-                                    "Comprar productos sin factura",
-                                    "Subarrendar una habitación",
-                                    "Vivir en una habitación subarrendada",
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        questions: [
-                            {
                                 type: "radiogroup",
                                 title: "¿Cuál es su sexo?",
                                 choices: [
                                     "Masculino", "Femenino"
                                 ],
-                                "isRequired": true,
+                                isRequired: true,
                             },
                             {
                                 type: "text",
                                 title: "¿Cuántos años cumplidos tiene usted?",
+                                isRequired: true,
                             },
                             {
                                 type: "text",
                                 title: "¿En qué ciudad vive actualmente?",
+                                isRequired: true,
                             }, {
                                 type: "text",
                                 title: "¿Cuál es el estrato de la vivienda en la cual habita actualmente?",
+                                isRequired: true,
                             },
                             {
                                 type: "radiogroup",
@@ -97,10 +74,12 @@
                             {
                                 type: "text",
                                 title: "¿Cuántos hijos tiene usted?",
+                                isRequired: true,
                             },
                             {
                                 type: "radiogroup",
                                 title: "De acuerdo con su cultura o rasgos físicos, usted es o se reconoce como",
+                                isRequired: true,
                                 colCount: 3,
                                 choices: ["Afro-colombiano",
                                     "Indígena",
@@ -115,6 +94,7 @@
                             {
                                 type: "radiogroup",
                                 title: "¿En cuál de los siguientes grupos se identifica usted?",
+                                isRequired: true,
                                 colCount: 3,
                                 choices: [
                                     "Católico",
@@ -142,7 +122,6 @@
                                     "\"derecha\" cuando piensa sobre su punto de vista político, ¿dónde se encontraría usted en esta escala?\n",
                                 "rateMin": 1,
                                 "rateMax": 10,
-
                                 "isRequired": true,
                                 "minRateDescription": "Izquierda",
                                 "maxRateDescription": "Derecha"
@@ -164,15 +143,18 @@
                                     "Pregrado completo",
                                     "Postgrado completo",
                                     "Posgrado incompleto",
-                                ]
+                                ],
+                                isRequired: true,
                             },
                             {
                                 type: 'text',
-                                title: "¿Cuál es el nombre de la entidad en la que usted trabaja?"
+                                title: "¿Cuál es el nombre de la entidad en la que usted trabaja?",
+                                isRequired: true,
                             },
                             {
                                 type: 'text',
-                                title: "¿Cuánto tiempo lleva trabajando en esta entidad?"
+                                title: "¿Cuánto tiempo lleva trabajando en esta entidad?",
+                                isRequired: true,
                             },
                             {
                                 type: "radiogroup",
@@ -183,11 +165,13 @@
                                     "Contrato a término fijo",
                                     "Contrato de obra o labor",
                                     "Contrato por prestación de servicios",
-                                ]
+                                ],
+                                isRequired: true,
                             },
                             {
                                 type: 'text',
-                                title: "¿Cuántas horas a la semana trabaja normalmente en este trabajo?"
+                                title: "¿Cuántas horas a la semana trabaja normalmente en este trabajo?",
+                                isRequired: true,
                             },
 
                             {
@@ -210,7 +194,8 @@
                                     "Entre 1.600.001 y 2.000.000",
                                     "Entre 2.000.001 y 3.150.000",
                                     "Más de 3.150.000",
-                                ]
+                                ],
+                                isRequired: true,
                             },
                             {
                                 title: "¿Está conforme con su tipo de contrato?",
@@ -218,7 +203,8 @@
                                 choices: [
                                     "Sí",
                                     "No",
-                                ]
+                                ],
+                                isRequired: true,
                             },
                             {
                                 title: "¿Considera que su empleo actual es estable?",
@@ -226,7 +212,8 @@
                                 choices: [
                                     "Sí",
                                     "No",
-                                ]
+                                ],
+                                isRequired: true,
                             },
                             {
                                 title: "De acuerdo con su contrato actual, usted recibe o tiene derecho a algunas de las siguientes opciones",
@@ -236,7 +223,8 @@
                                     "Prima de navidad",
                                     "Cesantías",
                                     "Vacaciones con sueldo",
-                                ]
+                                ],
+                                isRequired: true,
                             },
                             {
                                 title: "¿Cuáles de los siguientes productos financieros utiliza usted o algún miembro del hogar actualmente?",
@@ -251,7 +239,8 @@
                                     "Préstamo de libre inversión",
                                     "Tarjeta de crédito.",
                                     "Otro",
-                                ]
+                                ],
+                                isRequired: true,
                             },
                             {
                                 title: "¿Qué está haciendo usted actualmente para mantener económicamente en su vejez?",
@@ -266,7 +255,8 @@
                                     "Preparando a sus hijos para que pueda mantenerlo en su vejes",
                                     "Otro",
                                     "Nada",
-                                ]
+                                ],
+                                isRequired: true,
                             },
                             {
                                 type: "rating",
@@ -275,13 +265,15 @@
                                 "rateMin": 1,
                                 "rateMax": 10,
                                 "minRateDescription": "Para nada dispuesto",
-                                "maxRateDescription": "Totalment dispuesto"
+                                "maxRateDescription": "Totalment dispuesto",
+                                isRequired: true,
                             },
                         ]
                     },
                     {
                         questions: [
                             {
+                                isRequired: true,
                                 type: "matrix",
                                 title: ". Por favor, indique en qué medida está de acuerdo o no con cada una de las siguientes 10 afirmaciones",
                                 columns: [
@@ -344,6 +336,7 @@
                     {
                         questions: [
                             {
+                                isRequired: true,
                                 type: "matrix",
                                 title: "Por favor, indique en qué medida está de acuerdo o no con cada una de las siguientes 10 afirmaciones",
                                 columns: [
@@ -409,14 +402,11 @@
                     {
                         questions: [
                             {
-                                type: "matrixdropdown",
+                                isRequired: true,
+                                type: "matrix",
                                 title: "Responda en una escala de 1 a 5, donde 1 corresponde a ser “muy deshonesto” y 5 corresponde ser “muy honesto”.",
 
-                                columns: [
-                                    {
-                                        choices: [1, 2, 3, 4, 5]
-                                    }
-                                ],
+                                columns: [1, 2, 3, 4, 5],
                                 rows: [
                                     "Iglesia/ organizaciones religiosas",
                                     "Defensa pública",
@@ -446,24 +436,7 @@
                     {
                         questions: [
                             {
-                                type: "matrixdropdown",
-                                title: "Comprar a vendedores ambulantes",
-                                columns: [
-                                    {
-                                        choices: ["Completamente inapropiado", "Poco inapropiado", "Ni apropiado ni inapropiado", "Poco apropiado", "Completamente apropiado"]
-                                    }
-                                ],
-                                rows: [
-                                    "¿Ha realizado las siguientes situaciones o acciones en los últimos 4 años?",
-                                    "¿Cuántas personas de su entorno cree usted que piensan que es apropiado hacerlas?",
-                                    "¿Cree usted que es ilegal hacerlas?"
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        questions: [
-                            {
+                                isRequired: true,
                                 type: "matrixdropdown",
                                 title: "Trabajar y recibir un pago sin que haya firmado un contrato formal (pintar una casa, realizar un reporte, etc.)",
                                 columns: [
@@ -482,6 +455,7 @@
                     {
                         questions: [
                             {
+                                isRequired: true,
                                 type: "matrixdropdown",
                                 title: "Darle trabajo a alguien y pagarle sin pedirle que firme un contrato formal (pintar una casa, realizar un reporte, etc.)",
                                 columns: [
@@ -500,6 +474,58 @@
                     {
                         questions: [
                             {
+                                type: "matrix",
+                                title: "De acuerdo con su cotidianidad en los últimos cuatro años, por favor evalúe la frecuencia\n" +
+                                    "con la que usted realiza las siguientes acciones. Escoja un número entre el 1 y el 5, siendo\n" +
+                                    "1 “nunca la hice”, y 5 “las hago/he hecho todo el tiempo”.",
+                                columns: [
+                                    {
+                                        value: 1,
+                                        text: "nunca la hice"
+                                    }, {
+                                        value: 2,
+                                        text: "lo he hecho alguna vez"
+                                    }, {
+                                        value: 3,
+                                        text: "lo he hecho varias veces "
+                                    }, {
+                                        value: 4,
+                                        text: "lo he hecho todo el tiempo"
+                                    }, {
+                                        value: 5,
+                                        text: "las hago/he hecho todo el tiempo"
+                                    }
+                                ],
+                                rows: [
+                                    "Comprar a vendedores ambulantes",
+                                    "Tirar basura en la calle",
+                                    "Trabajar y recibir un pago sin que haya firmado un contrato formal (pintar una casa, realizar un reporte, etc.)",
+                                    "Silbar o decirle un piropo a un (a) desconocido (a) en la calle",
+                                    "Darle trabajo a alguien y pagarle sin pedirle que firme un contrato formal (pintar una casa, realizar un reporte, etc.)",
+                                    "Consumir cerveza, aguardiente, ron u otras bebidas alcohólicas en un andén o parque",
+                                    "No cotizar al sistema de pensiones",
+                                    "No aportar al sistema de salud",
+                                    "No ceder un asiento preferente a una embarazada o un(a) anciano(a) se sube al bus",
+                                    "Colarse en las filas",
+                                    "No tener cuenta bancaria",
+                                    "Pedir dinero prestado a prestamistas informales (ejemplo: gota a gota)",
+                                    "No recoger los desechos de las mascotas",
+                                    "Usar transportes alternativos como piratas o mototaxis",
+                                    "Vender cosas o hacer negocios de manera informal",
+                                    "No votar",
+                                    "Ir a eventos políticos para conseguir empleo/beneficios personales",
+                                    "Comprar productos sin factura",
+                                    "Subarrendar una habitación",
+                                    "Vivir en una habitación subarrendada",
+                                ],
+                                isRequired: true,
+                            }
+                        ]
+                    },
+                    {
+                        questions: [
+                            {
+                                isRequired: true,
                                 type: "matrixdropdown",
                                 title: "No cotizar al sistema de pensiones",
                                 columns: [
@@ -518,6 +544,7 @@
                     {
                         questions: [
                             {
+                                isRequired: true,
                                 type: "matrixdropdown",
                                 title: "No aportar al sistema de salud",
                                 columns: [
@@ -536,6 +563,7 @@
                     {
                         questions: [
                             {
+                                isRequired: true,
                                 type: "matrixdropdown",
                                 title: "No tener cuenta bancaria",
                                 columns: [
@@ -554,6 +582,7 @@
                     {
                         questions: [
                             {
+                                isRequired: true,
                                 type: "matrixdropdown",
                                 title: "Pedir dinero prestado a prestamistas informales (ejemplo: gota a gota)",
                                 columns: [
@@ -572,6 +601,7 @@
                     {
                         questions: [
                             {
+                                isRequired: true,
                                 type: "matrixdropdown",
                                 title: "Usar transportes alternativos como piratas o mototaxis",
                                 columns: [
@@ -590,6 +620,7 @@
                     {
                         questions: [
                             {
+                                isRequired: true,
                                 type: "matrixdropdown",
                                 title: "Vender cosas o hacer negocios de manera informal",
                                 columns: [
@@ -607,6 +638,7 @@
                     }, {
                         questions: [
                             {
+                                isRequired: true,
                                 type: "matrixdropdown",
                                 title: "No votar",
                                 columns: [
@@ -624,6 +656,7 @@
                     }, {
                         questions: [
                             {
+                                isRequired: true,
                                 type: "matrixdropdown",
                                 title: "Comprar productos sin factura",
                                 columns: [
@@ -642,6 +675,7 @@
                     {
                         questions: [
                             {
+                                isRequired: true,
                                 type: "matrix",
                                 name: "Quality",
                                 title: "Por favor, indique en qué medida está de acuerdo o no con cada una de las siguientes 10 afirmaciones",
@@ -667,34 +701,12 @@
                                     }
                                 ],
                                 rows: [
-                                    {
-                                        value: 'a.',
-                                        text: 'Esta persona cree que es importante no pedir mas de lo que se tiene. Considera que los demás ' +
-                                            'deberían estar satisfechas con lo que tienen'
-                                    },
-                                    {
-                                        value: 'b.',
-                                        text: 'Es importante para esta persona siempre comportarse apropiadamente. Quiere evitar hacer lo ' +
-                                            'que los demás podrían decir que está mal.'
-                                    },
-                                    {
-                                        value: 'c.',
-                                        text: 'Las creencias religiosas son importantes para esta persona. Se esfuerza por hacer lo que la religión requiere.'
-                                    },
-                                    {
-                                        value: 'd.',
-                                        text: 'Considera que siempre debería respetar a sus padres y a las personas mayores. Es importante ' +
-                                            'para esta persona ser obediente.'
-                                    },
-                                    {
-                                        value: 'e.',
-                                        text: 'Esta persona piensa que es mejor hacer las cosas de manera tradicional. Es importante mantener ' +
-                                            'las costumbres que aprendió..'
-                                    },
-                                    {
-                                        value: 'f.',
-                                        text: 'Es importante para esta persona ser amable con los demás todo el tiempo. Intenta no molestar o irritar a los demás. '
-                                    },
+                                    'Esta persona cree que es importante no pedir mas de lo que se tiene. Considera que los demás deberían estar satisfechas con lo que tienen',
+                                    'Es importante para esta persona siempre comportarse apropiadamente. Quiere evitar hacer lo que los demás podrían decir que está mal.',
+                                    'Las creencias religiosas son importantes para esta persona. Se esfuerza por hacer lo que la religión requiere.',
+                                    'Considera que siempre debería respetar a sus padres y a las personas mayores. Es importante para esta persona ser obediente.',
+                                    'Esta persona piensa que es mejor hacer las cosas de manera tradicional. Es importante mantener las costumbres que aprendió.',
+                                    'Es importante para esta persona ser amable con los demás todo el tiempo. Intenta no molestar o irritar a los demás. '
                                 ]
                             }
                         ]
@@ -705,7 +717,8 @@
             json.pages = json.pages.map(e => {
                 e.questions = e.questions.map(k => {
                     k.name = "" + counter;
-                    counter++;
+                    counter += 1;
+                    k.isRequired = true;
                     return k
                 })
                 return e;
@@ -715,9 +728,20 @@
             $("#surveyElement"
             ).Survey({
                 model: survey, onComplete: function (result) {
-                    $('#id_survey').val(JSON.stringify(result.data))
+                    let data = {}
+                    Object.keys(result.data).forEach(function (key) {
+                        if (typeof result.data[key] == "object") {
+                            Object.values(result.data[key]).map((v, i) => {
+                                data[key + "." + i] = v
+                            })
+                        } else {
+                            data[key] = result.data[key]
+                        }
+                    });
+                    $('#id_survey').val(JSON.stringify(data))
                     $('.otree-btn-next').trigger('click')
-                }
+                },
+                onValidateQuestion: surveyValidateQuestion
             });
         })
 
