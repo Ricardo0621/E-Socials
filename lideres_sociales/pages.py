@@ -61,37 +61,46 @@ class Video(Page):
         self.player.contador_femenino = Player.objects.filter(genero__exact='Femenino').count()
         link = ""
         if self.player.genero == 'Masculino':
-            if self.player.contador_masculino >= 1 and self.player.contador_masculino <= 30:
+            if self.player.contador_masculino >= 1 and self.player.contador_masculino <= 46:
                 self.player.tratamiento = "Empatía"
                 link = "https://drive.google.com/file/d/1G2QVdfV6rorWWN7bEnR7CWgK3v1ga8nD/preview"
 
-            if self.player.contador_masculino >= 31 and self.player.contador_masculino <= 60:
+            if self.player.contador_masculino >= 47 and self.player.contador_masculino <= 92:
                 self.player.tratamiento = "Expectativa Normativa"
                 link = "https://drive.google.com/file/d/1VMIP4xuGVDLpujrHuH5AqWyRHK7hLaYs/preview"
 
-            if self.player.contador_masculino >= 61 and self.player.contador_masculino <= 90:
+            if self.player.contador_masculino >= 93 and self.player.contador_masculino <= 138:
                 self.player.tratamiento = "Expectativa Empírica"
                 link = "https://drive.google.com/file/d/1p6GEkyC4hnrMF_2kfjlCrfa2myktLWEU/preview"
 
-            if self.player.contador_masculino >= 91 and self.player.contador_masculino <= 120:
+            if self.player.contador_masculino >= 139 and self.player.contador_masculino <= 184:
                 self.player.tratamiento = "Informacional"
                 link = "https://drive.google.com/file/d/19xw56Bwt9Ea8Fhy_M88nTsj5YHZutbWp/preview"
+
+            if self.player.contador_masculino >= 185 and self.player.contador_masculino <= 230:
+                self.player.tratamiento = "Línea Base"
+                link = "https://drive.google.com/file/d/1QV5g_iR9a5zDO62W7-sEafQaRNHkGNwm/preview"
+                
         else:
-            if self.player.contador_femenino >= 1 and self.player.contador_femenino <= 30:
+            if self.player.contador_femenino >= 1 and self.player.contador_femenino <= 46:
                 self.player.tratamiento = "Empatía"
                 link = "https://drive.google.com/file/d/1G2QVdfV6rorWWN7bEnR7CWgK3v1ga8nD/preview"
 
-            if self.player.contador_femenino >= 31 and self.player.contador_femenino <= 60:
+            if self.player.contador_femenino >= 47 and self.player.contador_femenino <= 92:
                 self.player.tratamiento = "Expectativa Normativa"
                 link = "https://drive.google.com/file/d/1VMIP4xuGVDLpujrHuH5AqWyRHK7hLaYs/preview"
 
-            if self.player.contador_femenino >= 61 and self.player.contador_femenino <= 90:
+            if self.player.contador_femenino >= 93 and self.player.contador_femenino <= 138:
                 self.player.tratamiento = "Expectativa Empírica"
                 link = "https://drive.google.com/file/d/1p6GEkyC4hnrMF_2kfjlCrfa2myktLWEU/preview"
                 
-            if self.player.contador_femenino >= 91 and self.player.contador_femenino <= 120:
+            if self.player.contador_femenino >= 139 and self.player.contador_femenino <= 184:
                 self.player.tratamiento = "Informacional"
                 link = "https://drive.google.com/file/d/19xw56Bwt9Ea8Fhy_M88nTsj5YHZutbWp/preview"
+
+            if self.player.contador_femenino >= 185 and self.player.contador_femenino <= 230:
+                self.player.tratamiento = "Línea Base"
+                link = "https://drive.google.com/file/d/1QV5g_iR9a5zDO62W7-sEafQaRNHkGNwm/preview"    
 
         return {
             'contador_masculino' : self.player.contador_masculino,
