@@ -2,7 +2,7 @@
 {% load otree %}
 
 {% block title %}
-    Sesion {{ player.intermedio_actual }}
+    Opciones de pago sesión {{ player.intermedio_actual }}
 {% endblock %}
 
 {% block body %}
@@ -11,6 +11,7 @@
         <b>{{ player.disbursement }}COP</b>
     </p>
     <p>
+        
         La actividad total consta de 3 sesiones de aproximadamente 15 minutos cada
         una. A continuación, le presentamos las siguientes opciones de pago para este
         trabajo. Por favor, lea atentamente y marque la opción deseada.
@@ -34,7 +35,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Por favor responda correctamente esta encuenta para
+                    <h5 class="modal-title" id="exampleModalLabel">Por favor responda correctamente esta encuesta para
                         continuar</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -137,8 +138,8 @@
                                     "50 pesos", "25 pesos", "45 pesos"
                                 ],
                                 "isRequired": true,
-                                correctAnswer: "50 pesos"
-                            },
+                                correctAnswer:  {% if player.intermedio_actual == 1 %} "50 pesos" {%else %} "25 pesos" {% endif %}
+                            },                            
                             {
                                 type: "radiogroup",
                                 title: "¿Cuándo es posible retirar el monto ahorrado?",
