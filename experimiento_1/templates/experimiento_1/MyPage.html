@@ -7,8 +7,8 @@
 
 {% block body %}
     <div id="content1">
-        <h1>Bienvenido.</h1>
-        Usted desempeñará la labor de digitador (a), trabajando por un periodo de 3
+        <h1>Bienvenido (a) </h1>
+        Estimado participante, usted desempeñará la labor de digitador (a), trabajando por un periodo de 3
         sesiones, con una duración de 15 minutos cada una. El salario será de $4.000 por
         sesión. Con fecha de iniciación de labores a los {{ player.experiment_start_date|date:"d" }} días , del
         {{ player.experiment_start_date|date:"m" }} mes de {{ player.experiment_start_date|date:"Y" }} y
@@ -34,13 +34,22 @@
         <br>
         <br>
         <br>
+        {% next_button %}
+        
 
-        <p>
+
+{% endblock %}
+
+{% block local_scripts %}
+    <div id="content2">
+
+        <h1>Opciones de pago</h1>
+<p>
             La actividad total consta de 3 sesiones de aproximadamente 15 minutos cada
             una. A continuación, le presentamos las siguientes opciones de pago para este
             trabajo. Por favor, lea atentamente y marque la opción deseada.
         </p>
-        {% next_button %}
+        
     </div>
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
@@ -59,11 +68,8 @@
             </div>
         </div>
     </div>
+     
 
-
-{% endblock %}
-
-{% block local_scripts %}
     <script type="text/javascript" src="https://surveyjs.azureedge.net/1.1.13/survey.jquery.min.js">
 
     </script>
@@ -95,7 +101,7 @@
                                     "50 pesos", "25 pesos", "45 pesos"
                                 ],
                                 "isRequired": true,
-                                correctAnswer: {% if player.intermedio_actual == 1 %} "50 pesos" {% else %} "25 pesos" {% endif %}
+                                correctAnswer: {% if player.intermedio_actual == 1 %} "50 pesos" {%else %} "25 pesos" {% endif %}
                             },
                             {
                                 type: "radiogroup",

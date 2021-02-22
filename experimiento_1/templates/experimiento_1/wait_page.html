@@ -2,6 +2,7 @@
 {% load otree %}
 
 {% block title %}
+
     {% if not can_access %}
         Usted debe esperar hasta {{ day_available|date:"D d M Y" }} para continuar
     {% endif %}

@@ -2,17 +2,15 @@
 {% load otree %}
 
 {% block title %}
-    Sesion numero 1
+ Documento a digitalizar
 {% endblock %}
 
 {% block body %}
     {{ text_info }}
-    <p>
-        En el momento usted cuenta con <b>{{ player.payoff }}COP</b> y ha retirado un total de <b>{{ player.disbursement }}COP</b>
-    </p>
+ 
     <div style="margin-top: 40px" class="row">
         <div class="col-md-12">
-            <h3>Documento a digitalizar</h3>
+           
         </div>
         <div class="col-md-4">
             {% csrf_token %}
@@ -27,7 +25,13 @@
         </div>
     </div>
     <br>
-
+    <br>
+    <br>
+   <p>
+        En el momento usted cuenta con <b>{{ player.payoff }}COP</b> y ha retirado un total de <b>{{ player.disbursement }}COP</b>
+    </p>
+    <br>
+    <br>
     {% next_button %}
 
 {% endblock %}

@@ -9,11 +9,16 @@ from otree import strict_templates
 from otree.api import (
     models,
     BaseConstants,
+    widgets,
     BaseSubsession,
     BaseGroup,
     BasePlayer, widgets,
+    Currency as c,
+    currency_range,
 )
 from otree.models import subsession
+from random import shuffle
+
 
 author = 'Your name here'
 
@@ -69,6 +74,12 @@ class Subsession(BaseSubsession):
             survey_values.append(s_item_array)
         return dict(survey_keys=json.dumps(survey_keys), survey_values=json.dumps(survey_values))
 
+class Constants(BaseConstants):
+    players_per_group = None
+    name_in_url = 'experimiento_1'
+    num_rounds = 1
+    experiment_days = 15
+
 
 class Group(BaseGroup):
 
@@ -110,6 +121,7 @@ class Player(BasePlayer):
         ],
         default=True)
     accepts_terms = models.BooleanField()
+  
 
     money_decision = models.IntegerField(choices=MONEY_DECISION_CHOICES, blank=False,
                                          verbose_name="Como desea reclamar su dinero?",
@@ -127,7 +139,8 @@ class Player(BasePlayer):
     monto_session_2 = django_models.IntegerField(default=0)
     updated_at = django_models.DateTimeField(auto_now=True)
     disbursement = models.CurrencyField(null=True, doc="Valor retirado", default=0)
-    survey = models.LongStringField()
+    survey = models.LongStringField() 
+    expectations= models.LongStringField() 
     tracker = FieldTracker()
 
     def start(self):
@@ -143,8 +156,5 @@ class Player(BasePlayer):
     @property
     def experiment_end_date(self):
         return self.experiment_start_date + timedelta(days=Constants.experiment_days)
-
-
-
-
-
+   
+  

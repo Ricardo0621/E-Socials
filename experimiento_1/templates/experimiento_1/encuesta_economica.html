@@ -2,7 +2,7 @@
 {% load otree %}
 
 {% block title %}
-    Encuesta socio economica.
+    Encuesta socio económica.
 {% endblock %}
 
 {% block body %}
@@ -37,7 +37,7 @@
                 .StylesManager
                 .applyTheme("default");
 
-            var json = {
+              var json = {
                 pages: [
                     {
                         questions: [
@@ -53,6 +53,7 @@
                                 type: "text",
                                 title: "¿Cuántos años cumplidos tiene usted?",
                                 isRequired: true,
+                                inputType: "number"
                             },
                             {
                                 type: "text",
@@ -62,6 +63,7 @@
                                 type: "text",
                                 title: "¿Cuál es el estrato de la vivienda en la cual habita actualmente?",
                                 isRequired: true,
+                                inputType: "number"
                             },
                             {
                                 type: "radiogroup",
@@ -75,6 +77,7 @@
                                 type: "text",
                                 title: "¿Cuántos hijos tiene usted?",
                                 isRequired: true,
+                                inputType: "number"
                             },
                             {
                                 type: "radiogroup",
@@ -153,8 +156,9 @@
                             },
                             {
                                 type: 'text',
-                                title: "¿Cuánto tiempo lleva trabajando en esta entidad?",
+                                title: "¿Cuánto tiempo lleva trabajando en esta entidad?(indique el número de meses)",
                                 isRequired: true,
+                                inputType: "number"
                             },
                             {
                                 type: "radiogroup",
@@ -172,8 +176,8 @@
                                 type: 'text',
                                 title: "¿Cuántas horas a la semana trabaja normalmente en este trabajo?",
                                 isRequired: true,
+                                inputType: "number"
                             },
-
                             {
 
                                 type: "radiogroup",
@@ -217,7 +221,7 @@
                             },
                             {
                                 title: "De acuerdo con su contrato actual, usted recibe o tiene derecho a algunas de las siguientes opciones",
-                                type: "radiogroup",
+                                type: "checkbox",
                                 colCount: 3,
                                 choices: [
                                     "Prima de navidad",
@@ -275,7 +279,7 @@
                             {
                                 isRequired: true,
                                 type: "matrix",
-                                title: ". Por favor, indique en qué medida está de acuerdo o no con cada una de las siguientes 10 afirmaciones",
+                                title: "Por favor, indique en qué medida está de acuerdo o no con cada una de las siguientes 10 afirmaciones",
                                 columns: [
                                     {
                                         value: 1,
@@ -398,7 +402,45 @@
                             }
                         ]
                     },
-
+                    {
+                        questions: [
+                            {
+                                isRequired: true,
+                                type: "matrix",
+                                name: "Quality",
+                                title: "Por favor, indique en qué medida está de acuerdo o no con cada una de las siguientes 10 afirmaciones",
+                                columns: [
+                                    {
+                                        value: 1,
+                                        text: "Para nada parecida"
+                                    }, {
+                                        value: 2,
+                                        text: "No es como yo"
+                                    }, {
+                                        value: 3,
+                                        text: "Poco parecida a mi"
+                                    }, {
+                                        value: 4,
+                                        text: "Algo parecida a mi"
+                                    }, {
+                                        value: 5,
+                                        text: "Es como yo"
+                                    }, {
+                                        value: 5,
+                                        text: "Es muy parecida a mi"
+                                    }
+                                ],
+                                rows: [
+                                    'Esta persona cree que es importante no pedir mas de lo que se tiene. Considera que los demás deberían estar satisfechas con lo que tienen',
+                                    'Es importante para esta persona siempre comportarse apropiadamente. Quiere evitar hacer lo que los demás podrían decir que está mal.',
+                                    'Las creencias religiosas son importantes para esta persona. Se esfuerza por hacer lo que la religión requiere.',
+                                    'Considera que siempre debería respetar a sus padres y a las personas mayores. Es importante para esta persona ser obediente.',
+                                    'Esta persona piensa que es mejor hacer las cosas de manera tradicional. Es importante mantener las costumbres que aprendió.',
+                                    'Es importante para esta persona ser amable con los demás todo el tiempo. Intenta no molestar o irritar a los demás. '
+                                ]
+                            },
+                        ]
+                    },       
                     {
                         questions: [
                             {
@@ -429,44 +471,6 @@
                                     "Partidos políticos",
                                     "Ministerio de Educación",
                                     "Universidad del Valle",
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        questions: [
-                            {
-                                isRequired: true,
-                                type: "matrixdropdown",
-                                title: "Trabajar y recibir un pago sin que haya firmado un contrato formal (pintar una casa, realizar un reporte, etc.)",
-                                columns: [
-                                    {
-                                        choices: ["Completamente inapropiado", "Poco inapropiado", "Ni apropiado ni inapropiado", "Poco apropiado", "Completamente apropiado"]
-                                    }
-                                ],
-                                rows: [
-                                    "¿Ha realizado las siguientes situaciones o acciones en los últimos 4 años?",
-                                    "¿Cuántas personas de su entorno cree usted que piensan que es apropiado hacerlas?",
-                                    "¿Cree usted que es ilegal hacerlas?"
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        questions: [
-                            {
-                                isRequired: true,
-                                type: "matrixdropdown",
-                                title: "Darle trabajo a alguien y pagarle sin pedirle que firme un contrato formal (pintar una casa, realizar un reporte, etc.)",
-                                columns: [
-                                    {
-                                        choices: ["Completamente inapropiado", "Poco inapropiado", "Ni apropiado ni inapropiado", "Poco apropiado", "Completamente apropiado"]
-                                    }
-                                ],
-                                rows: [
-                                    "¿Ha realizado las siguientes situaciones o acciones en los últimos 4 años?",
-                                    "¿Cuántas personas de su entorno cree usted que piensan que es apropiado hacerlas?",
-                                    "¿Cree usted que es ilegal hacerlas?"
                                 ]
                             }
                         ]
@@ -522,208 +526,8 @@
                             }
                         ]
                     },
-                    {
-                        questions: [
-                            {
-                                isRequired: true,
-                                type: "matrixdropdown",
-                                title: "No cotizar al sistema de pensiones",
-                                columns: [
-                                    {
-                                        choices: ["Completamente inapropiado", "Poco inapropiado", "Ni apropiado ni inapropiado", "Poco apropiado", "Completamente apropiado"]
-                                    }
-                                ],
-                                rows: [
-                                    "¿Ha realizado las siguientes situaciones o acciones en los últimos 4 años?",
-                                    "¿Cuántas personas de su entorno cree usted que piensan que es apropiado hacerlas?",
-                                    "¿Cree usted que es ilegal hacerlas?"
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        questions: [
-                            {
-                                isRequired: true,
-                                type: "matrixdropdown",
-                                title: "No aportar al sistema de salud",
-                                columns: [
-                                    {
-                                        choices: ["Completamente inapropiado", "Poco inapropiado", "Ni apropiado ni inapropiado", "Poco apropiado", "Completamente apropiado"]
-                                    }
-                                ],
-                                rows: [
-                                    "¿Ha realizado las siguientes situaciones o acciones en los últimos 4 años?",
-                                    "¿Cuántas personas de su entorno cree usted que piensan que es apropiado hacerlas?",
-                                    "¿Cree usted que es ilegal hacerlas?"
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        questions: [
-                            {
-                                isRequired: true,
-                                type: "matrixdropdown",
-                                title: "No tener cuenta bancaria",
-                                columns: [
-                                    {
-                                        choices: ["Completamente inapropiado", "Poco inapropiado", "Ni apropiado ni inapropiado", "Poco apropiado", "Completamente apropiado"]
-                                    }
-                                ],
-                                rows: [
-                                    "¿Ha realizado las siguientes situaciones o acciones en los últimos 4 años?",
-                                    "¿Cuántas personas de su entorno cree usted que piensan que es apropiado hacerlas?",
-                                    "¿Cree usted que es ilegal hacerlas?"
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        questions: [
-                            {
-                                isRequired: true,
-                                type: "matrixdropdown",
-                                title: "Pedir dinero prestado a prestamistas informales (ejemplo: gota a gota)",
-                                columns: [
-                                    {
-                                        choices: ["Completamente inapropiado", "Poco inapropiado", "Ni apropiado ni inapropiado", "Poco apropiado", "Completamente apropiado"]
-                                    }
-                                ],
-                                rows: [
-                                    "¿Ha realizado las siguientes situaciones o acciones en los últimos 4 años?",
-                                    "¿Cuántas personas de su entorno cree usted que piensan que es apropiado hacerlas?",
-                                    "¿Cree usted que es ilegal hacerlas?"
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        questions: [
-                            {
-                                isRequired: true,
-                                type: "matrixdropdown",
-                                title: "Usar transportes alternativos como piratas o mototaxis",
-                                columns: [
-                                    {
-                                        choices: ["Completamente inapropiado", "Poco inapropiado", "Ni apropiado ni inapropiado", "Poco apropiado", "Completamente apropiado"]
-                                    }
-                                ],
-                                rows: [
-                                    "¿Ha realizado las siguientes situaciones o acciones en los últimos 4 años?",
-                                    "¿Cuántas personas de su entorno cree usted que piensan que es apropiado hacerlas?",
-                                    "¿Cree usted que es ilegal hacerlas?"
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        questions: [
-                            {
-                                isRequired: true,
-                                type: "matrixdropdown",
-                                title: "Vender cosas o hacer negocios de manera informal",
-                                columns: [
-                                    {
-                                        choices: ["Completamente inapropiado", "Poco inapropiado", "Ni apropiado ni inapropiado", "Poco apropiado", "Completamente apropiado"]
-                                    }
-                                ],
-                                rows: [
-                                    "¿Ha realizado las siguientes situaciones o acciones en los últimos 4 años?",
-                                    "¿Cuántas personas de su entorno cree usted que piensan que es apropiado hacerlas?",
-                                    "¿Cree usted que es ilegal hacerlas?"
-                                ]
-                            }
-                        ]
-                    }, {
-                        questions: [
-                            {
-                                isRequired: true,
-                                type: "matrixdropdown",
-                                title: "No votar",
-                                columns: [
-                                    {
-                                        choices: ["Completamente inapropiado", "Poco inapropiado", "Ni apropiado ni inapropiado", "Poco apropiado", "Completamente apropiado"]
-                                    }
-                                ],
-                                rows: [
-                                    "¿Ha realizado las siguientes situaciones o acciones en los últimos 4 años?",
-                                    "¿Cuántas personas de su entorno cree usted que piensan que es apropiado hacerlas?",
-                                    "¿Cree usted que es ilegal hacerlas?"
-                                ]
-                            }
-                        ]
-                    }, {
-                        questions: [
-                            {
-                                isRequired: true,
-                                type: "matrixdropdown",
-                                title: "Comprar productos sin factura",
-                                columns: [
-                                    {
-                                        choices: ["Completamente inapropiado", "Poco inapropiado", "Ni apropiado ni inapropiado", "Poco apropiado", "Completamente apropiado"]
-                                    }
-                                ],
-                                rows: [
-                                    "¿Ha realizado las siguientes situaciones o acciones en los últimos 4 años?",
-                                    "¿Cuántas personas de su entorno cree usted que piensan que es apropiado hacerlas?",
-                                    "¿Cree usted que es ilegal hacerlas?"
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        questions: [
-                            {
-                                isRequired: true,
-                                type: "matrix",
-                                name: "Quality",
-                                title: "Por favor, indique en qué medida está de acuerdo o no con cada una de las siguientes 10 afirmaciones",
-                                columns: [
-                                    {
-                                        value: 1,
-                                        text: "Para nada parecida"
-                                    }, {
-                                        value: 2,
-                                        text: "No es como yo"
-                                    }, {
-                                        value: 3,
-                                        text: "Poco parecida a mi"
-                                    }, {
-                                        value: 4,
-                                        text: "Algo parecida a mi"
-                                    }, {
-                                        value: 5,
-                                        text: "Es como yo"
-                                    }, {
-                                        value: 5,
-                                        text: "Es muy parecida a mi"
-                                    }
-                                ],
-                                rows: [
-                                    'Esta persona cree que es importante no pedir mas de lo que se tiene. Considera que los demás deberían estar satisfechas con lo que tienen',
-                                    'Es importante para esta persona siempre comportarse apropiadamente. Quiere evitar hacer lo que los demás podrían decir que está mal.',
-                                    'Las creencias religiosas son importantes para esta persona. Se esfuerza por hacer lo que la religión requiere.',
-                                    'Considera que siempre debería respetar a sus padres y a las personas mayores. Es importante para esta persona ser obediente.',
-                                    'Esta persona piensa que es mejor hacer las cosas de manera tradicional. Es importante mantener las costumbres que aprendió.',
-                                    'Es importante para esta persona ser amable con los demás todo el tiempo. Intenta no molestar o irritar a los demás. '
-                                ]
-                            }
-                        ]
-                    }
                 ],
             }
-            counter = 1;
-            json.pages = json.pages.map(e => {
-                e.questions = e.questions.map(k => {
-                    k.name = "" + counter;
-                    counter += 1;
-                    k.isRequired = true;
-                    return k
-                })
-                return e;
-            })
-
             window.survey = new Survey.Model(json);
             $("#surveyElement"
             ).Survey({
@@ -748,3 +552,6 @@
 
     </script>
 {% endblock local_scripts %}
+
+
+

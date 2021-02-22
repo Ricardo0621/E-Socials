@@ -10,8 +10,8 @@ class MyPage(Page):
 
 
 class ResultsWaitPage(WaitPage):
+    
     pass
-
 
 class SessionBase(object):
 
@@ -39,7 +39,9 @@ class SessionBase(object):
 class EncuestaSocioEconomica(Page):
     template_name = 'experimiento_1/encuesta_economica.html'
     form_model = 'player'
-    form_fields = ['survey']
+    form_fields = [
+        'survey'
+        ]
 
 
 class Session1(SessionBase, Page):
@@ -47,7 +49,8 @@ class Session1(SessionBase, Page):
     form_model = 'player'
     form_fields = ['file_session_1']
     document = 'experimento_1/session_1.pdf'
-    text_info = "Las siguientes páginas hacen parte del libro El crimen como oficio: ensayos sobre economía del crimen en Colombia (2007), y es necesario para nosotros transcribir la información contenida en el documento. El tiempo aproximado del siguiente trabajo es de 15 min, por favor transcriba la información en el espacio disponible. "
+    title= 'Sesión 1'
+    text_info = "Las siguientes páginas hacen parte del libro: La Era del Desarrollo Sostenible (2014), y es necesario para nosotros transcribir la información contenida en el documento. El tiempo aproximado del siguiente trabajo es de 15 min, por favor transcriba la información en el espacio disponible. "
 
     def get_context_data(self, *args, **kwargs):
         context = super(Session1, self).get_context_data(*args, **kwargs)
@@ -62,7 +65,7 @@ class Session2(SessionBase, Page):
     form_fields = ['file_session_2']
     document = 'experimento_1/session_2.pdf'
 
-    text_info = "Las siguientes páginas hacen parte del libro Informe de la desigualdad global (2018), y es necesario para nosotros transcribir la información contenida en el documento. El tiempo aproximado del siguiente trabajo es de 15 min, por favor transcriba la información en el espacio disponible. "
+    text_info = "Las siguientes páginas hacen parte del libro: Decrecimiento. Vocabulario ara la nueva era (2015), y es necesario para nosotros transcribir la información contenida en el documento. El tiempo aproximado del siguiente trabajo es de 15 min, por favor transcriba la información en el espacio disponible. "
 
     def get_context_data(self, *args, **kwargs):
         context = super(Session2, self).get_context_data(*args, **kwargs)
@@ -76,7 +79,7 @@ class Session3(SessionBase, Page):
     form_model = 'player'
     form_fields = ['file_session_3']
     document = 'experimento_1/session_3.pdf'
-    text_info = "Las siguientes páginas hacen parte del libro Informe de la desigualdad global (2018), y es necesario para nosotros transcribir la información contenida en el documento. El tiempo aproximado del siguiente trabajo es de 15 min, por favor transcriba la información en el espacio disponible. "
+    text_info = "Las siguientes páginas hacen parte del libro: Prosperidad sin crecimiento (2011), y es necesario para nosotros transcribir la información contenida en el documento. El tiempo aproximado del siguiente trabajo es de 15 min, por favor transcriba la información en el espacio disponible. "
 
     def get_context_data(self, *args, **kwargs):
         context = super(Session3, self).get_context_data(*args, **kwargs)
@@ -120,7 +123,7 @@ class IntermedioSession(Page):
 
 class SevenDaysWaitPage(Page):
     template_name = 'experimiento_1/wait_page.html'
-
+   
     def get_context_data(self, *args, **kwargs):
         day_available = self.player.updated_at.replace(hour=0, tzinfo=None) + timedelta(days=7)
         today = datetime.now()
@@ -134,17 +137,44 @@ class Consent(Page):
     form_model = 'player'  # Le dice que es un jugador
     form_fields = ['num_temporal', 'accepts_terms']
 
+class EndGame(Page):
+     def is_displayed(self):
+        if self.player.consentimiento == False:
+            return True
+        if self.player.terminos_actividad == False:
+            return True
+        if self.round_number == Constants.num_rounds:
+            return True
+        else: 
+            return False
+
+class Expectations(Page):
+    template_name = 'experimiento_1/Expectations.html'
+    form_model = 'player'
+    form_fields = [
+        'expectations'
+        ]
+   
+
+class sesion_3(Page):
+    template_name= 'experimiento_1/sesion_3.html'
+    form_model = 'player'  
+    
+
 
 page_sequence = [
-    Consent,
-    MyPage,
-    IntermedioSession,
-    Session1,
-    IntermedioSession,
-    # SevenDaysWaitPage,
-    Session2,
-    # SevenDaysWaitPage,
-    Session3,
-    EncuestaSocioEconomica,
+    #Consent,
+    #MyPage,
+    #IntermedioSession,
+    #Expectations,
+    #Session1,
+    #SevenDaysWaitPage,
+    #IntermedioSession,    
+    #Session2,
+    #SevenDaysWaitPage,
+    #sesion_3,    
+    #Session3,    
+    #EncuestaSocioEconomica,
     Session4,
+   
 ]
