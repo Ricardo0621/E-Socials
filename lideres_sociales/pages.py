@@ -101,6 +101,8 @@ class Video(Page):
             if self.player.contador_femenino >= 185 and self.player.contador_femenino <= 230:
                 self.player.tratamiento = "Línea Base"
                 link = "https://drive.google.com/file/d/1QV5g_iR9a5zDO62W7-sEafQaRNHkGNwm/preview"    
+
+                
         return {
             'contador_masculino' : self.player.contador_masculino,
             'contador_femenino' : self.player.contador_femenino,
