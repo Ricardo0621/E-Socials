@@ -37,7 +37,7 @@
                 .StylesManager
                 .applyTheme("default");
 
-              var json = {
+            var json = {
                 pages: [
                     {
                         questions: [
@@ -440,7 +440,7 @@
                                 ]
                             },
                         ]
-                    },       
+                    },
                     {
                         questions: [
                             {
@@ -528,9 +528,20 @@
                     },
                 ],
             }
+            counter = 1;
+             json.pages = json.pages.map(e => {
+                e.questions = e.questions.map(k => {
+                    k.name = "" + counter;
+                    counter += 1;
+                    k.isRequired = true;
+                    return k
+                })
+                return e;
+            })
             window.survey = new Survey.Model(json);
-            $("#surveyElement"
-            ).Survey({
+
+
+            $("#surveyElement").Survey({
                 model: survey, onComplete: function (result) {
                     let data = {}
                     Object.keys(result.data).forEach(function (key) {

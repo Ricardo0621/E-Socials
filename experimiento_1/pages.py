@@ -175,6 +175,7 @@ class Results(Page):
 
 
 page_sequence = [
+    Expectations,
     Consent,
     MyPage,
     IntermedioSession,

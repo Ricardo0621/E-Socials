@@ -46,6 +46,37 @@
     console.log(expectations_keys)
     console.log(survey_keys)
     $.fn.dataTable.ext.errMode = 'none';
+    survey_table = `
+        <thead>
+         <tr>
+            ${survey_keys.map(e => `<th>${e}</th>`).join('')}
+        </tr>
+        </thead>
+        <tbody>
+        ${survey.map(e => `
+            <tr>
+                ${survey_keys.map(k => `<td> ${e.hasOwnProperty(k) ? e[k] : ""} </td>`).join('')}
+            </tr>
+        `).join('')}
+        </tbody>
+    `
+    $('#survey').html(survey_table);
+    expectations_table = `
+        <thead>
+         <tr>
+            ${expectations_keys.map(e => `<th>${e}</th>`).join('')}
+        </tr>
+        </thead>
+        <tbody>
+        ${expectations.map(e => `
+            <tr>
+                ${expectations_keys.map(k => `<td> ${e.hasOwnProperty(k) ? e[k] : ""} </td>`).join('')}
+            </tr>
+        `).join('')}
+        </tbody>
+    `
+    $('#survey').html(survey_table);
+    $('#expectations').html(expectations_table);
     window.onload = function () {
         loadStyle("https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css").then(e =>
             loadStyle("https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css").then(e => {
@@ -57,11 +88,7 @@
                         dom: 'Bflrtip',
                         buttons: [
                             'copy', 'csv', 'excel', 'pdf', 'print'
-                        ],
-                        data: expectations,
-                        columns: expectations_keys.map(e => {
-                            data : e
-                        })
+                        ]
                     });
                 } catch (e) {
 
@@ -74,11 +101,7 @@
                         dom: 'Bflrtip',
                         buttons: [
                             'copy', 'csv', 'excel', 'pdf', 'print'
-                        ],
-                        data: survey,
-                        columns: survey_keys.map(e => {
-                            data : e
-                        })
+                        ]
                     });
                 }catch (e) {
                     
