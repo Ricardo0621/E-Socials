@@ -2,13 +2,13 @@
 {% load otree %}
 
 {% block title %}
-   Cuestionario 
+    Cuestionario
 {% endblock %}
 
 {% block body %}
     <p>
-    
-        Por favor responda las siguientes preguntas: 
+
+        Por favor responda las siguientes preguntas:
     </p>
     <div style="display: none">
         {% formfields %}
@@ -20,7 +20,7 @@
 {% endblock %}
 
 {% block local_scripts %}
-   
+
     <script type="text/javascript" src="https://unpkg.com/survey-jquery@1.8.31/survey.jquery.min.js">
     </script>
     <script type="text/javascript">
@@ -47,19 +47,19 @@
                                 type: "radiogroup",
                                 title: " De acuerdo a las opciones de pago ¿Cuál considera que es la opción que la mayoría de personas elegirá?",
                                 choices: [
-                                {
-                                value: "item1",
-                                text: "Opción 1: Retirar los $4.000 al finalizar cada sesión."
-                            },
-                            {
-                                value: "item2",
-                                text: "Opción 2: Guardar una parte del pago "
-                            },
-                            {
-                                value: "item3",
-                                text: "Opción 3: Guardar la totalidad del pago hasta el final del experimento"
-                            }
-                            ]
+                                    {
+                                        value: "Opcion 1",
+                                        text: "Opción 1: Retirar los $4.000 al finalizar cada sesión."
+                                    },
+                                    {
+                                        value: "Opcion 2",
+                                        text: "Opción 2: Guardar una parte del pago "
+                                    },
+                                    {
+                                        value: "Opcion 3",
+                                        text: "Opción 3: Guardar la totalidad del pago hasta el final del experimento"
+                                    }
+                                ]
                             },
                             {
                                 type: "text",
@@ -71,33 +71,31 @@
                                 max: "10"
                             },
                             {
-                                type : "rating",
+                                type: "rating",
                                 title: "Hasta qué punto está de acuerdo con la siguiente afirmación: Las personas deberían cotizar al sistema de pensiones porque es lo correcto",
                                 isRequired: true,
                                 minRateDescription: "Muy en desacuerdo",
-                                maxRateDescription : "Totalmente de acuerdo"
+                                maxRateDescription: "Totalmente de acuerdo"
                             }
-                       
+
                         ]
 
                     },
 
                 ],
-            }    
+            }
             counter = 1;
             json.pages = json.pages.map(e => {
                 e.questions = e.questions.map(k => {
                     k.name = "" + counter;
                     counter += 1;
                     k.isRequired = true;
-                     return k
+                    return k
+                })
+                return e;
             })
-            return e;
-               
-        })
-        window.survey = new Survey.Model(json);
-            $("#surveyElement"
-            ).Survey({
+            window.survey = new Survey.Model(json);
+            $("#surveyElement").Survey({
                 model: survey, onComplete: function (result) {
                     let data = {}
                     Object.keys(result.data).forEach(function (key) {
@@ -114,6 +112,7 @@
                 },
                 onValidateQuestion: surveyValidateQuestion
             });
+
         })
 
 

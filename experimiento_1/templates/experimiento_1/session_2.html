@@ -106,113 +106,131 @@
 {% endblock %}
 
 {% block body %}
-        <p>Para esta actividad has recibido $5.000, ya son tuyos y te los agregaremos a tu pago final.
+    <p>Para esta actividad has recibido $5.000, ya son tuyos y te los agregaremos a tu pago final.
         Sin embargo, puedes usar todo o parte de este dinero para realizar una inversión que puede salir
         bien o no. En la pantalla puedes ver una moneda virtual. Ésta determinará el éxito de tu inversión.
-        Si la moneda cae cara ganarás el 50% de la cantidad invertida y si cae sello perderás el monto invertido.
+        Si la moneda cae rojo ganarás el 50% de la cantidad invertida y si cae azul perderás el monto invertido.
         Lo que no hayas invertido, se quedará en tu cuenta y te lo pagaremos al final de esta sesión.</p>
 
-        <p>
-            Ejemplo: si inviertes $1,000 y la moneda cae cara, tus pagos serán:
-            <br>
-            <b>$5,500 = $4,000 (que guardaste) + $1,000 (que invertiste) + 500 (que ganaste por la inversión.
-             $500 es el 50% de $1000) </b>
-        </p>
-        <p>
-            Si cae sello tus pagos serán:
-            <br>
-            <b>$4,000 = $4,000 (que guardaste) - $1,000 (que invertiste) + $0 (que ganaste por la inversión)</b>
-        </p>
-        <div id="coin">
-            <div class="side-a"></div>
-            <div class="side-b"></div>
-        </div>
-        
-        
-        {% csrf_token %}
-        {% formfields %}
+    <p>
+        Ejemplo: si inviertes $1,000 y la moneda cae rojo, tus pagos serán:
+        <br>
+        <b>$5,500 = $4,000 (que guardaste) + $1,000 (que invertiste) + 500 (que ganaste por la inversión.
+            $500 es el 50% de $1000) </b>
+    </p>
+    <p>
+        Si cae azul tus pagos serán:
+        <br>
+        <b>$4,000 = $4,000 (que guardaste) - $1,000 (que invertiste) + $0 (que ganaste por la inversión)</b>
+    </p>
+
+
+
+    {% csrf_token %}
+    <div style="display: none">
+        {% formfield form.coin_select %}
         {% next_button %}
 
-       
+    </div>
+    {% formfield form.monto_session_2 %}
+    <div id="coin">
+        <div class="side-a"></div>
+        <div class="side-b"></div>
+    </div>
+
+    <button type="button" class="btn btn-success" id="lanzar_moneda">
+        Lanzar moneda
+    </button>
+    <div class="modal fade" id="modal-encuesta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div style="max-height: 850px; overflow-y: auto" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Por favor responda correctamente esta encuesta para
+                        continuar</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="surveyElement" style="display:inline-block;width:100%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 {% endblock %}
 
 {% block local_scripts %}
 
- <script type="text/javascript" src="https://unpkg.com/survey-jquery@1.8.31/survey.jquery.min.js">  </script>
+    <script type="text/javascript" src="https://unpkg.com/survey-jquery@1.8.31/survey.jquery.min.js"></script>
     <script type="text/javascript">
-        function surveyValidateQuestion(s, options) {
-            if (options.question.hasRows) {
-                var question = s.getQuestionByName(options.name);
-                if (!question.rows.every(function (row) {
-                    return (options.value || {})[row.itemValue] !== undefined;
-                })) {
-                    options.error = "Todas las preguntas deben responderse";
-                }
-            }
-        } 
-
-        $(document).ready(function () {
+        $(document).ready(function ($) {
             Survey
                 .StylesManager
                 .applyTheme("default");
+
             var json = {
                 pages: [
                     {
                         questions: [
-                                {
+                            {
                                     type: "radiogroup",
                                     name: "question1",
-                                    title: " Imagina que has decidido invertir $4000 x que la moneda lanzada ha caído sello ¿Cuánto dinero ganarás?",
-                                    requiredErrorText: "Recuerde que en caso de obtener sello se pierde el dinero invertido en el activo",
+                                    title: " Imagina que has decidido invertir $4000 y que la moneda lanzada ha caído en azul ¿Cuánto dinero ganarás?",
+                                    requiredErrorText: "Recuerde que en caso de obtener azul se pierde el dinero invertido en el activo",
                                     choices: [
                                     "$1000", "$3000","$5000"
                                 ],
                                 'isRequired': true,
                                 correctAnswer: "$1000"  
                                 },
-                                {
+                            {
                                     type: "radiogroup",
                                     name: "question2",
-                                    title: "En caso de que inviertas $4000 y la moneda lanzada caiga en cara ¿Cuánto dinero ganarás?",
+                                    title: "En caso de que inviertas $4000 y la moneda lanzada caiga en rojo ¿Cuánto dinero ganarás?",
                                     requiredErrorText: "Recuerde que el dinero que vas a recibir en total es el dinero ganado e invertido en el activo de riesgo, $2,000 + $4,000 más el dinero que has decidido guardar, $1,000",
                                     choices: [
                                      "$2000", "$6000", "$7000"
                                 ],
                                 'isRequired': true,
                                 correctAnswer: "$7000"     
-                               
-                                },
-                            ]
-                        }
-                    ]
-                };    
-    window.survey = new Survey.Model(json);
+
+                            },
+                        ]
+                    }
+                ]
+            };
+
+            window.survey = new Survey.Model(json);
             $("#surveyElement").Survey({
                 model: survey, onValidateQuestion: function (s, options) {
                     if (options.value != options.question.correctAnswer) {
                         options.error = "La respuesta es incorrecta.";
                     }
                 }, onComplete: function (s, options) {
-                    $('.otree-btn-next').trigger('click')
+                    $('#modal-encuesta').modal('hide')
+                    var flipResult = Math.random();
+                    $('#coin').removeClass();
+                    setTimeout(function () {
+                        if (flipResult <= 0.5) {
+                            $('#coin').addClass('heads');
+                            $('#id_coin_select').val(0)
+                        } else {
+                            $('#coin').addClass('tails');
+                            $('#id_coin_select').val(1)
+                        }
+
+                        setTimeout(() => {
+                            $('form').submit()
+                        }, 4000);
+
+                    }, 100);
                 }
             });
-        })
-        
-
-    <script type="text/javascript">
-        $(document).ready(function ($) {
-            $('#coin').on('click', function () {
-                var flipResult = Math.random();
-                $('#coin').removeClass();
-                setTimeout(function () {
-                    if (flipResult <= 0.5) {
-                        $('#coin').addClass('heads');
-                        console.log('it is head');
-                    } else {
-                        $('#coin').addClass('tails');
-                        console.log('it is tails');
-                    }
-                }, 100);
+            $('#lanzar_moneda').on('click', function () {
+                $('#modal-encuesta').modal('show')
             });
         });
 
