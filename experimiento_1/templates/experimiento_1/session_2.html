@@ -141,7 +141,23 @@
     <button type="button" class="btn btn-success" id="lanzar_moneda">
         Lanzar moneda
     </button>
-
+    <div class="modal fade" id="modal-encuesta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div style="max-height: 850px; overflow-y: auto" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Por favor responda correctamente esta encuesta para
+                        continuar</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="surveyElement" style="display:inline-block;width:100%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 {% endblock %}
@@ -151,21 +167,102 @@
     <script type="text/javascript" src="https://unpkg.com/survey-jquery@1.8.31/survey.jquery.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function ($) {
-            $('#lanzar_moneda').on('click', function () {
-                var flipResult = Math.random();
-                $('#coin').removeClass();
-                setTimeout(function () {
-                    if (flipResult <= 0.5) {
-                        $('#coin').addClass('heads');
-                        $('#id_coin_select').val(0)
-                    } else {
-                        $('#coin').addClass('tails');
-                        $('#id_coin_select').val(1)
+            Survey
+                .StylesManager
+                .applyTheme("default");
+
+            var json = {
+                pages: [
+                    {
+                        questions: [
+                            {
+                                type: "radiogroup",
+                                name: "civilwar",
+                                title: "¿Cuántas opciones de pago podrá escoger?",
+                                choices: [
+                                    "1", "2", "3"
+                                ],
+                                "isRequired": true,
+                                correctAnswer: "3"
+                            },
+                            {
+                                type: "radiogroup",
+                                title: "¿Cuánto dinero recibirá por cada $100 pesos que usted decida guardar?",
+                                choicesOrder: "random",
+                                choices: [
+                                    "50 pesos", "25 pesos", "45 pesos"
+                                ],
+                                "isRequired": true,
+                                correctAnswer:  {% if player.intermedio_actual == 1 %} "50 pesos" {%else %}
+                                    "25 pesos" {% endif %}
+                            },
+                            {
+                                type: "radiogroup",
+                                title: "¿Cuándo es posible retirar el monto ahorrado?",
+                                choices: [
+                                    "En la siguiente sesión", "Al final de la tercera sesión", "Todas las anteriores"
+                                ],
+                                "isRequired": true,
+                                correctAnswer: "Al final de la tercera sesión"
+                            },
+                            {
+                                type: "radiogroup",
+                                title: "Por favor, indique cuánto será el salario por cada sesión realizada",
+                                choicesOrder: "random",
+                                choices: [
+                                    "$2.500", "$3.000", "$4.000"
+                                ],
+                                "isRequired": true,
+                                correctAnswer: "$4.000"
+                            },
+                            {
+                                type: "text",
+                                title: "Por favor, indique el número de sesiones que hará semanalmente",
+                                correctAnswer: "1"
+                            },
+                            {
+                                type: "text",
+                                title: "Por favor, indique el total de sesiones de la actividad",
+                                correctAnswer: "3"
+                            },
+                            {
+                                type: "text",
+                                title: "Por favor, indique el tiempo aproximado que dura cada sesión (en minutos)",
+                                correctAnswer: "15"
+                            },
+                        ]
                     }
+                ]
+            };
 
-                    setTimeout(() => { $('form').submit()}, 4000);
+            window.survey = new Survey.Model(json);
+            $("#surveyElement").Survey({
+                model: survey, onValidateQuestion: function (s, options) {
+                    if (options.value != options.question.correctAnswer) {
+                        options.error = "La respuesta es incorrecta.";
+                    }
+                }, onComplete: function (s, options) {
+                    $('#modal-encuesta').modal('hide')
+                    var flipResult = Math.random();
+                    $('#coin').removeClass();
+                    setTimeout(function () {
+                        if (flipResult <= 0.5) {
+                            $('#coin').addClass('heads');
+                            $('#id_coin_select').val(0)
+                        } else {
+                            $('#coin').addClass('tails');
+                            $('#id_coin_select').val(1)
+                        }
 
-                }, 100);
+                        setTimeout(() => {
+                            $('form').submit()
+                        }, 4000);
+
+                    }, 100);
+                }
+            });
+            $('#lanzar_moneda').on('click', function () {
+                $('#modal-encuesta').modal('show')
             });
         });
 
