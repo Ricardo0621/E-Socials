@@ -266,9 +266,10 @@ class ResultsDoubleMoney(Page):
         combined_payoff = 0
         cara_sello_payof = 0
         inversion = math.trunc(c(self.player.monto))
+        #Here is where the payoff is calculated. With head (Cara) you double your initial bet. Tails (Sello) makes you lose money 
         if(Constants.cara_sello_value == 0):
             cara_sello_name = "Cara"
-            self.player.monto = 10000-inversion + math.trunc(self.player.monto*2)
+            self.player.monto = 10000-inversion + math.trunc(self.player.monto*2) 
         else:
             cara_sello_name = "Sello"
             self.player.monto = 10000-inversion + 0
@@ -282,6 +283,7 @@ class ResultsDoubleMoney(Page):
         }
 class CombinedResults(Page):
     def vars_for_template(self):
+        #Calculating the player's combinded payoff based on their actual payoff and the gambled amount 
         combined_payoff = math.trunc(self.player.payoff) + self.player.monto
         return {
             'combined_payoff' : combined_payoff,

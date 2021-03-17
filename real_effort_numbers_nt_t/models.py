@@ -37,6 +37,9 @@ class Subsession(BaseSubsession):
         # for player in self.get_players():
         #     print("Jugador id_group: " + str(player.id_in_group))
         #     print("Jugador id_session: " + str(player.participant.id_in_session))
+
+        #Groups players randomly in the first half and in the second half assigns players with their teammates
+
         team_label = ['AB', 'CD', 'EF', 'GH', 'IJ', 'KL', 'MN', 'OP', 'QR', 'ST', 'UV', 'WX', 'YZ']
         number_of_groups = self.session.num_participants // Constants.players_per_group
         
@@ -48,6 +51,8 @@ class Subsession(BaseSubsession):
 
         if self.round_number >= 1 and self.round_number <= (Constants.num_rounds/2):
             self.group_like_round(1)
+
+        # Randomizes teams and then groups them together
 
         if self.round_number == (Constants.num_rounds/2)+1:
             # print("Cambio")

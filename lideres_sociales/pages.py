@@ -56,6 +56,9 @@ class Video(Page):
     #     print(p)
     # print(list(Player.objects.raw('SELECT id, genero FROM lideres_sociales_player'))[0])
     # print(len(Player.objects.filter(genero__exact='Masculino')))
+
+    #Here is where each treatment is assigned based on the participant's gender and the number of registers in the DB
+
     def vars_for_template(self):
         self.player.contador_masculino = Player.objects.filter(genero__exact='Masculino').count()
         self.player.contador_femenino = Player.objects.filter(genero__exact='Femenino').count()

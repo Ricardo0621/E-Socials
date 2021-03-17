@@ -44,8 +44,9 @@ class Subsession(BaseSubsession):
             
         for player in self.get_players():
             player.cara_sello_value = random.random()
-        #Creo que la asginacion aqui es innecesaria
+        # Teams assignation
         if self.round_number >= 1 and self.round_number <= (Constants.num_rounds/2):
+            # Groups teams like round 1
             self.group_like_round(1)
             for i in range(0,number_of_groups):
                 for j in range(0,Constants.players_per_group):

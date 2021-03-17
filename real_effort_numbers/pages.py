@@ -10,6 +10,7 @@ class AddNumbers(Page):
     timer_text = 'Tiempo restante para completar la Etapa 1:'
 
     def before_next_page(self):
+        #Here's where the payoff is calculated
         self.player.total_sums = 1            
         if self.player.sum_of_numbers == self.player.number_entered:
             self.player.payoff = Constants.payment_per_correct_answer
@@ -20,6 +21,7 @@ class AddNumbers(Page):
 
     def get_timeout_seconds(self):
         import time
+        #Timeout variable used to show the timer
         return self.participant.vars['expiry'] - time.time()
 
     def is_displayed(self):
@@ -66,6 +68,7 @@ class AddNumbers(Page):
         # self.player.contador_numero_aux = 1
         # Lo de del timeout hay que hacerlo dimacamente, tomando el evento y actialuzando la pagina    
         for player in all_players:
+            #Calculating the payoff for each player
             combined_payoff += player.payoff
             correct_answers += player.correct_answers
             wrong_sums += player.wrong_sums
@@ -84,7 +87,7 @@ class AddNumbers(Page):
         }
 
 class AddNumbers2(Page):
-    #Falta algoritmo de asignación de equipos
+    # Works in similar way as the previous class 
     form_model = 'player'
     form_fields = ['number_entered_2']
     timer_text = 'Tiempo restante para completar la Etapa 2:'

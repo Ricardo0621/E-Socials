@@ -37,6 +37,9 @@ class Subsession(BaseSubsession):
         # for player in self.get_players():
         #     print("Jugador id_group: " + str(player.id_in_group))
         #     print("Jugador id_session: " + str(player.participant.id_in_session))
+
+        #Teams in the first half, different teams in the second
+
         team_label = ['AB', 'CD', 'EF', 'GH', 'IJ', 'KL', 'MN', 'OP', 'QR', 'ST', 'UV', 'WX', 'YZ']
         number_of_groups = self.session.num_participants // Constants.players_per_group
 
