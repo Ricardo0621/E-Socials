@@ -9,7 +9,7 @@ class MyPage(Page):
     form_model = 'player'
 
 
-class ResultsWaitPage(WaitPage):
+class Results(WaitPage):
     
     pass
 
@@ -91,8 +91,16 @@ class Session3(SessionBase, Page):
 class Session4(Page):
     template_name = 'experimiento_1/session_2.html'
     form_model = 'player'
-    form_fields = ['monto_session_2']
+    form_fields = ['monto_session_2', 'coin_select']
 
+    def post(self, *args, **kwargs):
+        monto = int(self.request.POST.get('monto_session_2'))
+        if self.request.POST.get('coin_select') == '0':
+            self.player.payoff += (5000 - monto) + monto + (monto * 0.5)
+        elif self.request.POST.get('coin_select') == '1':
+            self.player.payoff += (5000 - monto)
+        self.player.save()
+        return super(Session4, self).post(*args, **kwargs)
 
 class IntermedioSession(Page):
     template_name = 'experimiento_1/intermedio.html'
@@ -137,6 +145,7 @@ class Consent(Page):
     form_model = 'player'  # Le dice que es un jugador
     form_fields = ['num_temporal', 'accepts_terms']
 
+
 class EndGame(Page):
      def is_displayed(self):
         if self.player.consentimiento == False:
@@ -147,6 +156,7 @@ class EndGame(Page):
             return True
         else: 
             return False
+
 
 class Expectations(Page):
     template_name = 'experimiento_1/Expectations.html'
@@ -159,22 +169,25 @@ class Expectations(Page):
 class sesion_3(Page):
     template_name= 'experimiento_1/sesion_3.html'
     form_model = 'player'  
-    
+
+class Results(Page):
+    pass
 
 
 page_sequence = [
+    #Expectations,
     #Consent,
     #MyPage,
     #IntermedioSession,
     #Expectations,
     #Session1,
     #SevenDaysWaitPage,
-    #IntermedioSession,    
+    #IntermedioSession,
     #Session2,
     #SevenDaysWaitPage,
-    #sesion_3,    
-    #Session3,    
+    #sesion_3,
+    #Session3,
     #EncuestaSocioEconomica,
     Session4,
-   
+    Results
 ]

@@ -5,20 +5,13 @@ from random import randint
 from django.db import models as django_models
 from django.forms import Textarea
 from model_utils import FieldTracker
-from otree import strict_templates
 from otree.api import (
     models,
     BaseConstants,
-    widgets,
     BaseSubsession,
     BaseGroup,
     BasePlayer, widgets,
-    Currency as c,
-    currency_range,
 )
-from otree.models import subsession
-from random import shuffle
-
 
 author = 'Your name here'
 
@@ -42,37 +35,14 @@ class Subsession(BaseSubsession):
     def vars_for_admin_report(self):
         survey_keys = []
         survey_items = []
+        expectations_items = []
         for player in self.get_players():
-            survey_item = {}
             survey_data = json.loads(player.survey) if player.survey else {}
-            for key, value in survey_data.items():
-                if type(value) == dict:
-                    keys = []
-                    for key2, v2 in value.items():
-                        if type(v2) == dict:
-                            v2 = v2.get("")
-                        survey_item[key + "__" + key2] = v2
-                        if key2 not in keys:
-                            keys.append(key2)
-                    survey_keys.append({
-                        'title':  key,
-                        'values': keys
-                    })
-                else:
-                    survey_item[key] = value
-                    survey_keys.append({'title': key})
-            survey_items.append(survey_item)
-        survey_values = []
-        for s_item in survey_items:
-            s_item_array = []
-            for item in survey_keys:
-                if 'values' in item:
-                    for v in item['values']:
-                        s_item_array.append(s_item.get(item['title'] + "__" + v))
-                else:
-                    s_item_array.append(s_item.get(item['title']))
-            survey_values.append(s_item_array)
-        return dict(survey_keys=json.dumps(survey_keys), survey_values=json.dumps(survey_values))
+            expectations = json.loads(player.expectations) if player.expectations else {}
+            survey_items.append(survey_data)
+            expectations_items.append(expectations)
+        return dict(survey=json.dumps(survey_items), expectations=json.dumps(expectations_items))
+
 
 class Constants(BaseConstants):
     players_per_group = None
@@ -119,9 +89,17 @@ class Player(BasePlayer):
             [True, "Sí"],
             [False, "No"],
         ],
-        default=True)
+        default=True
+    )
     accepts_terms = models.BooleanField()
-  
+
+    coin_select = models.IntegerField(null=True,
+                                      label="Cara obtenida",
+                                      choices=[
+                                          [0, "Cara"],
+                                          [1, "Sello"],
+                                      ]
+                                      )
 
     money_decision = models.IntegerField(choices=MONEY_DECISION_CHOICES, blank=False,
                                          verbose_name="Como desea reclamar su dinero?",
@@ -136,11 +114,11 @@ class Player(BasePlayer):
                                             widget=Textarea(attrs={'rows': 40, 'cols': 40}))
     file_session_3 = models.LongStringField(default="", verbose_name="Ingrese el texto del documento",
                                             widget=Textarea(attrs={'rows': 40, 'cols': 40}))
-    monto_session_2 = django_models.IntegerField(default=0)
+    monto_session_2 = models.IntegerField(max=5000, min=0,default=0)
     updated_at = django_models.DateTimeField(auto_now=True)
     disbursement = models.CurrencyField(null=True, doc="Valor retirado", default=0)
-    survey = models.LongStringField() 
-    expectations= models.LongStringField() 
+    survey = models.LongStringField()
+    expectations = models.LongStringField()
     tracker = FieldTracker()
 
     def start(self):
@@ -156,5 +134,3 @@ class Player(BasePlayer):
     @property
     def experiment_end_date(self):
         return self.experiment_start_date + timedelta(days=Constants.experiment_days)
-   
-  

@@ -14,10 +14,10 @@
     <link rel="stylesheet" href="{% static 'experimento_1/css/aos.css' %}">
 
     <!-- MAIN CSS -->
-     {% comment %}<link rel="stylesheet" href="{% static 'css/style.css' %}">{% endcomment %}
+    {% comment %}<link rel="stylesheet" href="{% static 'css/style.css' %}">{% endcomment %}
     <link href="https://surveyjs.azureedge.net/1.8.0/survey.css" type="text/css" rel="stylesheet"/>
-    {% comment %} {% block local_styles %}
-    {% endblock local_styles %} {% endcomment %}
+    {% block local_styles %}
+    {% endblock local_styles %}
 {% endblock %}
 
 {% block global_scripts %}
