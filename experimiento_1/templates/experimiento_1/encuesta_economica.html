@@ -235,7 +235,7 @@
                             },
                             {
                                 title: "¿Cuáles de los siguientes productos financieros utiliza usted o algún miembro del hogar actualmente?",
-                                type: "radiogroup",
+                                type: "checkbox",
                                 colCount: 3,
                                 choices: [
                                     "Cuenta corriente",
@@ -250,12 +250,12 @@
                                 isRequired: true,
                             },
                             {
-                                title: "¿Qué está haciendo usted actualmente para mantener económicamente en su vejez?",
+                                title: "¿Qué está haciendo usted actualmente para mantenerse económicamente en su vejez?",
                                 type: "radiogroup",
                                 colCount: 3,
                                 choices: [
                                     "Aportar en un fondo de pensiones obligatorias",
-                                    "Aportar en un fonde de pensiones voluntarias",
+                                    "Aportar en un fondo de pensiones voluntarias",
                                     "Ahorrando",
                                     "Haciendo inversiones",
                                     "Pagando un seguro por su cuenta",
@@ -264,6 +264,29 @@
                                     "Nada",
                                 ],
                                 isRequired: true,
+                            },
+                            {
+                                title: "¿En el último año ha tenido alguna experiencia cercana a la muerte?",
+                                type: "radiogroup",
+                                colCount: 3,
+                                choices: [
+                                    "Sí",
+                                    "No",
+                                ],
+                                isRequired: true,
+                            },
+                            {
+                                title: "Si la respueta anterior es afirmativa, ¿A qué hecho estuvo relacionado la experiencia?",
+                               type: "radiogroup",
+                                colCount: 3,
+                                choices: [
+                                    "Enfermedad Crónica",
+                                    "Anomalía congénita",
+                                    "Accidente de tránsito",
+                                    "Violencia interpersonal",
+                                    "Comportamiento suicida",
+                                    "Otro",                                    
+                                ],
                             },
                             {
                                 type: "rating",

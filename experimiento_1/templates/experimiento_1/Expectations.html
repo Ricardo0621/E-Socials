@@ -45,11 +45,11 @@
                         questions: [
                             {
                                 type: "radiogroup",
-                                title: " De acuerdo a las opciones de pago ¿Cuál considera que es la opción que la mayoría de personas elegirá?",
+                                title: " De acuerdo con las opciones de pago ¿Cuál considera que es la opción que la mayoría de personas elegirá?",
                                 choices: [
                                     {
                                         value: "Opcion 1",
-                                        text: "Opción 1: Retirar los $4.000 al finalizar cada sesión."
+                                        text: "Opción 1: Retirar los $4.000 al finalizar cada sesión"
                                     },
                                     {
                                         value: "Opcion 2",
@@ -57,7 +57,7 @@
                                     },
                                     {
                                         value: "Opcion 3",
-                                        text: "Opción 3: Guardar la totalidad del pago hasta el final del experimento"
+                                        text: "Opción 3: Guardar la totalidad del pago hasta finalizar el contrato"
                                     }
                                 ]
                             },
@@ -71,13 +71,23 @@
                                 max: "10"
                             },
                             {
-                                type: "rating",
-                                title: "Hasta qué punto está de acuerdo con la siguiente afirmación: Las personas deberían cotizar al sistema de pensiones porque es lo correcto",
-                                isRequired: true,
-                                minRateDescription: "Muy en desacuerdo",
-                                maxRateDescription: "Totalmente de acuerdo"
+                                type: "radiogroup",
+                                title: " De acuerdo con las opciones de pago ¿Cuál considera que es la opción que debería ser elegida?",
+                                choices: [
+                                    {
+                                        value: "Opcion 1",
+                                        text: "Opción 1: Retirar los $4.000 al finalizar cada sesión"
+                                    },
+                                    {
+                                        value: "Opcion 2",
+                                        text: "Opción 2: Guardar una parte del pago "
+                                    },
+                                    {
+                                        value: "Opcion 3",
+                                        text: "Opción 3: Guardar la totalidad del pago hasta finalizar el contrato"
+                                    }
+                                ]
                             }
-
                         ]
 
                     },
