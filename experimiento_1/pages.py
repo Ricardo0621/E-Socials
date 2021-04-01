@@ -102,6 +102,27 @@ class Session4(Page):
         self.player.save()
         return super(Session4, self).post(*args, **kwargs)
 
+class Informacion(Page):
+
+    def js_vars(self):
+        return dict(
+            intermedio_actual = self.player.intermedio_actual,
+        )
+
+    def vars_for_template(self):
+
+        money = 50 if self.player.intermedio_actual == 1 else 25
+
+        return {
+            "price_session" : money,
+        }
+
+class Informacion_moneda(Page):
+    def vars_for_template(self):
+        return {
+            "1" : 2,
+        }
+
 class IntermedioSession(Page):
     template_name = 'experimiento_1/intermedio.html'
     form_model = 'player'
@@ -174,6 +195,8 @@ class Results(Page):
     pass
 
 
+
+
 page_sequence = [
     #Expectations,
     #Consent,
@@ -182,12 +205,14 @@ page_sequence = [
     #Expectations,
     #Session1,
     #SevenDaysWaitPage,
-    #IntermedioSession,
-    #Session2,
+    Informacion,
+    IntermedioSession,
+    Session2,
     #SevenDaysWaitPage,
     #sesion_3,
     #Session3,
     #EncuestaSocioEconomica,
+    Informacion_moneda,
     Session4,
     Results
 ]

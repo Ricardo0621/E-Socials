@@ -26,8 +26,8 @@
         </div>
     </div>
     <div style="display: None" id="confirm_button">
-        <button id="confirm_button" type="button" class="btn btn-primary" data-toggle="modal"
-                data-target="#exampleModal">Confirmar
+        <button id="confirm_button" type="button" class="btn btn-primary">
+            Confirmar
         </button>
     </div>
 
@@ -58,6 +58,12 @@
 
     </script>
     <script type="text/javascript">
+
+
+    var confirm_button = document.getElementById("confirm_button");
+        
+   
+
         $(document).on('change', 'input[name="money_decision"]', function () {
             $('#id_percentage_saved').val(0);
             if ($('input[name="money_decision"]:checked').val() == 1) {
@@ -66,10 +72,17 @@
             } else {
                 $('#confirm_button').show()
                 $('#percentage_saved_div').hide();
+
+                confirm_button.addEventListener("click", function(){
+                    $('.otree-btn-next').trigger('click');
+                }, false);
             }
         })
         $(document).on('change', '#id_percentage_saved', function () {
             $('#confirm_button').show();
+            confirm_button.addEventListener("click", function(){
+                    $('.otree-btn-next').trigger('click');
+                }, false);
         })
         chartColors = {
             red: 'rgb(255, 99, 132)',
@@ -107,90 +120,15 @@
             type: 'pie',
             data: data,
         });
+
+
+    /*    var el = document.getElementById("t");
+  el.addEventListener("click", function(){modifyText("four")}, false);*/
+
+        
     </script>
     <script type="text/javascript" src="https://surveyjs.azureedge.net/1.1.13/survey.jquery.min.js">
 
     </script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            Survey
-                .StylesManager
-                .applyTheme("default");
-
-            var json = {
-                pages: [
-                    {
-                        questions: [
-                            {
-                                type: "radiogroup",
-                                name: "civilwar",
-                                title: "¿Cuántas opciones de pago podrá escoger?",
-                                choices: [
-                                    "1", "2", "3"
-                                ],
-                                "isRequired": true,
-                                correctAnswer: "3"
-                            },
-                            {
-                                type: "radiogroup",
-                                title: "¿Cuánto dinero recibirá por cada $100 pesos que usted decida guardar?",
-                                choicesOrder: "random",
-                                choices: [
-                                    "50 pesos", "25 pesos", "45 pesos"
-                                ],
-                                "isRequired": true,
-                                correctAnswer:  {% if player.intermedio_actual == 1 %} "50 pesos" {%else %} "25 pesos" {% endif %}
-                            },                            
-                            {
-                                type: "radiogroup",
-                                title: "¿Cuándo es posible retirar el monto ahorrado?",
-                                choices: [
-                                    "En la siguiente sesión", "Al final de la tercera sesión", "Todas las anteriores"
-                                ],
-                                "isRequired": true,
-                                correctAnswer: "Al final de la tercera sesión"
-                            },
-                            {
-                                type: "radiogroup",
-                                title: "Por favor, indique cuánto será el salario por cada sesión realizada",
-                                choicesOrder: "random",
-                                choices: [
-                                    "$2.500", "$3.000", "$4.000"
-                                ],
-                                "isRequired": true,
-                                correctAnswer: "$4.000"
-                            },
-                            {
-                                type: "text",
-                                title: "Por favor, indique el número de sesiones que hará semanalmente",
-                                correctAnswer: "1"
-                            },
-                            {
-                                type: "text",
-                                title: "Por favor, indique el total de sesiones de la actividad",
-                                correctAnswer: "3"
-                            },
-                            {
-                                type: "text",
-                                title: "Por favor, indique el tiempo aproximado que dura cada sesión (en minutos)",
-                                correctAnswer: "15"
-                            },
-                        ]
-                    }
-                ]
-            };
-
-            window.survey = new Survey.Model(json);
-            $("#surveyElement").Survey({
-                model: survey, onValidateQuestion: function (s, options) {
-                    if (options.value != options.question.correctAnswer) {
-                        options.error = "La respuesta es incorrecta.";
-                    }
-                }, onComplete: function (s, options) {
-                    $('.otree-btn-next').trigger('click')
-                }
-            });
-        })
-
-    </script>
+   
 {% endblock local_scripts %}
